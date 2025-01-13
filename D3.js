@@ -43,6 +43,8 @@ async function onUserSelect(event) {
     if (selectedIndex !== ""){
         const user_data = allData[selectedIndex]; // Obtenir les données de l'utilisateur
         console.log("---------------------------", user_data.user);
+        console.log("---------------------------", user_data);
+
         const genreData = await loadGenreData(user_data.user);
         
         // Call visualizations
@@ -59,6 +61,7 @@ async function onUserSelect(event) {
         await plotGenrePieChart(genreData);
         await visualizeTopSearchQueries(user_data);
         await plotPodcastMusicChart(user_data);
+        await artistDensityChart(user_data);
 
         
     } else {
@@ -305,9 +308,9 @@ async function ecoutesChart(userData, month = null) {
         return ecoutes.length ? (totalMs / ecoutes.length) / 1000 : 0;
     });
 
-    const width = 500;
-    const height = 300;
-    const margin = { top: 20, right: 20, bottom: 50, left: 50 };
+    const width = 600;
+    const height = 400;
+    const margin = { top: 30, right: 30, bottom: 60, left: 70 };
 
     d3.select("#ecoutesChart").selectAll("*").remove();
 
@@ -362,6 +365,12 @@ async function ecoutesChart(userData, month = null) {
         });
 }
 
+// **************************
+// ********* Test *********
+// **************************
+
+
+
 
 
 // **************************
@@ -376,26 +385,25 @@ async function visualizeMonthlyListening(userData, updateTimeDistribution) {
         console.error("No music data available for visualization.");
         return;
     }
-
-    const monthlyMinutes = {};
+    const monthlyHours = {};
     musicData.forEach(record => {
         const date = new Date(record.endTime);
         const month = date.toLocaleString('default', { month: 'short' });
-        const minutes = record.msPlayed / 60000;
+        const hours = record.msPlayed / (60000 * 60);
 
-        if (monthlyMinutes[month]) {
-            monthlyMinutes[month] += minutes;
+        if (monthlyHours[month]) {
+            monthlyHours[month] += hours;
         } else {
-            monthlyMinutes[month] = minutes;
+            monthlyHours[month] = hours;
         }
     });
 
-    const months = Object.keys(monthlyMinutes);
-    const minutes = Object.values(monthlyMinutes);
+    const months = Object.keys(monthlyHours);
+    const hours = Object.values(monthlyHours);
 
-    const width = 500;
-    const height = 300;
-    const margin = { top: 20, right: 20, bottom: 50, left: 50 };
+    const width = 600;
+    const height = 400;
+    const margin = { top: 30, right: 30, bottom: 60, left: 70 };
 
     d3.select("#listeningTimelineChart").selectAll("*").remove();
 
@@ -410,7 +418,7 @@ async function visualizeMonthlyListening(userData, updateTimeDistribution) {
         .padding(0.5);
 
     const yScale = d3.scaleLinear()
-        .domain([0, d3.max(minutes)])
+        .domain([0, d3.max(hours)])
         .nice()
         .range([height - margin.bottom, margin.top]);
 
@@ -427,25 +435,25 @@ async function visualizeMonthlyListening(userData, updateTimeDistribution) {
         .y(d => yScale(d));
 
     svg.append("path")
-        .data([minutes])
+        .data([hours])
         .attr("fill", "none")
-        .attr("stroke", "steelblue")
+        .attr("stroke", "black")
         .attr("stroke-width", 2)
         .attr("d", line);
 
     const tooltip = d3.select("#tooltip");
 
     svg.selectAll("circle")
-        .data(minutes)
+        .data(hours)
         .enter()
         .append("circle")
         .attr("cx", (d, i) => xScale(months[i]))
         .attr("cy", d => yScale(d))
         .attr("r", 5)
-        .attr("fill", "red")
+        .attr("fill", "#800000")
         .on("mouseover", (event, d) => {
             tooltip.style("opacity", 1)
-                .html(`Month: ${months[minutes.indexOf(d)]}<br>Minutes: ${d.toFixed(2)}`);
+                .html(`Month: ${months[hours.indexOf(d)]}<br>${d.toFixed(2)} Hours`);
         })
         .on("mousemove", (event) => {
             tooltip.style("left", (event.pageX + 10) + "px")
@@ -455,15 +463,33 @@ async function visualizeMonthlyListening(userData, updateTimeDistribution) {
             tooltip.style("opacity", 0);
         })
         .on("click", (event, d) => {
-            const selectedMonth = months[minutes.indexOf(d)];
+            const selectedMonth = months[hours.indexOf(d)];
             updateTimeDistribution(selectedMonth);
             svg.selectAll("circle")
                 .attr("fill", "lightgray");
             d3.select(event.currentTarget)
-                .attr("fill", "red");
+                .attr("fill", "#800000");
         });
-}
 
+        // Add X-axis title
+        svg.append("text")
+            .attr("text-anchor", "middle")
+            .attr("x", (width - margin.left - margin.right) / 2 + margin.left)
+            .attr("y", height - 10) // Slightly below the axis
+            .text("Months")
+            .style("font-size", "14px")
+            .style("fill", "#800000");
+
+        // Add Y-axis title
+        svg.append("text")
+            .attr("text-anchor", "middle")
+            .attr("x", -(height - margin.top - margin.bottom) / 2 - margin.top)
+            .attr("y", 15) // Slightly to the left of the axis
+            .attr("transform", "rotate(-90)")
+            .text("Hours Listened")
+            .style("font-size", "14px")
+            .style("fill", "#800000");
+}
 
 // **************************
 // ********* Slot 5 *********
@@ -879,4 +905,129 @@ function plotPodcastMusicChart(allUsersData) {
         .text("Podcasts")
         .style("font-size", "14px")
         .attr("alignment-baseline", "middle");
+}
+
+// **************************
+// ********* Slot 8 *********
+// **************************
+
+async function artistDensityChart(userData){
+
+    console.log("************je suis dans artistDensityChart");
+    const musicData = userData.streamingHistory.music;
+    const nodes = [];
+    const nodeMap ={};
+    const links = [];
+
+    musicData.forEach(d => {
+        if(!nodeMap[d.artistName]){
+            nodes.push({ id: d.artistName, group: 'artistName'});
+            nodeMap[d.artistName]= true;
+        }
+        if(!nodeMap[d.trackName]){
+            nodes.push({ id: d.trackName, group: 'trackName'});
+            nodeMap[d.trackName] = true;
+        }
+        links.push({ source: d.artistName, target: d.trackName, value: 1 });
+    });
+
+    const width = 1000;
+    const height = 600;
+    const color = d3.scaleOrdinal()
+    .domain(['artistName', 'trackName'])  // Définir les types de groupes
+    .range(['#800000', '#E8D2A6']);  // Noir pour les artistes, rouge pour les pistes
+
+    // Créer un tableau de liens entre les artistes et les musiques
+    const simulation = d3.forceSimulation(nodes)
+    .force("link", d3.forceLink(links).id(d => d.id))
+    .force("charge", d3.forceManyBody())
+    .force("x", d3.forceX())
+    .force("y", d3.forceY());
+
+    d3.select("#fdGraph").selectAll("*").remove();
+
+    const svg = d3.select("#fdGraph")
+    .append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("viewBox", [-width / 2, -height / 2, width, height])
+    .attr("style", "max-width: 100%; height: auto;");
+
+const link = svg.append("g")
+    .attr("stroke", "#999")
+    .attr("stroke-opacity", 0.6)
+    .selectAll("line")
+    .data(links)
+    .join("line")
+    .attr("stroke-width", d => Math.sqrt(d.value));
+
+const node = svg.append("g")
+    .attr("stroke", "#fff")
+    .attr("stroke-width", 1.5)
+    .selectAll("circle")
+    .data(nodes)
+    .join("circle")
+    .attr("r", 5)
+    .attr("fill", d => color(d.group))
+    .on("mouseover", (event, d) => {
+        const numLinks = links.filter(link => link.source.id === d.id || link.target.id === d.id).length;
+        tooltip.style("opacity", 1)
+               .html(`
+                    ${d.group === 'artistName' ? 'Artist' : 'Track'} : ${d.id}<br>
+                    <strong>Links:</strong> ${numLinks}
+                `);
+    })
+    .on("mousemove", (event) => {
+        tooltip.style("left", (event.pageX + 10) + "px")
+               .style("top", (event.pageY - 20) + "px");
+    })
+    .on("mouseout", () => {
+        tooltip.style("opacity", 0);
+    });
+
+// node.append("title")
+//     .text(d => d.id);
+
+node.call(d3.drag()
+      .on("start", dragstarted)
+      .on("drag", dragged)
+      .on("end", dragended));
+
+const tooltip = d3.select("#tooltip");
+
+
+simulation.on("tick", () => {
+  link
+      .attr("x1", d => d.source.x)
+      .attr("y1", d => d.source.y)
+      .attr("x2", d => d.target.x)
+      .attr("y2", d => d.target.y);
+
+  node
+      .attr("cx", d => d.x)
+      .attr("cy", d => d.y);
+
+});
+
+
+function dragstarted(event) {
+  if (!event.active) simulation.alphaTarget(0.3).restart();
+  event.subject.fx = event.subject.x;
+  event.subject.fy = event.subject.y;
+}
+
+function dragged(event) {
+  event.subject.fx = event.x;
+  event.subject.fy = event.y;
+}
+
+function dragended(event) {
+  if (!event.active) simulation.alphaTarget(0);
+  event.subject.fx = null;
+  event.subject.fy = null;
+}
+
+// invalidation.then(() => simulation.stop());
+
+return svg.node();
 }

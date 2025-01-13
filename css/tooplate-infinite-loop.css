@@ -17,6 +17,21 @@ body {
   overflow-x: hidden;
 }
 
+/* Le conteneur parent va occuper toute la fenêtre et utiliser Flexbox pour centrer */
+#fdGraphContainer {
+  display: flex;              /* Active Flexbox */
+  justify-content: center;    /* Centre horizontalement */
+  align-items: center;        /* Centre verticalement */
+  height: 100vh;              /* Remplit toute la hauteur de la fenêtre */
+  width: 100%;                /* Remplit toute la largeur de la fenêtre */
+}
+
+#fdGraph {
+  width: 80%;                 /* La largeur du graphique, 80% de la largeur de la fenêtre */
+  height: 80%;                /* La hauteur du graphique, 80% de la hauteur de la fenêtre */
+  max-width: 100%;            /* Empêche le dépassement de la largeur du conteneur */
+  max-height: 100%;           /* Empêche le dépassement de la hauteur du conteneur */
+}
 
 .story-step {
   display: flex;
