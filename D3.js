@@ -1,56 +1,65 @@
 async function populateUserSelect() {
     try {
-        const allData = await loadAllUsersData(); // Charger les données des utilisateurs
-        const userDropdownMenu = document.getElementById("userDropdownMenu"); // Récupérer l'élément du menu dropdown
+        const allData = await loadAllUsersData(); // Load user data
+        const userDropdownMenu = document.getElementById("userDropdownMenu"); // Dropdown menu element
 
-        // Réinitialiser le contenu existant du menu dropdown
+        // Reset the dropdown menu
         userDropdownMenu.innerHTML = '';
 
-        // Ajouter chaque utilisateur au menu
+        // Add each user to the menu
         allData.forEach((user, index) => {
-            const listItem = document.createElement("li"); // Créer un élément <li>
-            const linkItem = document.createElement("a"); // Créer un élément <a>
-            linkItem.className = "dropdown-item"; // Classe Bootstrap pour les items
-            linkItem.href = "#"; // Lien vide, peut être modifié si nécessaire
-            linkItem.textContent = user.user; // Texte à afficher
-            linkItem.setAttribute("data-index", index);  // Ajout de l'index comme attribut
+            const listItem = document.createElement("li"); // Create <li>
+            const linkItem = document.createElement("a"); // Create <a>
+            linkItem.className = "dropdown-item"; // Bootstrap class for dropdown items
+            linkItem.href = "#"; // Empty link
+            linkItem.textContent = user.user; // Display user name
+            linkItem.setAttribute("data-index", index);  // Add index as an attribute
 
-            // Ajouter un gestionnaire d'événements au clic
-            linkItem.addEventListener("click", () => {
-                console.log(`Utilisateur sélectionné : ${user.user} (Index: ${index})`);
-                // Ajoutez ici la logique pour gérer la sélection de l'utilisateur
+            // Add click event handler
+            linkItem.addEventListener("click", (event) => {
+                console.log(`User selected: ${user.user} (Index: ${index})`);
+                onUserSelect(event, allData); // Pass the event and all data to the selection handler
             });
 
-            listItem.appendChild(linkItem); // Ajouter le lien au <li>
-            userDropdownMenu.appendChild(listItem); // Ajouter le <li> au menu dropdown
+            listItem.appendChild(linkItem); // Add link to <li>
+            userDropdownMenu.appendChild(listItem); // Add <li> to dropdown menu
         });
 
-        console.log("Menu déroulant rempli avec succès !");
+        console.log("Dropdown menu populated successfully!");
+
+        // Set default user (e.g., "user-1") if it exists
+        const defaultUserIndex = allData.findIndex(user => user.user === "user-1");
+        if (defaultUserIndex !== -1) {
+            // Call onUserSelect directly with the default user
+            const defaultEvent = {
+                target: {
+                    getAttribute: () => defaultUserIndex // Mock event target
+                }
+            };
+            onUserSelect(defaultEvent, allData); // Load visualizations for "user-1"
+        } else {
+            console.warn("Default user 'user-1' not found.");
+        }
+
     } catch (error) {
-        console.error("Erreur lors du remplissage du menu déroulant :", error);
+        console.error("Error populating dropdown menu:", error);
     }
 }
 
-document.addEventListener("DOMContentLoaded", async () => {
-    await populateUserSelect(); // Charge et affiche les utilisateurs au chargement de la page
-});
-
-async function onUserSelect(event) {
-    
-    const allData = await loadAllUsersData();
+async function onUserSelect(event, allData) {
     const selectedIndex = event.target.getAttribute("data-index");
 
-    if (selectedIndex !== ""){
-        const user_data = allData[selectedIndex]; // Obtenir les données de l'utilisateur
+    if (selectedIndex !== "") {
+        const user_data = allData[selectedIndex]; // Get user data
         console.log("---------------------------", user_data.user);
         console.log("---------------------------", user_data);
 
         const genreData = await loadGenreData(user_data.user);
-        
+
         // Call visualizations
         await visualizePlaylists(user_data);
         await ecoutesChart(user_data);
-        
+
         // Pass a callback to visualizeMonthlyListening to link both ecoutesChart and plotTopArtistsTreemap
         await visualizeMonthlyListening(user_data, (selectedMonth) => {
             ecoutesChart(user_data, selectedMonth);
@@ -63,16 +72,21 @@ async function onUserSelect(event) {
         await plotPodcastMusicChart(user_data);
         await artistDensityChart(user_data);
 
-        
     } else {
         document.getElementById("playlist-chart").innerHTML = "";
     }
 }
 
+// Call populateUserSelect on page load
+document.addEventListener("DOMContentLoaded", async () => {
+    await populateUserSelect(); // Populate dropdown and select default user
+});
 
-populateUserSelect();
-
-document.getElementById("userDropdownMenu").addEventListener("click", onUserSelect);
+// Attach event listener to the dropdown menu
+document.getElementById("userDropdownMenu").addEventListener("click", async (event) => {
+    const allData = await loadAllUsersData();
+    onUserSelect(event, allData);
+});
 
 
 // **************************
@@ -284,8 +298,7 @@ async function ecoutesChart(userData, month = null) {
         : userData.streamingHistory.music;
 
     const periodes = [
-        { start: 0, end: 3, label: "Midnight - 3 AM" },
-        { start: 3, end: 6, label: "3 AM - 6 AM" },
+        { start: 0, end: 6, label: "Midnight - 6 AM" },
         { start: 6, end: 9, label: "6 AM - 9 AM" },
         { start: 9, end: 12, label: "9 AM - 12 PM" },
         { start: 12, end: 18, label: "12 PM - 6 PM" },
@@ -308,9 +321,9 @@ async function ecoutesChart(userData, month = null) {
         return ecoutes.length ? (totalMs / ecoutes.length) / 1000 : 0;
     });
 
-    const width = 600;
-    const height = 400;
-    const margin = { top: 30, right: 30, bottom: 60, left: 70 };
+    const width = 500;
+    const height = 300;
+    const margin = { top: 20, right: 20, bottom: 50, left: 50 };
 
     d3.select("#ecoutesChart").selectAll("*").remove();
 
@@ -339,6 +352,10 @@ async function ecoutesChart(userData, month = null) {
 
     const tooltip = d3.select("#tooltip");
 
+    // Use a sequential Viridis color scale
+    const colorScale = d3.scaleSequential(d3.interpolateYlOrRd)
+                         .domain([0, periodes.length - 1]);
+
     svg.selectAll(".bar")
         .data(moyennesEcoute)
         .enter()
@@ -348,7 +365,7 @@ async function ecoutesChart(userData, month = null) {
         .attr("y", d => y(d))
         .attr("width", x.bandwidth())
         .attr("height", d => height - margin.bottom - y(d))
-        .attr("fill", "steelblue")
+        .attr("fill", (_, i) => colorScale(i)) // Apply Viridis color scale
         .on("mouseover", function (event, d) {
             const index = d3.select(this).datum();
             const i = moyennesEcoute.indexOf(index);
@@ -364,10 +381,6 @@ async function ecoutesChart(userData, month = null) {
             tooltip.style("opacity", 0);
         });
 }
-
-// **************************
-// ********* Test *********
-// **************************
 
 
 
@@ -471,24 +484,23 @@ async function visualizeMonthlyListening(userData, updateTimeDistribution) {
                 .attr("fill", "#800000");
         });
 
-        // Add X-axis title
-        svg.append("text")
-            .attr("text-anchor", "middle")
-            .attr("x", (width - margin.left - margin.right) / 2 + margin.left)
-            .attr("y", height - 10) // Slightly below the axis
-            .text("Months")
-            .style("font-size", "14px")
-            .style("fill", "#800000");
-
-        // Add Y-axis title
-        svg.append("text")
-            .attr("text-anchor", "middle")
-            .attr("x", -(height - margin.top - margin.bottom) / 2 - margin.top)
-            .attr("y", 15) // Slightly to the left of the axis
-            .attr("transform", "rotate(-90)")
-            .text("Hours Listened")
-            .style("font-size", "14px")
-            .style("fill", "#800000");
+    // Add X-axis title
+    svg.append("text")
+        .attr("text-anchor", "middle")
+        .attr("x", (width - margin.left - margin.right) / 2 + margin.left)
+        .attr("y", height - 10) // Slightly below the axis
+        .text("Months")
+        .style("font-size", "14px")
+        .style("fill", "#800000");
+    // Add Y-axis title
+    svg.append("text")
+        .attr("text-anchor", "middle")
+        .attr("x", -(height - margin.top - margin.bottom) / 2 - margin.top)
+        .attr("y", 15) // Slightly to the left of the axis
+        .attr("transform", "rotate(-90)")
+        .text("Hours Listened")
+        .style("font-size", "14px")
+        .style("fill", "#800000");
 }
 
 // **************************
@@ -530,10 +542,12 @@ function drawTreemap(artistData) {
     const height = 300;
     d3.select("#treemap-container").selectAll("*").remove();
 
-    // Create a color scale based on artist names
-    const colorScale = d3.scaleOrdinal()
-        .domain(artistData.map(d => d.name)) // Map each artist name
-        .range(d3.schemeCategory10); // Use a predefined color scheme
+    // Determine the maximum value for color scaling
+    const maxValue = d3.max(artistData, d => d.value);
+
+    // Create a sequential color scale based on the artist values
+    const colorScale = d3.scaleSequential(d3.interpolateYlOrRd)
+        .domain([0, maxValue]); // Map values to the YlOrRd palette
 
     const treemap = d3.treemap()
         .size([width, height])
@@ -554,11 +568,11 @@ function drawTreemap(artistData) {
         .enter().append("g")
         .attr("transform", d => `translate(${d.x0},${d.y0})`);
 
-    // Add rectangles and fill them with the color associated with each artist
+    // Add rectangles and fill them with colors from the YlOrRd palette
     cell.append("rect")
         .attr("width", d => d.x1 - d.x0)
         .attr("height", d => d.y1 - d.y0)
-        .attr("fill", d => colorScale(d.data.name)); // Use the color scale
+        .attr("fill", d => colorScale(d.data.value)); // Use the sequential color scale
 
     // Add artist names as text labels
     cell.append("text")
@@ -589,10 +603,6 @@ function drawTreemap(artistData) {
                 .style("top", (event.pageY - 20) + "px"); // Position tooltip near the cursor
         })
         .on("mouseout", () => {
-            tooltip.style("opacity", 0); // Hide tooltip
-        })
-        .on("mouseout", function(event, d) {
-            // Hide the tooltip when mouse leaves the rectangle
             tooltip.style("opacity", 0); // Hide tooltip
         });
 }
@@ -655,22 +665,21 @@ function plotGenrePieChart(genreData) {
     const width = 300, height = 300, radius = Math.min(width, height) / 2;
     d3.select("#pieChart").selectAll("*").remove();
 
-    // Use a color scale based on the genre names
-    const color = d3.scaleOrdinal()
-        .domain(topGenres.map(d => d.genre))  // Map genre names to the domain
-        .range(d3.schemeSet3);  // You can replace d3.schemeSet3 with any other color palette or define your own
+    // Use a sequential color scale based on YlOrRd
+    const colorScale = d3.scaleSequential(d3.interpolateYlOrRd)
+        .domain([0, topGenres.length - 1]); // Scale domain based on the number of genres
 
     // Create SVG element and append a group for the pie chart
     const svg = d3.select("#pieChart")
         .append("svg")
-        .attr("width", width)
+        .attr("width", width + 150) // Add extra width for the legend
         .attr("height", height)
         .append("g")
         .attr("transform", `translate(${width / 2}, ${height / 2})`); // Center the pie chart inside the SVG
 
     // Create pie function for calculating the angle of each slice
     const pie = d3.pie().value((d) => d.count);
-    const arc = d3.arc().outerRadius(radius).innerRadius(0);  // Pie slices
+    const arc = d3.arc().outerRadius(radius).innerRadius(0); // Pie slices
 
     // Step 3: Bind data to pie chart and create the slices
     const arcs = svg.selectAll(".arc")
@@ -682,7 +691,7 @@ function plotGenrePieChart(genreData) {
     // Append pie slices
     arcs.append("path")
         .attr("d", arc)
-        .style("fill", (d) => color(d.data.genre));
+        .style("fill", (d, i) => colorScale(i)); // Use the YlOrRd scale
 
     // Add percentage labels inside each slice
     arcs.append("text")
@@ -694,35 +703,34 @@ function plotGenrePieChart(genreData) {
         .text((d) => `${Math.round((d.data.count / d3.sum(topGenres, (d) => d.count)) * 100)}%`);
 
     // Step 4: Create the legend on the right side of the chart
-    const legendWidth = 12;   // Smaller size for the dots
-    const legendHeight = 12;  // Smaller size for the dots
-    const legendSpacing = 18; // Adjust the vertical spacing between legend items to ensure all 20 fit
-    const legend = svg.append("g")
-        .attr("transform", `translate(${radius + 10}, ${-radius / 2})`); // Position the legend to the right of the pie chart
+    const legend = d3.select("#pieChart svg")
+        .append("g")
+        .attr("transform", `translate(${width+10}, 70)`); // Position legend to the right of the pie chart
 
-    // Add legend items (color and genre name)
-    legend.selectAll(".legend")
+    const legendSpacing = 18; // Spacing between legend items
+
+    // Add legend items
+    legend.selectAll(".legend-item")
         .data(topGenres)
         .enter()
         .append("g")
-        .attr("class", "legend")
-        .attr("transform", (d, i) => `translate(0, ${i * legendSpacing})`) // Increase vertical spacing
+        .attr("class", "legend-item")
+        .attr("transform", (d, i) => `translate(0, ${i * legendSpacing})`);
 
-        // Add colored circles to legend
-        .append("circle")
-        .attr("cx", 0)
-        .attr("cy", legendHeight / 2)  // Position circle vertically centered
-        .attr("r", 6)  // Small dot size
-        .style("fill", (d) => color(d.genre));
+    // Add colored squares to legend
+    legend.selectAll(".legend-item")
+        .append("rect")
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("width", 12)
+        .attr("height", 12)
+        .style("fill", (d, i) => colorScale(i));
 
-    // Add genre text to the legend
-    legend.selectAll(".legendText")
-        .data(topGenres)
-        .enter()
+    // Add genre labels to legend
+    legend.selectAll(".legend-item")
         .append("text")
-        .attr("x", legendWidth + 5)
-        .attr("y", (d, i) => i * legendSpacing + legendHeight / 2)
-        .attr("dy", ".35em")
+        .attr("x", 20)
+        .attr("y", 10)
         .text((d) => d.genre)
         .style("font-size", "12px");
 
@@ -731,11 +739,11 @@ function plotGenrePieChart(genreData) {
     arcs.selectAll("path")
         .on("mouseover", (event, d) => {
             tooltip.style("opacity", 1) // Make tooltip visible
-                   .html(`Genre: ${d.data.genre}<br>Count: ${d.data.count}`); // Display genre and count
+                .html(`Genre: ${d.data.genre}<br>Count: ${d.data.count}`); // Display genre and count
         })
         .on("mousemove", (event) => {
             tooltip.style("left", (event.pageX + 10) + "px")
-                   .style("top", (event.pageY - 20) + "px"); // Position tooltip near the cursor
+                .style("top", (event.pageY - 20) + "px"); // Position tooltip near the cursor
         })
         .on("mouseout", () => {
             tooltip.style("opacity", 0); // Hide tooltip
@@ -810,9 +818,14 @@ function prepareComparisonData(userData) {
 function plotPodcastMusicChart(allUsersData) {
     const comparisonData = prepareComparisonData(allUsersData);
 
-    console.log("Comparison data: ", comparisonData);
+    // Map numerical months (e.g., "2023-01") to short month names
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    comparisonData.forEach(record => {
+        const [year, month] = record.month.split("-"); // Split "YYYY-MM" into year and month
+        record.month = `${monthNames[parseInt(month, 10) - 1]} ${year}`; // Convert numeric month to "ShortName YYYY"
+    });
 
-    const margin = { top: 20, right: 20, bottom: 50, left: 50 };
+    const margin = { top: 40, right: 40, bottom: 40, left: 55 };
     const width = 400;
     const height = 200;
 
@@ -827,11 +840,9 @@ function plotPodcastMusicChart(allUsersData) {
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    
-
     // Set up scales
     const xScale = d3.scaleBand()
-        .domain(comparisonData.map(d => d.month))
+        .domain(comparisonData.map(d => d.month)) // Use formatted month names as the domain
         .range([0, width])
         .padding(0.2);
 
@@ -850,6 +861,9 @@ function plotPodcastMusicChart(allUsersData) {
     svg.append("g")
         .call(d3.axisLeft(yScale).ticks(10));
 
+    // Add tooltip
+    const tooltip = d3.select("#tooltip");
+
     // Draw music bars
     svg.selectAll(".bar.music")
         .data(comparisonData)
@@ -860,7 +874,18 @@ function plotPodcastMusicChart(allUsersData) {
         .attr("y", d => yScale(d.musicHours))
         .attr("width", xScale.bandwidth() / 2)
         .attr("height", d => height - yScale(d.musicHours))
-        .attr("fill", "#1DB954"); // Spotify green for music
+        .attr("fill", "#800000") // Spotify green for music
+        .on("mouseover", (event, d) => {
+            tooltip.style("opacity", 1)
+                .html(`Month: ${d.month}<br>Type: Music<br>Hours: ${d.musicHours.toFixed(2)}`);
+        })
+        .on("mousemove", (event) => {
+            tooltip.style("left", `${event.pageX + 10}px`)
+                .style("top", `${event.pageY - 20}px`);
+        })
+        .on("mouseout", () => {
+            tooltip.style("opacity", 0);
+        });
 
     // Draw podcast bars
     svg.selectAll(".bar.podcast")
@@ -872,38 +897,51 @@ function plotPodcastMusicChart(allUsersData) {
         .attr("y", d => yScale(d.podcastHours))
         .attr("width", xScale.bandwidth() / 2)
         .attr("height", d => height - yScale(d.podcastHours))
-        .attr("fill", "#FFC107"); // Yellow for podcasts
+        .attr("fill", "#E8D2A6") // Yellow for podcasts
+        .on("mouseover", (event, d) => {
+            tooltip.style("opacity", 1)
+                .html(`Month: ${d.month}<br>Type: Podcast<br>Hours: ${d.podcastHours.toFixed(2)}`);
+        })
+        .on("mousemove", (event) => {
+            tooltip.style("left", `${event.pageX + 10}px`)
+                .style("top", `${event.pageY - 20}px`);
+        })
+        .on("mouseout", () => {
+            tooltip.style("opacity", 0);
+        });
 
-    // Add legend
+    // Add horizontal legend
     const legend = svg.append("g")
-        .attr("transform", `translate(${width - 100}, ${-10})`);
+        .attr("transform", `translate(${width - 125}, ${-margin.top + 5})`); // Position at the top-right corner
 
+    // Music legend
     legend.append("rect")
         .attr("x", 0)
         .attr("y", 0)
-        .attr("width", 20)
-        .attr("height", 20)
-        .attr("fill", "#1DB954");
+        .attr("width", 13) // Smaller square size
+        .attr("height", 13) // Smaller square size
+        .attr("fill", "#800000");
 
     legend.append("text")
-        .attr("x", 30)
-        .attr("y", 15)
+        .attr("x", 17)
+        .attr("y", 11)
         .text("Music")
-        .style("font-size", "14px")
+        .style("font-size", "12px") // Smaller font size
         .attr("alignment-baseline", "middle");
 
+    // Podcast legend
     legend.append("rect")
-        .attr("x", 0)
-        .attr("y", 30)
-        .attr("width", 20)
-        .attr("height", 20)
-        .attr("fill", "#FFC107");
+        .attr("x", 55) // Position to the right of "Music" legend
+        .attr("y", 0)
+        .attr("width", 13) // Smaller square size
+        .attr("height", 13) // Smaller square size
+        .attr("fill", "#E8D2A6");
 
     legend.append("text")
-        .attr("x", 30)
-        .attr("y", 45)
+        .attr("x", 72) // Position to the right of the yellow rectangle
+        .attr("y", 11)
         .text("Podcasts")
-        .style("font-size", "14px")
+        .style("font-size", "12px") // Smaller font size
         .attr("alignment-baseline", "middle");
 }
 
