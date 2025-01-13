@@ -93,17 +93,58 @@ document.getElementById("userDropdownMenu").addEventListener("click", async (eve
 // ********* Slot 1 *********
 // **************************
 
+// Helper function to convert timestamp to year-month format
+function formatToYearMonth(dateString) {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1; // Month is zero-indexed
+    return `${year}-${String(month).padStart(2, '0')}`;
+}
+
+// Function to filter tracks based on the selected month or year and count items in the playlist
+function filterTracksByMonthOrYear(playlist, selectedValue) {
+    if (selectedValue === "2024") {
+        // If "Whole Year" is selected, include all tracks from 2024
+        return playlist.items.filter(item => new Date(item.addedDate).getFullYear() === 2024);
+    } else {
+        // If a specific month is selected, filter tracks by that month
+        return playlist.items.filter(item => {
+            const trackAddedMonth = formatToYearMonth(item.addedDate); 
+            return trackAddedMonth <= selectedValue; // Include tracks added before or in the selected month
+        });
+    }
+}
 // Visualize the playlists
 
-async function visualizePlaylists(userData) {
+// Function to filter tracks based on the selected month or year and count items in the playlist
+function filterTracksByMonthOrYear(playlist, selectedValue) {
+    if (selectedValue === "2024") {
+        // If "Whole Year" is selected, include all tracks from 2024
+        return playlist.items.filter(item => new Date(item.addedDate).getFullYear() === 2024);
+    } else {
+        // If a specific month is selected, filter tracks by that month
+        return playlist.items.filter(item => {
+            const trackAddedMonth = formatToYearMonth(item.addedDate); 
+            return trackAddedMonth <= selectedValue; // Include tracks added before or in the selected month
+        });
+    }
+}
+
+// Function to visualize playlists, with the added date filter
+async function visualizePlaylists(userData, selectedValue = null) {
     // Define the number of top playlists to display
     const topN = 20; // Change this value to adjust the number of playlists displayed
 
-    // Process playlists into data and take the top N
+    // Process playlists into data and apply the filter (month or whole year)
     const playlistData = userData.playlists
         .map(playlist => {
             const fullName = playlist.name || "Untitled Playlist"; // Store full name
-            const itemCount = Array.isArray(playlist.items) ? playlist.items.length : 0;
+            let filteredItems = playlist.items;
+            if (selectedValue) {
+                // Filter tracks based on the selected month or year
+                filteredItems = filterTracksByMonthOrYear(playlist, selectedValue);
+            }
+            const itemCount = filteredItems.length; // Count filtered items
             return { fullName: fullName, name: fullName, count: itemCount };
         })
         .sort((a, b) => b.count - a.count) // Sort by count descending
@@ -114,8 +155,8 @@ async function visualizePlaylists(userData) {
         }));
 
     const width = 500;
-    const height = 300; 
-    const margin = { top: 20, right: 20, bottom: 70, left: 70 }; // Adjusted for axis labels
+    const height = 300;
+    const margin = { top: 20, right: 20, bottom: 70, left: 70 };
 
     // Clear old content
     d3.select("#playlist-chart").selectAll("*").remove();
@@ -149,28 +190,28 @@ async function visualizePlaylists(userData) {
          .attr("x", -2)
          .attr("y", +7);
 
+    // Append y-axis
+    svg.append("g")
+       .attr("transform", `translate(${margin.left}, 0)`)
+       .call(d3.axisLeft(yScale));
+
     // Append x-axis label
     svg.append("text")
        .attr("x", width / 2)
        .attr("y", height - margin.bottom + 60) // Position below x-axis
        .attr("text-anchor", "middle")
        .style("font-size", "14px")
-       .text("Playlist name")
+       .text("Titre de playlist")
        .attr("fill", "#800000");
-
-    // Append y-axis
-    svg.append("g")
-       .attr("transform", `translate(${margin.left}, 0)`)
-       .call(d3.axisLeft(yScale));
 
     // Append y-axis label
     svg.append("text")
        .attr("x", -height / 2.5)
-       .attr("y", margin.left - 40) // Position to the left of y-axis
+       .attr("y", margin.left - 45) // Position to the left of y-axis
        .attr("transform", "rotate(-90)")
        .attr("text-anchor", "middle")
        .style("font-size", "14px")
-       .text("Number of songs")
+       .text("Nombre de morceaux")
        .attr("fill", "#800000");
 
     const tooltip = d3.select("#tooltip");
@@ -188,7 +229,7 @@ async function visualizePlaylists(userData) {
        .attr("fill", (_, i) => colorScale(i)) // Assign YlOrRd color based on index
        .on("mouseover", (event, d) => {
            tooltip.style("opacity", 1)
-                  .html(`Playlist: ${d.fullName}<br>${d.count} songs`); // Use full name in tooltip
+                  .html(`Playlist: ${d.fullName}<br>Items: ${d.count}`); // Use full name in tooltip
        })
        .on("mousemove", (event) => {
            tooltip.style("left", (event.pageX + 10) + "px")
@@ -208,11 +249,18 @@ async function visualizePlaylists(userData) {
            .style("fill", "gray")
            .text("No playlists available");
     }
+    
+    // Event listener for the month filter dropdown
+    document.getElementById("month-filter").addEventListener("change", (event) => {
+        const selectedMonth = event.target.value; // Get the selected month
+        visualizePlaylists(userData, selectedMonth); // Re-render the visualization with the selected month
+    });
 }
 
 // **************************
 // ********* Slot 2 *********
 // **************************
+
 
 // Top serach queries history
 
@@ -324,11 +372,11 @@ async function ecoutesChart(userData, month = null) {
         : userData.streamingHistory.music;
 
     const periodes = [
-        { start: 0, end: 6, label: "Midnight - 6 AM" },
-        { start: 6, end: 9, label: "6 AM - 9 AM" },
-        { start: 9, end: 12, label: "9 AM - 12 PM" },
-        { start: 12, end: 18, label: "12 PM - 6 PM" },
-        { start: 18, end: 24, label: "6 PM - Midnight" }
+        { start: 0, end: 6, label: "00:00 - 06:00" },
+        { start: 6, end: 9, label: "06:00 - 09:00" },
+        { start: 9, end: 12, label: "09:00 - 12:00" },
+        { start: 12, end: 18, label: "12:00 - 18:00" },
+        { start: 18, end: 24, label: "18:00 - 00:00" }
     ];
 
     const getHour = (dateString) => {
@@ -382,7 +430,7 @@ async function ecoutesChart(userData, month = null) {
         .attr("y", height - 20) // Position below the x-axis
         .attr("text-anchor", "middle")
         .style("font-size", "14px")
-        .text("Period")
+        .text("Période")
         .attr("fill", "#800000");
 
     // Add y-axis label
@@ -392,7 +440,7 @@ async function ecoutesChart(userData, month = null) {
         .attr("transform", "rotate(-90)")
         .attr("text-anchor", "middle")
         .style("font-size", "14px")
-        .text("Average listening time")
+        .text("Temps d'écoute moyen")
         .attr("fill", "#800000");
 
     const tooltip = d3.select("#tooltip");
@@ -416,7 +464,7 @@ async function ecoutesChart(userData, month = null) {
             const i = moyennesEcoute.indexOf(index);
 
             tooltip.style("opacity", 1)
-                .html(`Period: ${periodes[i].label}<br>Average listening time: ${d.toFixed(2)} seconds`);
+                .html(`Période : ${periodes[i].label}<br>Temps d'écoute moyen : ${d.toFixed(2)} secondes`);
         })
         .on("mousemove", (event) => {
             tooltip.style("left", (event.pageX + 10) + "px")
@@ -443,7 +491,7 @@ async function visualizeMonthlyListening(userData, updateTimeDistribution) {
     const monthlyHours = {};
     musicData.forEach(record => {
         const date = new Date(record.endTime);
-        const month = date.toLocaleString('default', { month: 'short' });
+        const month = date.toLocaleString('fr-FR', { month: 'short' });
         const hours = record.msPlayed / (60000 * 60);
 
         if (monthlyHours[month]) {
@@ -510,7 +558,7 @@ async function visualizeMonthlyListening(userData, updateTimeDistribution) {
         .attr("fill", "#800000")
         .on("mouseover", (event, d) => {
             tooltip.style("opacity", 1)
-                .html(`Month: ${months[hours.indexOf(d)]}<br>${d.toFixed(2)} hours`);
+                .html(`Mois : ${months[hours.indexOf(d)]}<br>${d.toFixed(2)} heures`);
         })
         .on("mousemove", (event) => {
             tooltip.style("left", (event.pageX + 10) + "px")
@@ -542,7 +590,7 @@ async function visualizeMonthlyListening(userData, updateTimeDistribution) {
         .attr("text-anchor", "middle")
         .attr("x", (width - margin.left - margin.right) / 2 + margin.left)
         .attr("y", height - 10)
-        .text("Months")
+        .text("Mois")
         .style("font-size", "14px")
         .style("fill", "#800000");
 
@@ -550,9 +598,9 @@ async function visualizeMonthlyListening(userData, updateTimeDistribution) {
     svg.append("text")
         .attr("text-anchor", "middle")
         .attr("x", -(height - margin.top - margin.bottom) / 2 - margin.top)
-        .attr("y", 15)
+        .attr("y", 25)
         .attr("transform", "rotate(-90)")
-        .text("Hours listened")
+        .text("Heures d'écoutes")
         .style("font-size", "14px")
         .style("fill", "#800000");
 }
@@ -650,7 +698,7 @@ function drawTreemap(artistData) {
     cell.selectAll("rect")
         .on("mouseover", (event, d) => {
             tooltip.style("opacity", 1) // Make tooltip visible
-                .html(`Artist: ${d.data.name}<br>${d.data.value} songs`); // Display artist name and value
+                .html(`Artiste : ${d.data.name}<br>${d.data.value} morceaux`); // Display artist name and value
         })
         .on("mousemove", (event) => {
             tooltip.style("left", (event.pageX + 10) + "px")
@@ -793,7 +841,7 @@ function plotGenrePieChart(genreData) {
     arcs.selectAll("path")
         .on("mouseover", (event, d) => {
             tooltip.style("opacity", 1) // Make tooltip visible
-                .html(`Genre: ${d.data.genre}<br>${d.data.count} songs`); // Display genre and count
+                .html(`Genre : ${d.data.genre}<br>${d.data.count} songs`); // Display genre and count
         })
         .on("mousemove", (event) => {
             tooltip.style("left", (event.pageX + 10) + "px")
@@ -873,7 +921,7 @@ function plotPodcastMusicChart(allUsersData) {
     const comparisonData = prepareComparisonData(allUsersData);
 
     // Map numerical months (e.g., "2023-01") to short month names
-    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const monthNames = ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Août", "Sept", "Oct", "Nov", "Déc"];
     comparisonData.forEach(record => {
         const [year, month] = record.month.split("-"); // Split "YYYY-MM" into year and month
         record.month = `${monthNames[parseInt(month, 10) - 1]}`; // Convert numeric month to "ShortName YYYY"
@@ -918,7 +966,7 @@ function plotPodcastMusicChart(allUsersData) {
         .attr("y", height + 50) // Position below the x-axis
         .attr("text-anchor", "middle")
         .style("font-size", "14px")
-        .text("Months")
+        .text("Mois")
         .attr("fill", "#800000");
 
     // Add y-axis label
@@ -928,7 +976,7 @@ function plotPodcastMusicChart(allUsersData) {
         .attr("transform", "rotate(-90)")
         .attr("text-anchor", "middle")
         .style("font-size", "14px")
-        .text("Hours listened")
+        .text("Heures d'écoute")
         .attr("fill", "#800000");
 
     // Add tooltip
@@ -947,7 +995,7 @@ function plotPodcastMusicChart(allUsersData) {
         .attr("fill", "#800000") // Spotify green for music
         .on("mouseover", (event, d) => {
             tooltip.style("opacity", 1)
-                .html(`Month: ${d.month}<br>Type: Music<br>${d.musicHours.toFixed(2)} hours`);
+                .html(`Mois : ${d.month}<br>Type : Musique<br>${d.musicHours.toFixed(2)} heures`);
         })
         .on("mousemove", (event) => {
             tooltip.style("left", `${event.pageX + 10}px`)
@@ -970,7 +1018,7 @@ function plotPodcastMusicChart(allUsersData) {
         .attr("fill", "#FFD65A") // Yellow for podcasts
         .on("mouseover", (event, d) => {
             tooltip.style("opacity", 1)
-                .html(`Month: ${d.month}<br>Type: Podcast<br>${d.podcastHours.toFixed(2)} hours`);
+                .html(`Mois : ${d.month}<br>Type : Podcast<br>${d.podcastHours.toFixed(2)} heures`);
         })
         .on("mousemove", (event) => {
             tooltip.style("left", `${event.pageX + 10}px`)
@@ -986,31 +1034,31 @@ function plotPodcastMusicChart(allUsersData) {
 
     // Music legend
     legend.append("rect")
-        .attr("x", 0)
+        .attr("x", -6)
         .attr("y", 0)
         .attr("width", 13) // Smaller square size
         .attr("height", 13) // Smaller square size
         .attr("fill", "#800000");
 
     legend.append("text")
-        .attr("x", 17)
+        .attr("x", 11)
         .attr("y", 11)
-        .text("Music")
+        .text("Musique")
         .style("font-size", "12px") // Smaller font size
         .attr("alignment-baseline", "middle");
 
     // Podcast legend
     legend.append("rect")
-        .attr("x", 55) // Position to the right of "Music" legend
+        .attr("x", 66) // Position to the right of "Music" legend
         .attr("y", 0)
         .attr("width", 13) // Smaller square size
         .attr("height", 13) // Smaller square size
         .attr("fill", "#FFD65A");
 
     legend.append("text")
-        .attr("x", 72) // Position to the right of the yellow rectangle
+        .attr("x", 83) // Position to the right of the yellow rectangle
         .attr("y", 11)
-        .text("Podcasts")
+        .text("Podcast")
         .style("font-size", "12px") // Smaller font size
         .attr("alignment-baseline", "middle");
 }
@@ -1039,8 +1087,8 @@ async function artistDensityChart(userData){
         links.push({ source: d.artistName, target: d.trackName, value: 1 });
     });
 
-    const width = 1000;
-    const height = 600;
+    const width = 2600;
+    const height = 1000;
     const color = d3.scaleOrdinal()
     .domain(['artistName', 'trackName'])  // Définir les types de groupes
     .range(['#800000', '#FFD65A']);  // Noir pour les artistes, rouge pour les pistes
@@ -1081,8 +1129,8 @@ const node = svg.append("g")
         const numLinks = links.filter(link => link.source.id === d.id || link.target.id === d.id).length;
         tooltip.style("opacity", 1)
                .html(`
-                    ${d.group === 'artistName' ? 'Artist' : 'Track'} : ${d.id}<br>
-                    <strong>Times listened:</strong> ${numLinks}
+                    ${d.group === 'artistName' ? 'Artiste' : 'Morceau'} : ${d.id}<br>
+                    <strong>Nombre d'écoutes :</strong> ${numLinks}
                 `);
     })
     .on("mousemove", (event) => {

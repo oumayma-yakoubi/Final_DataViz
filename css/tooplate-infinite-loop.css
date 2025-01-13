@@ -19,6 +19,23 @@ body {
 p {
   text-align: justify;
 }
+
+select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #dfa3a3;
+  background-color: #4a1a1a;
+  color: #f7f4f4;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Effet hover sur le select */
+select:hover {
+  background-color: #1f0707;
+  border-color: #ef2121;
+}
 /* Le conteneur parent va occuper toute la fenêtre et utiliser Flexbox pour centrer */
 #fdGraphContainer {
   display: flex;              /* Active Flexbox */

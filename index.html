@@ -79,14 +79,13 @@ https://www.tooplate.com/view/2117-infinite-loop
       </div>      
     </section>
 
-    <section id="whatwedo" class="tm-section-pad-top">    
-        <div class="container">
-          <center><h2>L'Écosystème de Vos Écoutes</h2></center>
+    <section id="whatwedo" class="tm-section-pad-top">
+      <center><h2>L'Écosystème de Vos Écoutes</h2></center>
           <center><h3>Les points d'écoute les plus intenses révèlent vos artistes phares.</h3></center>
-          <div id="fdGraphContainer">
-            <div id="fdGraph"></div>
-          </div>
-
+      <div id="fdGraphContainer">
+        <div id="fdGraph"></div>
+      </div>    
+        <div class="container">
           <div id="tooltip" class="tooltip" style="opacity: 0; position: absolute; background: #fff; border: 1px solid #ccc; padding: 5px; pointer-events: none;"></div>
           <div class="story-step">
               <div class="story-text">
@@ -123,14 +122,32 @@ https://www.tooplate.com/view/2117-infinite-loop
               <div class="story-text">
                   <h2>Ton équilibre entre podcasts et musique</h2>
                   <p>Plongé entre les rythmes de la <span class="spotify-highlight">musique</span> et les récits captivants des <span class="spotify-highlight">podcasts</span>, découvre comment tu partages ton temps entre ces deux univers sonores.</p>
+                
               </div>
-              <div class="chart" id="podcastMusicChart"></div>
+              <div class="chart" id="podcastMusicChart">
+                  <!-- <label for="month-filter">Sélectionnez un mois :</label> -->
+                  
+              </div>
           </div>
           <div class="story-step">
             <div class="story-text">
                 <h2>Top 20 des Playlists les Plus Remplies : Un Océan de Musique</h2>
-                <p>Découvrez le classement de vos 20 playlists les plus remplies de chansons ! Cette visualisation met en avant vos collections musicales les plus vastes, selon le nombre de morceaux qu'elles contiennent.</p>
-            </div>
+                <p>Découvrez le classement de vos 20 playlists les plus remplies de chansons ! Cette visualisation met en avant vos collections musicales les plus vastes, selon le nombre de morceaux qu'elles contiennent. Grâce à un filtre interactif, vous pouvez également explorer comment le nombre de chansons dans chaque playlist évolue mois après mois, révélant les tendances et les dynamiques musicales au fil de l'année.</p>
+                <select id="month-filter">
+                  <option value="2024-01">Janvier 2024</option>
+                  <option value="2024-02">Février 2024</option>
+                  <option value="2024-03">Mars 2024</option>
+                  <option value="2024-04">Avril 2024</option>
+                  <option value="2024-05">Mai 2024</option>
+                  <option value="2024-06">Juin 2024</option>
+                  <option value="2024-07">Juillet 2024</option>
+                  <option value="2024-08">Août 2024</option>
+                  <option value="2024-09">Septembre 2024</option>
+                  <option value="2024-10">Octobre 2024</option>
+                  <option value="2024-11">Novembre 2024</option>
+                  <option value="2024-12">Décembre 2024</option>
+              </select>
+              </div>
             <div class="chart" id="playlist-chart"></div>
         </div>
       </div>
@@ -152,21 +169,21 @@ https://www.tooplate.com/view/2117-infinite-loop
             <div class="mx-auto tm-gallery-container tm-gallery-container-2">
               <div class="tm-testimonials-carousel">
                 <figure class="tm-testimonial-item">
-                  <blockquote>Processus de collecte <br> 
-                  <p>Une fois les utilisateurs ayant accepté de participer : Chaque utilisateur a accédé à la section de confidentialité de leur compte Spotify pour demander une copie de leurs données personnelles pour l'année 2024. Ce processus a pris 5 jours avant que Spotify génère et envoie les fichiers.
-                    Les fichiers reçus, en format JSON , ont été transmis avec leur consentement explicite à l’équipe du projet.</blockquote>
+                  <blockquote><h3>Processus de collecte</h3></blockquote> 
+                  <p>Une fois les utilisateurs ayant accepté de participer : chaque utilisateur a accédé à la section de confidentialité de leur compte Spotify pour demander une copie de leurs données personnelles pour l'année 2024. Ce processus a pris 5 jours avant que Spotify génère et envoie les fichiers.
+                    Les fichiers reçus, en format JSON , ont été transmis avec leur consentement explicite à l’équipe du projet.
                   </p>
                   </figure>
 
                 <figure class="tm-testimonial-item">
-                  <blockquote>Nettoyage des données</blockquote>
+                  <blockquote><h3>Nettoyage des données</h3></blockquote>
                   <p>
                   Le processus charge et organise les données utilisateur en récupérant, via un fichier d'index, les fichiers JSON associés à chaque utilisateur (historique, playlists, etc.) depuis un dépôt GitHub, puis les structure pour une utilisation efficace.    
                   </p>
                 </figure>
 
                 <figure class="tm-testimonial-item">
-                  <blockquote>Transformation en visualisation.</blockquote>
+                  <blockquote><h3>Transformation en visualisation</h3></blockquote>
                   <p>Les données nettoyées ont été transformées en graphiques pour mettre en évidence les tendances et comportements d’écoute. Ces visualisations permettent d'explorer les préférences musicales et les habitudes d’écoute de manière claire et esthétique.</p>
                 </figure>
 
