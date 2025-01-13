@@ -1,0 +1,324 @@
+{
+  "playlists": [
+    {
+      "name": "Chill 😎",
+      "lastModifiedDate": "2023-08-23",
+      "items": [
+        {
+          "track": {
+            "trackName": "Numb The Pain",
+            "artistName": "Clarx",
+            "albumName": "Numb The Pain",
+            "trackUri": "spotify:track:4vAze2mrHQgy44qRuz1rCm"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2023-07-23"
+        },
+        {
+          "track": {
+            "trackName": "Leave a Light On",
+            "artistName": "Tom Walker",
+            "albumName": "What a Time To Be Alive",
+            "trackUri": "spotify:track:4iVVU8DyQvOVsKafv3KWIF"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2023-07-23"
+        },
+        {
+          "track": {
+            "trackName": "a m a r i",
+            "artistName": "J. Cole",
+            "albumName": "The Off-Season",
+            "trackUri": "spotify:track:2cnKST6T9qUo2i907lm8zX"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2023-07-23"
+        },
+        {
+          "track": {
+            "trackName": "HUMBLE.",
+            "artistName": "Kendrick Lamar",
+            "albumName": "DAMN.",
+            "trackUri": "spotify:track:7KXjTSCq5nL1LoYtL7XAwS"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2023-07-23"
+        },
+        {
+          "track": {
+            "trackName": "Real Good Feeling",
+            "artistName": "Oh The Larceny",
+            "albumName": "Blood Is Rebel",
+            "trackUri": "spotify:track:3HHNrkdy0b1y3UGqKdJOMs"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2023-07-23"
+        },
+        {
+          "track": {
+            "trackName": "The Search",
+            "artistName": "NF",
+            "albumName": "The Search",
+            "trackUri": "spotify:track:3oLe5ZILASG8vU5dxIMfLY"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2023-07-24"
+        },
+        {
+          "track": {
+            "trackName": "Legends Are Made",
+            "artistName": "Sam Tinnesz",
+            "albumName": "Babel",
+            "trackUri": "spotify:track:0yqrhHrcWLMjBylHReDN5u"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2023-07-24"
+        },
+        {
+          "track": {
+            "trackName": "Unstoppable",
+            "artistName": "The Score",
+            "albumName": "ATLAS",
+            "trackUri": "spotify:track:6rrKbzJGGDlSZgLphopS49"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2023-07-24"
+        },
+        {
+          "track": {
+            "trackName": "I Am Defiant",
+            "artistName": "The Seige",
+            "albumName": "I Am Defiant",
+            "trackUri": "spotify:track:4ePKbzLwkIBslceokt2iXZ"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2023-07-24"
+        },
+        {
+          "track": {
+            "trackName": "Outside",
+            "artistName": "The Seige",
+            "albumName": "Act IV: Awake",
+            "trackUri": "spotify:track:3ZYN2cfyCFn4NuWxEW9tuh"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2023-07-24"
+        },
+        {
+          "track": {
+            "trackName": "Rule the World",
+            "artistName": "Zayde Wølf",
+            "albumName": "Modern Alchemy",
+            "trackUri": "spotify:track:4hWtNA80MqTwYUKjnQBdc2"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2023-07-24"
+        },
+        {
+          "track": {
+            "trackName": "Friend of the Devil",
+            "artistName": "Adam Jensen",
+            "albumName": "Friend of the Devil",
+            "trackUri": "spotify:track:11xWF4YFci7GNTd0QHIPex"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2023-07-27"
+        },
+        {
+          "track": {
+            "trackName": "Someone You Loved",
+            "artistName": "Lewis Capaldi",
+            "albumName": "Divinely Uninspired To A Hellish Extent",
+            "trackUri": "spotify:track:7qEHsqek33rTcFNT9PFqLf"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2023-07-27"
+        },
+        {
+          "track": {
+            "trackName": "Ghost (Dark Version)",
+            "artistName": "Confetti",
+            "albumName": "Ghost (Dark Version)",
+            "trackUri": "spotify:track:3ypzlFX9dj3gsP3h8sL3NR"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2023-07-27"
+        },
+        {
+          "track": {
+            "trackName": "Ain't No Rest for the Wicked",
+            "artistName": "Cage The Elephant",
+            "albumName": "Best Of The Bands",
+            "trackUri": "spotify:track:4B3qEctMpLkb7eewdrQ6lU"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2023-07-27"
+        },
+        {
+          "track": {
+            "trackName": "Money Trees",
+            "artistName": "Kendrick Lamar",
+            "albumName": "good kid, m.A.A.d city",
+            "trackUri": "spotify:track:0UtnpKaReKUg2GquaSxCyD"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2023-08-16"
+        },
+        {
+          "track": {
+            "trackName": "Ain't No Sunshine",
+            "artistName": "Lighthouse Family",
+            "albumName": "Greatest Hits",
+            "trackUri": "spotify:track:435rQGMojc5C6xJbtjeynu"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2023-08-16"
+        },
+        {
+          "track": {
+            "trackName": "One Thing Right",
+            "artistName": "Marshmello",
+            "albumName": "One Thing Right",
+            "trackUri": "spotify:track:4hPpVbbakQNv8YTHYaOJP4"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2023-08-17"
+        },
+        {
+          "track": {
+            "trackName": "Let You Down",
+            "artistName": "NF",
+            "albumName": "Perception",
+            "trackUri": "spotify:track:52okn5MNA47tk87PeZJLEL"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2023-08-17"
+        },
+        {
+          "track": {
+            "trackName": "Sunflower - Spider-Man: Into the Spider-Verse",
+            "artistName": "Post Malone",
+            "albumName": "Hollywood's Bleeding",
+            "trackUri": "spotify:track:0RiRZpuVRbi7oqRdSMwhQY"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2023-08-17"
+        },
+        {
+          "track": {
+            "trackName": "Whatever It Takes",
+            "artistName": "Imagine Dragons",
+            "albumName": "Evolve",
+            "trackUri": "spotify:track:6Qn5zhYkTa37e91HC1D7lb"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2023-08-17"
+        },
+        {
+          "track": {
+            "trackName": "Lie",
+            "artistName": "NF",
+            "albumName": "Perception",
+            "trackUri": "spotify:track:07FkzikE6FuHIa8Ma7zJGc"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2023-08-17"
+        },
+        {
+          "track": {
+            "trackName": "Home (with Machine Gun Kelly, X Ambassadors & Bebe Rexha)",
+            "artistName": "mgk",
+            "albumName": "Home (with Machine Gun Kelly, X Ambassadors & Bebe Rexha) [From Bright: The Album]",
+            "trackUri": "spotify:track:0OI7AFifLSoGzpb8bdBLLV"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2023-08-17"
+        },
+        {
+          "track": {
+            "trackName": "13bullets (pt. 1)",
+            "artistName": "Stop Light Observations",
+            "albumName": "oRANGE.",
+            "trackUri": "spotify:track:0ug8cXoQxQjfVd8vLQpdaL"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2023-08-18"
+        },
+        {
+          "track": {
+            "trackName": "Under The Influence",
+            "artistName": "Chris Brown",
+            "albumName": "Indigo (Extended)",
+            "trackUri": "spotify:track:5IgjP7X4th6nMNDh4akUHb"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2023-08-20"
+        },
+        {
+          "track": {
+            "trackName": "Stressed Out",
+            "artistName": "Twenty One Pilots",
+            "albumName": "Blurryface",
+            "trackUri": "spotify:track:3CRDbSIZ4r5MsZ0YwxuEkn"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2023-08-23"
+        }
+      ],
+      "description": null,
+      "numberOfFollowers": 0
+    }
+  ]
+}

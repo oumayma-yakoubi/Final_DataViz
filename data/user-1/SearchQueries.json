@@ -1,0 +1,1843 @@
+[
+  {
+    "platform" : "ANDROID_ARM",
+    "searchTime" : "2024-09-09T09:30:23.964Z[UTC]",
+    "searchQuery" : "q",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "ANDROID",
+    "searchTime" : "2024-09-09T09:30:27.092Z[UTC]",
+    "searchQuery" : "ach kayn",
+    "searchInteractionURIs" : [
+      "spotify:artist:42hh59CvORzrpveSnW4SMp",
+      "spotify:track:1HHKC2UB0Z10ecT00nLGb9"
+    ]
+  },
+  {
+    "platform" : "ANDROID_ARM",
+    "searchTime" : "2024-09-15T10:37:51.556Z[UTC]",
+    "searchQuery" : "3",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "ANDROID_ARM",
+    "searchTime" : "2024-09-15T10:37:51.893Z[UTC]",
+    "searchQuery" : "3a",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "ANDROID",
+    "searchTime" : "2024-09-15T10:37:52.288Z[UTC]",
+    "searchQuery" : "3adi",
+    "searchInteractionURIs" : [
+      "spotify:track:2wNNXprT139bOoaBGmc12V"
+    ]
+  },
+  {
+    "platform" : "ANDROID_ARM",
+    "searchTime" : "2024-09-19T20:14:43.165Z[UTC]",
+    "searchQuery" : "m",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "ANDROID",
+    "searchTime" : "2024-09-19T20:14:44.949Z[UTC]",
+    "searchQuery" : "moro",
+    "searchInteractionURIs" : [
+      "spotify:search:moroccan+songs"
+    ]
+  },
+  {
+    "platform" : "ANDROID",
+    "searchTime" : "2024-09-19T20:14:55.739Z[UTC]",
+    "searchQuery" : "moroccan songs",
+    "searchInteractionURIs" : [
+      "spotify:playlist:37i9dQZF1DWYHO8PTSQ9fM",
+      "spotify:playlist:2H38TMCmzU1DtejRh02Qjj",
+      "spotify:playlist:37i9dQZEVXbJU9eQpX8gPT"
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-09-30T13:26:52.919Z[UTC]",
+    "searchQuery" : "#",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "LINUX_X86_64",
+    "searchTime" : "2024-09-30T13:26:53.198Z[UTC]",
+    "searchQuery" : "#",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-09-30T13:26:53.515Z[UTC]",
+    "searchQuery" : "#d",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-09-30T13:26:53.917Z[UTC]",
+    "searchQuery" : "#d",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-09-30T13:26:55.164Z[UTC]",
+    "searchQuery" : "#ad",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-09-30T13:26:55.503Z[UTC]",
+    "searchQuery" : "#ad",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-09-30T13:26:59.220Z[UTC]",
+    "searchQuery" : "3",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-09-30T13:26:59.418Z[UTC]",
+    "searchQuery" : "3",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-09-30T13:26:59.483Z[UTC]",
+    "searchQuery" : "3a",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-09-30T13:26:59.661Z[UTC]",
+    "searchQuery" : "3a",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-09-30T13:26:59.744Z[UTC]",
+    "searchQuery" : "3ad",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-09-30T13:26:59.905Z[UTC]",
+    "searchQuery" : "3ad",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-09-30T13:27:00.378Z[UTC]",
+    "searchQuery" : "3adi",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-09-30T13:27:00.537Z[UTC]",
+    "searchQuery" : "3adi",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T13:19:55.145Z[UTC]",
+    "searchQuery" : "h",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T13:19:55.363Z[UTC]",
+    "searchQuery" : "ha",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T13:19:55.416Z[UTC]",
+    "searchQuery" : "h",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T13:19:55.517Z[UTC]",
+    "searchQuery" : "ha",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T13:19:55.884Z[UTC]",
+    "searchQuery" : "hal",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T13:19:56.058Z[UTC]",
+    "searchQuery" : "hal",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T13:19:56.963Z[UTC]",
+    "searchQuery" : "hala",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T13:19:57.108Z[UTC]",
+    "searchQuery" : "hala",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T13:20:02.531Z[UTC]",
+    "searchQuery" : "halak",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T13:20:02.738Z[UTC]",
+    "searchQuery" : "halak",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T13:20:02.984Z[UTC]",
+    "searchQuery" : "halaka",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T13:20:03.252Z[UTC]",
+    "searchQuery" : "halaka",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T13:20:08.852Z[UTC]",
+    "searchQuery" : "hala9",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "WIN32_X86_64",
+    "searchTime" : "2024-10-21T13:20:09.083Z[UTC]",
+    "searchQuery" : "hala9",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T13:20:09.306Z[UTC]",
+    "searchQuery" : "hala9a",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "WIN32_X86_64",
+    "searchTime" : "2024-10-21T13:20:09.672Z[UTC]",
+    "searchQuery" : "hala9a",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T13:22:12.695Z[UTC]",
+    "searchQuery" : "t",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "WIN32_X86_64",
+    "searchTime" : "2024-10-21T13:22:12.941Z[UTC]",
+    "searchQuery" : "t",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T13:22:13.393Z[UTC]",
+    "searchQuery" : "to",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T13:22:13.549Z[UTC]",
+    "searchQuery" : "to",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T13:22:14.794Z[UTC]",
+    "searchQuery" : "toto",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T13:22:14.933Z[UTC]",
+    "searchQuery" : "toto",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "WIN32_X86_64",
+    "searchTime" : "2024-10-21T13:22:24.535Z[UTC]",
+    "searchQuery" : "hit",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T13:22:24.564Z[UTC]",
+    "searchQuery" : "hit",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T14:03:40.948Z[UTC]",
+    "searchQuery" : "m",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T14:03:41.163Z[UTC]",
+    "searchQuery" : "m",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T14:03:41.368Z[UTC]",
+    "searchQuery" : "mo",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T14:03:41.596Z[UTC]",
+    "searchQuery" : "mo",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T14:03:42.349Z[UTC]",
+    "searchQuery" : "mone",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T14:03:42.507Z[UTC]",
+    "searchQuery" : "mone",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T14:03:43.018Z[UTC]",
+    "searchQuery" : "money ",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T14:03:43.231Z[UTC]",
+    "searchQuery" : "money ",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T14:50:19.843Z[UTC]",
+    "searchQuery" : "kindir ",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T14:50:20.036Z[UTC]",
+    "searchQuery" : "kindir ",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T14:50:20.523Z[UTC]",
+    "searchQuery" : "kindir lama",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T14:50:20.817Z[UTC]",
+    "searchQuery" : "kindir lama",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T14:50:20.836Z[UTC]",
+    "searchQuery" : "kindir lamar",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T14:50:21.061Z[UTC]",
+    "searchQuery" : "kindir lamar",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T14:50:26.609Z[UTC]",
+    "searchQuery" : "kindir lamar",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T14:50:32.424Z[UTC]",
+    "searchQuery" : "kindir lamar",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T14:56:14.030Z[UTC]",
+    "searchQuery" : "m",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T14:56:14.235Z[UTC]",
+    "searchQuery" : "m",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T14:56:14.440Z[UTC]",
+    "searchQuery" : "ma",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T14:56:14.790Z[UTC]",
+    "searchQuery" : "ma",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "WIN32_X86_64",
+    "searchTime" : "2024-10-21T14:56:15.525Z[UTC]",
+    "searchQuery" : "mama",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T14:56:15.561Z[UTC]",
+    "searchQuery" : "mama",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T14:56:20.135Z[UTC]",
+    "searchQuery" : "mama ",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T14:56:20.298Z[UTC]",
+    "searchQuery" : "mama ",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T14:56:20.963Z[UTC]",
+    "searchQuery" : "mama i",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T14:56:21.168Z[UTC]",
+    "searchQuery" : "mama i",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "WIN32_X86_64",
+    "searchTime" : "2024-10-21T14:56:22.321Z[UTC]",
+    "searchQuery" : "mama ink",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T14:56:22.356Z[UTC]",
+    "searchQuery" : "mama ink",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T15:00:41.624Z[UTC]",
+    "searchQuery" : "e",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T15:00:41.849Z[UTC]",
+    "searchQuery" : "e",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T15:00:42.081Z[UTC]",
+    "searchQuery" : "emin",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T15:00:42.272Z[UTC]",
+    "searchQuery" : "emin",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T15:00:43.344Z[UTC]",
+    "searchQuery" : "eminem s",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T15:00:43.511Z[UTC]",
+    "searchQuery" : "eminem s",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T15:00:43.770Z[UTC]",
+    "searchQuery" : "eminem su",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T15:00:43.939Z[UTC]",
+    "searchQuery" : "eminem su",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T15:00:44.684Z[UTC]",
+    "searchQuery" : "eminem super",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T15:00:44.819Z[UTC]",
+    "searchQuery" : "eminem super",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T15:00:45.158Z[UTC]",
+    "searchQuery" : "eminem superman",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-21T15:00:45.291Z[UTC]",
+    "searchQuery" : "eminem superman",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-22T08:55:13.222Z[UTC]",
+    "searchQuery" : "f",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-22T08:55:13.414Z[UTC]",
+    "searchQuery" : "f",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "WIN32_X86_64",
+    "searchTime" : "2024-10-22T08:55:13.488Z[UTC]",
+    "searchQuery" : "fa",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-22T08:55:13.514Z[UTC]",
+    "searchQuery" : "fa",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-22T08:55:13.676Z[UTC]",
+    "searchQuery" : "fay",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-22T08:55:13.862Z[UTC]",
+    "searchQuery" : "fay",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:06:58.048Z[UTC]",
+    "searchQuery" : "b",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:06:58.273Z[UTC]",
+    "searchQuery" : "b",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "WIN32_X86_64",
+    "searchTime" : "2024-10-27T17:06:58.364Z[UTC]",
+    "searchQuery" : "bi",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:06:58.390Z[UTC]",
+    "searchQuery" : "bi",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:06:59.675Z[UTC]",
+    "searchQuery" : "bil",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:06:59.813Z[UTC]",
+    "searchQuery" : "bil",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:13:36.968Z[UTC]",
+    "searchQuery" : "k",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:13:37.185Z[UTC]",
+    "searchQuery" : "k",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:13:37.258Z[UTC]",
+    "searchQuery" : "ki",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:13:37.541Z[UTC]",
+    "searchQuery" : "kin",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "WIN32_X86_64",
+    "searchTime" : "2024-10-27T17:13:37.583Z[UTC]",
+    "searchQuery" : "ki",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:13:37.673Z[UTC]",
+    "searchQuery" : "kin",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:13:38.538Z[UTC]",
+    "searchQuery" : "king",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:13:38.709Z[UTC]",
+    "searchQuery" : "king",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:13:40.373Z[UTC]",
+    "searchQuery" : "king ",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:13:40.521Z[UTC]",
+    "searchQuery" : "king ",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "WIN32_X86_64",
+    "searchTime" : "2024-10-27T17:13:41.613Z[UTC]",
+    "searchQuery" : "king o",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:13:41.654Z[UTC]",
+    "searchQuery" : "king o",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:13:42.162Z[UTC]",
+    "searchQuery" : "king of",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "WIN32_X86_64",
+    "searchTime" : "2024-10-27T17:13:42.472Z[UTC]",
+    "searchQuery" : "king of",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:13:42.695Z[UTC]",
+    "searchQuery" : "king of ",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:13:42.889Z[UTC]",
+    "searchQuery" : "king of ",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:13:43.355Z[UTC]",
+    "searchQuery" : "king of g",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:13:43.634Z[UTC]",
+    "searchQuery" : "king of g",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:13:43.809Z[UTC]",
+    "searchQuery" : "king of gr",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:13:44.064Z[UTC]",
+    "searchQuery" : "king of gr",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:13:44.611Z[UTC]",
+    "searchQuery" : "king of greed",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:13:44.781Z[UTC]",
+    "searchQuery" : "king of greed",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:14:20.748Z[UTC]",
+    "searchQuery" : "c",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:14:20.910Z[UTC]",
+    "searchQuery" : "c",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:14:21.218Z[UTC]",
+    "searchQuery" : "co",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:14:21.448Z[UTC]",
+    "searchQuery" : "co",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:14:21.980Z[UTC]",
+    "searchQuery" : "coy",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:14:22.142Z[UTC]",
+    "searchQuery" : "coy",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "WIN32_X86_64",
+    "searchTime" : "2024-10-27T17:14:24.242Z[UTC]",
+    "searchQuery" : "cou",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:14:24.276Z[UTC]",
+    "searchQuery" : "cou",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:14:24.501Z[UTC]",
+    "searchQuery" : "cour",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:14:24.650Z[UTC]",
+    "searchQuery" : "cour",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:14:24.825Z[UTC]",
+    "searchQuery" : "court",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:14:25.008Z[UTC]",
+    "searchQuery" : "court",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "WIN32_X86_64",
+    "searchTime" : "2024-10-27T17:14:30.301Z[UTC]",
+    "searchQuery" : "s",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:14:30.350Z[UTC]",
+    "searchQuery" : "s",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:14:30.461Z[UTC]",
+    "searchQuery" : "sq",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:14:30.676Z[UTC]",
+    "searchQuery" : "sq",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:14:31.814Z[UTC]",
+    "searchQuery" : "sqr",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:14:31.969Z[UTC]",
+    "searchQuery" : "sqr",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "WIN32_X86_64",
+    "searchTime" : "2024-10-27T17:14:32.327Z[UTC]",
+    "searchQuery" : "sqrq",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:14:32.349Z[UTC]",
+    "searchQuery" : "sqrq",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:14:38.288Z[UTC]",
+    "searchQuery" : "sz",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:14:38.488Z[UTC]",
+    "searchQuery" : "sz",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:14:40.160Z[UTC]",
+    "searchQuery" : "sx",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:14:40.312Z[UTC]",
+    "searchQuery" : "sx",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:14:45.718Z[UTC]",
+    "searchQuery" : "sa",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "WIN32_X86_64",
+    "searchTime" : "2024-10-27T17:14:45.951Z[UTC]",
+    "searchQuery" : "sa",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:14:47.378Z[UTC]",
+    "searchQuery" : "sar",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:14:47.536Z[UTC]",
+    "searchQuery" : "sar",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:14:48.490Z[UTC]",
+    "searchQuery" : "sara",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:14:48.643Z[UTC]",
+    "searchQuery" : "sara",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:14:50.361Z[UTC]",
+    "searchQuery" : "sara ",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:14:50.561Z[UTC]",
+    "searchQuery" : "sara ",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:14:51.980Z[UTC]",
+    "searchQuery" : "sara ;",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:14:52.272Z[UTC]",
+    "searchQuery" : "sara ;",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:15:04.943Z[UTC]",
+    "searchQuery" : "sara l",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:15:05.132Z[UTC]",
+    "searchQuery" : "sara l",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:15:05.497Z[UTC]",
+    "searchQuery" : "sara lk",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:15:05.756Z[UTC]",
+    "searchQuery" : "sara lk",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "WIN32_X86_64",
+    "searchTime" : "2024-10-27T17:15:06.380Z[UTC]",
+    "searchQuery" : "sara lkj",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:15:06.440Z[UTC]",
+    "searchQuery" : "sara lkj",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:15:07.278Z[UTC]",
+    "searchQuery" : "sara lkjh",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:15:07.475Z[UTC]",
+    "searchQuery" : "sara lkjh",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:15:07.838Z[UTC]",
+    "searchQuery" : "sara lkjhg",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:15:08.042Z[UTC]",
+    "searchQuery" : "sara lkjhg",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "WIN32_X86_64",
+    "searchTime" : "2024-10-27T17:15:10.112Z[UTC]",
+    "searchQuery" : "sara lkjhg.",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:15:10.139Z[UTC]",
+    "searchQuery" : "sara lkjhg.",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:15:10.599Z[UTC]",
+    "searchQuery" : "sara lkjhg.,",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:15:10.823Z[UTC]",
+    "searchQuery" : "sara lkjhg.,",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:15:11.541Z[UTC]",
+    "searchQuery" : "sara lkjhg.,m",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:15:11.734Z[UTC]",
+    "searchQuery" : "sara lkjhg.,m",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:15:11.922Z[UTC]",
+    "searchQuery" : "sara lkjhg.,mn",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:15:12.142Z[UTC]",
+    "searchQuery" : "sara lkjhg.,mn",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "WIN32_X86_64",
+    "searchTime" : "2024-10-27T17:15:13.830Z[UTC]",
+    "searchQuery" : "sara lkjhg.,mnm",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:15:13.863Z[UTC]",
+    "searchQuery" : "sara lkjhg.,mnm",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:15:19.304Z[UTC]",
+    "searchQuery" : "sara m",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:15:19.568Z[UTC]",
+    "searchQuery" : "sara m",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:15:20.713Z[UTC]",
+    "searchQuery" : "sara mj",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:15:21.038Z[UTC]",
+    "searchQuery" : "sara mj",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:15:27.861Z[UTC]",
+    "searchQuery" : "sara mj ",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:15:28.094Z[UTC]",
+    "searchQuery" : "sara mj ",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "WIN32_X86_64",
+    "searchTime" : "2024-10-27T17:15:28.875Z[UTC]",
+    "searchQuery" : "sara mj c",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:15:28.901Z[UTC]",
+    "searchQuery" : "sara mj c",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:15:29.196Z[UTC]",
+    "searchQuery" : "sara mj co",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:15:29.380Z[UTC]",
+    "searchQuery" : "sara mj co",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:15:29.534Z[UTC]",
+    "searchQuery" : "sara mj cou",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:15:29.765Z[UTC]",
+    "searchQuery" : "sara mj cou",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:15:32.635Z[UTC]",
+    "searchQuery" : "sara mj cour",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:15:32.852Z[UTC]",
+    "searchQuery" : "sara mj cour",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:15:32.931Z[UTC]",
+    "searchQuery" : "sara mj court",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-27T17:15:33.112Z[UTC]",
+    "searchQuery" : "sara mj court",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-28T13:50:27.261Z[UTC]",
+    "searchQuery" : "make it ",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-28T13:50:27.261Z[UTC]",
+    "searchQuery" : "make it r",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-28T13:50:27.265Z[UTC]",
+    "searchQuery" : "make it rain",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-28T13:50:27.268Z[UTC]",
+    "searchQuery" : "mak",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "WIN32_X86_64",
+    "searchTime" : "2024-10-28T13:50:27.401Z[UTC]",
+    "searchQuery" : "make ",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-28T13:50:27.427Z[UTC]",
+    "searchQuery" : "make ",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-28T13:50:27.450Z[UTC]",
+    "searchQuery" : "make it ",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-28T13:50:27.458Z[UTC]",
+    "searchQuery" : "mak",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-28T13:50:27.596Z[UTC]",
+    "searchQuery" : "make it r",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-10-28T13:50:27.700Z[UTC]",
+    "searchQuery" : "make it rain",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-09T21:30:09.979Z[UTC]",
+    "searchQuery" : "s",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-09T21:30:10.197Z[UTC]",
+    "searchQuery" : "s",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-09T21:30:10.212Z[UTC]",
+    "searchQuery" : "si",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-09T21:30:10.349Z[UTC]",
+    "searchQuery" : "si",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-09T21:30:10.514Z[UTC]",
+    "searchQuery" : "siha",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-09T21:30:10.659Z[UTC]",
+    "searchQuery" : "siha",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "WIN32_X86_64",
+    "searchTime" : "2024-11-09T21:30:11.434Z[UTC]",
+    "searchQuery" : "siham",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-09T21:30:11.462Z[UTC]",
+    "searchQuery" : "siham",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "WIN32_X86_64",
+    "searchTime" : "2024-11-09T21:30:13.733Z[UTC]",
+    "searchQuery" : "siham ",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-09T21:30:13.759Z[UTC]",
+    "searchQuery" : "siham ",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-09T21:30:15.054Z[UTC]",
+    "searchQuery" : "siham o",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-09T21:30:15.308Z[UTC]",
+    "searchQuery" : "siham o",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-09T21:30:15.452Z[UTC]",
+    "searchQuery" : "siham ou",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-09T21:30:15.645Z[UTC]",
+    "searchQuery" : "siham ou",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "WIN32_X86_64",
+    "searchTime" : "2024-11-09T21:30:16.991Z[UTC]",
+    "searchQuery" : "siham oummadi",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-09T21:30:17.020Z[UTC]",
+    "searchQuery" : "siham oummadi",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-09T21:30:32.712Z[UTC]",
+    "searchQuery" : "siham oummad",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-09T21:30:32.893Z[UTC]",
+    "searchQuery" : "siham oummad",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-13T14:23:08.939Z[UTC]",
+    "searchQuery" : "colo",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-13T14:23:09.113Z[UTC]",
+    "searchQuery" : "colo",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-13T14:23:09.247Z[UTC]",
+    "searchQuery" : "color",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-13T14:23:09.417Z[UTC]",
+    "searchQuery" : "color",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-13T14:23:13.203Z[UTC]",
+    "searchQuery" : "color ",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-13T14:23:13.357Z[UTC]",
+    "searchQuery" : "color ",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-13T14:23:16.523Z[UTC]",
+    "searchQuery" : "color s",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-13T14:23:16.747Z[UTC]",
+    "searchQuery" : "color s",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-13T14:23:17.900Z[UTC]",
+    "searchQuery" : "color sho",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "WIN32_X86_64",
+    "searchTime" : "2024-11-13T14:23:18.294Z[UTC]",
+    "searchQuery" : "color sho",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-13T14:23:21.007Z[UTC]",
+    "searchQuery" : "color show",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-13T14:23:21.277Z[UTC]",
+    "searchQuery" : "color show",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-18T21:16:05.036Z[UTC]",
+    "searchQuery" : "p",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-18T21:16:05.198Z[UTC]",
+    "searchQuery" : "p",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-18T21:16:05.595Z[UTC]",
+    "searchQuery" : "pa",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-18T21:16:05.723Z[UTC]",
+    "searchQuery" : "pa",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-19T19:59:53.367Z[UTC]",
+    "searchQuery" : "s",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "WIN32_X86_64",
+    "searchTime" : "2024-11-19T19:59:53.679Z[UTC]",
+    "searchQuery" : "s",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-19T19:59:53.837Z[UTC]",
+    "searchQuery" : "st",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-19T19:59:53.979Z[UTC]",
+    "searchQuery" : "st",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-19T19:59:54.702Z[UTC]",
+    "searchQuery" : "stro",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-19T19:59:54.861Z[UTC]",
+    "searchQuery" : "stro",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "WIN32_X86_64",
+    "searchTime" : "2024-11-19T19:59:55.611Z[UTC]",
+    "searchQuery" : "strom",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-19T19:59:55.635Z[UTC]",
+    "searchQuery" : "strom",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-20T16:55:03.909Z[UTC]",
+    "searchQuery" : "e",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-20T16:55:04.105Z[UTC]",
+    "searchQuery" : "e",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-20T16:55:05.761Z[UTC]",
+    "searchQuery" : "t",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-20T16:55:05.876Z[UTC]",
+    "searchQuery" : "t",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "WIN32_X86_64",
+    "searchTime" : "2024-11-20T16:55:06.879Z[UTC]",
+    "searchQuery" : "toto",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-20T16:55:06.902Z[UTC]",
+    "searchQuery" : "toto",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-20T16:55:57.289Z[UTC]",
+    "searchQuery" : "ou",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-20T16:55:57.426Z[UTC]",
+    "searchQuery" : "ou",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-20T16:55:57.616Z[UTC]",
+    "searchQuery" : "outt",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-20T16:55:57.752Z[UTC]",
+    "searchQuery" : "outt",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-23T15:55:26.138Z[UTC]",
+    "searchQuery" : "p",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-23T15:55:26.375Z[UTC]",
+    "searchQuery" : "p",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-23T15:55:26.865Z[UTC]",
+    "searchQuery" : "pa",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-23T15:55:27.027Z[UTC]",
+    "searchQuery" : "pa",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-23T15:55:28.286Z[UTC]",
+    "searchQuery" : "pause",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-11-23T15:55:28.423Z[UTC]",
+    "searchQuery" : "pause",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-12-05T09:31:39.240Z[UTC]",
+    "searchQuery" : "fai",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-12-05T09:31:39.455Z[UTC]",
+    "searchQuery" : "fai",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-12-05T09:31:41.685Z[UTC]",
+    "searchQuery" : "fa",
+    "searchInteractionURIs" : [
+    ]
+  },
+  {
+    "platform" : "",
+    "searchTime" : "2024-12-05T09:31:41.797Z[UTC]",
+    "searchQuery" : "fa",
+    "searchInteractionURIs" : [
+    ]
+  }
+]
