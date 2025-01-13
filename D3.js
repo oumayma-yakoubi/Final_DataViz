@@ -456,6 +456,8 @@ async function visualizeMonthlyListening(userData, updateTimeDistribution) {
 
     const tooltip = d3.select("#tooltip");
 
+    let selectedMonth = null;
+
     svg.selectAll("circle")
         .data(hours)
         .enter()
@@ -476,27 +478,37 @@ async function visualizeMonthlyListening(userData, updateTimeDistribution) {
             tooltip.style("opacity", 0);
         })
         .on("click", (event, d) => {
-            const selectedMonth = months[hours.indexOf(d)];
-            updateTimeDistribution(selectedMonth);
-            svg.selectAll("circle")
-                .attr("fill", "lightgray");
-            d3.select(event.currentTarget)
-                .attr("fill", "#800000");
+            const monthIndex = hours.indexOf(d);
+            const clickedMonth = months[monthIndex];
+
+            if (selectedMonth === clickedMonth) {
+                // Unselect the current month
+                selectedMonth = null;
+                updateTimeDistribution(null);
+                svg.selectAll("circle").attr("fill", "#800000");
+            } else {
+                // Select a new month
+                selectedMonth = clickedMonth;
+                updateTimeDistribution(selectedMonth);
+                svg.selectAll("circle").attr("fill", "lightgray");
+                d3.select(event.currentTarget).attr("fill", "#800000");
+            }
         });
 
     // Add X-axis title
     svg.append("text")
         .attr("text-anchor", "middle")
         .attr("x", (width - margin.left - margin.right) / 2 + margin.left)
-        .attr("y", height - 10) // Slightly below the axis
+        .attr("y", height - 10)
         .text("Months")
         .style("font-size", "14px")
         .style("fill", "#800000");
+
     // Add Y-axis title
     svg.append("text")
         .attr("text-anchor", "middle")
         .attr("x", -(height - margin.top - margin.bottom) / 2 - margin.top)
-        .attr("y", 15) // Slightly to the left of the axis
+        .attr("y", 15)
         .attr("transform", "rotate(-90)")
         .text("Hours Listened")
         .style("font-size", "14px")
@@ -897,7 +909,7 @@ function plotPodcastMusicChart(allUsersData) {
         .attr("y", d => yScale(d.podcastHours))
         .attr("width", xScale.bandwidth() / 2)
         .attr("height", d => height - yScale(d.podcastHours))
-        .attr("fill", "#E8D2A6") // Yellow for podcasts
+        .attr("fill", "#FFD65A") // Yellow for podcasts
         .on("mouseover", (event, d) => {
             tooltip.style("opacity", 1)
                 .html(`Month: ${d.month}<br>Type: Podcast<br>Hours: ${d.podcastHours.toFixed(2)}`);
@@ -935,7 +947,7 @@ function plotPodcastMusicChart(allUsersData) {
         .attr("y", 0)
         .attr("width", 13) // Smaller square size
         .attr("height", 13) // Smaller square size
-        .attr("fill", "#E8D2A6");
+        .attr("fill", "#FFD65A");
 
     legend.append("text")
         .attr("x", 72) // Position to the right of the yellow rectangle
@@ -973,7 +985,7 @@ async function artistDensityChart(userData){
     const height = 600;
     const color = d3.scaleOrdinal()
     .domain(['artistName', 'trackName'])  // Définir les types de groupes
-    .range(['#800000', '#E8D2A6']);  // Noir pour les artistes, rouge pour les pistes
+    .range(['#800000', '#FFD65A']);  // Noir pour les artistes, rouge pour les pistes
 
     // Créer un tableau de liens entre les artistes et les musiques
     const simulation = d3.forceSimulation(nodes)
