@@ -115,7 +115,7 @@ async function visualizePlaylists(userData) {
 
     const width = 500;
     const height = 300; 
-    const margin = { top: 20, right: 20, bottom: 50, left: 50 };
+    const margin = { top: 20, right: 20, bottom: 70, left: 70 }; // Adjusted for axis labels
 
     // Clear old content
     d3.select("#playlist-chart").selectAll("*").remove();
@@ -149,10 +149,29 @@ async function visualizePlaylists(userData) {
          .attr("x", -2)
          .attr("y", +7);
 
+    // Append x-axis label
+    svg.append("text")
+       .attr("x", width / 2)
+       .attr("y", height - margin.bottom + 60) // Position below x-axis
+       .attr("text-anchor", "middle")
+       .style("font-size", "14px")
+       .text("Playlist name")
+       .attr("fill", "#800000");
+
     // Append y-axis
     svg.append("g")
        .attr("transform", `translate(${margin.left}, 0)`)
        .call(d3.axisLeft(yScale));
+
+    // Append y-axis label
+    svg.append("text")
+       .attr("x", -height / 2.5)
+       .attr("y", margin.left - 40) // Position to the left of y-axis
+       .attr("transform", "rotate(-90)")
+       .attr("text-anchor", "middle")
+       .style("font-size", "14px")
+       .text("Number of songs")
+       .attr("fill", "#800000");
 
     const tooltip = d3.select("#tooltip");
 
@@ -169,7 +188,7 @@ async function visualizePlaylists(userData) {
        .attr("fill", (_, i) => colorScale(i)) // Assign YlOrRd color based on index
        .on("mouseover", (event, d) => {
            tooltip.style("opacity", 1)
-                  .html(`Playlist: ${d.fullName}<br>Items: ${d.count}`); // Use full name in tooltip
+                  .html(`Playlist: ${d.fullName}<br>${d.count} songs`); // Use full name in tooltip
        })
        .on("mousemove", (event) => {
            tooltip.style("left", (event.pageX + 10) + "px")
@@ -330,7 +349,7 @@ async function ecoutesChart(userData, month = null) {
 
     const width = 500;
     const height = 300;
-    const margin = { top: 20, right: 20, bottom: 50, left: 50 };
+    const margin = { top: 20, right: 20, bottom: 70, left: 70 }; // Adjusted margins for axis labels
 
     d3.select("#ecoutesChart").selectAll("*").remove();
 
@@ -357,6 +376,25 @@ async function ecoutesChart(userData, month = null) {
         .attr("transform", `translate(${margin.left},0)`)
         .call(d3.axisLeft(y));
 
+    // Add x-axis label
+    svg.append("text")
+        .attr("x", width / 2)
+        .attr("y", height - 20) // Position below the x-axis
+        .attr("text-anchor", "middle")
+        .style("font-size", "14px")
+        .text("Period")
+        .attr("fill", "#800000");
+
+    // Add y-axis label
+    svg.append("text")
+        .attr("x", -height / 2.5)
+        .attr("y", 15) // Position to the left of the y-axis
+        .attr("transform", "rotate(-90)")
+        .attr("text-anchor", "middle")
+        .style("font-size", "14px")
+        .text("Average listening time")
+        .attr("fill", "#800000");
+
     const tooltip = d3.select("#tooltip");
 
     // Use a sequential Viridis color scale
@@ -378,7 +416,7 @@ async function ecoutesChart(userData, month = null) {
             const i = moyennesEcoute.indexOf(index);
 
             tooltip.style("opacity", 1)
-                .html(`Period: ${periodes[i].label}<br>Average Listening Time: ${d.toFixed(2)} seconds`);
+                .html(`Period: ${periodes[i].label}<br>Average listening time: ${d.toFixed(2)} seconds`);
         })
         .on("mousemove", (event) => {
             tooltip.style("left", (event.pageX + 10) + "px")
@@ -388,9 +426,6 @@ async function ecoutesChart(userData, month = null) {
             tooltip.style("opacity", 0);
         });
 }
-
-
-
 
 
 // **************************
@@ -475,7 +510,7 @@ async function visualizeMonthlyListening(userData, updateTimeDistribution) {
         .attr("fill", "#800000")
         .on("mouseover", (event, d) => {
             tooltip.style("opacity", 1)
-                .html(`Month: ${months[hours.indexOf(d)]}<br>${d.toFixed(2)} Hours`);
+                .html(`Month: ${months[hours.indexOf(d)]}<br>${d.toFixed(2)} hours`);
         })
         .on("mousemove", (event) => {
             tooltip.style("left", (event.pageX + 10) + "px")
@@ -517,7 +552,7 @@ async function visualizeMonthlyListening(userData, updateTimeDistribution) {
         .attr("x", -(height - margin.top - margin.bottom) / 2 - margin.top)
         .attr("y", 15)
         .attr("transform", "rotate(-90)")
-        .text("Hours Listened")
+        .text("Hours listened")
         .style("font-size", "14px")
         .style("fill", "#800000");
 }
@@ -615,7 +650,7 @@ function drawTreemap(artistData) {
     cell.selectAll("rect")
         .on("mouseover", (event, d) => {
             tooltip.style("opacity", 1) // Make tooltip visible
-                .html(`Artist: ${d.data.name}<br>Value: ${d.data.value}`); // Display artist name and value
+                .html(`Artist: ${d.data.name}<br>${d.data.value} songs`); // Display artist name and value
         })
         .on("mousemove", (event) => {
             tooltip.style("left", (event.pageX + 10) + "px")
@@ -758,7 +793,7 @@ function plotGenrePieChart(genreData) {
     arcs.selectAll("path")
         .on("mouseover", (event, d) => {
             tooltip.style("opacity", 1) // Make tooltip visible
-                .html(`Genre: ${d.data.genre}<br>Count: ${d.data.count}`); // Display genre and count
+                .html(`Genre: ${d.data.genre}<br>${d.data.count} songs`); // Display genre and count
         })
         .on("mousemove", (event) => {
             tooltip.style("left", (event.pageX + 10) + "px")
@@ -844,7 +879,7 @@ function plotPodcastMusicChart(allUsersData) {
         record.month = `${monthNames[parseInt(month, 10) - 1]}`; // Convert numeric month to "ShortName YYYY"
     });
 
-    const margin = { top: 25, right: 40, bottom: 40, left: 55 };
+    const margin = { top: 25, right: 40, bottom: 70, left: 70 }; // Adjusted margins for axis labels
     const width = 400;
     const height = 200;
 
@@ -872,11 +907,29 @@ function plotPodcastMusicChart(allUsersData) {
     // Draw axes
     svg.append("g")
         .attr("transform", `translate(0,${height})`)
-        .call(d3.axisBottom(xScale))
-        .selectAll("text");
+        .call(d3.axisBottom(xScale));
 
     svg.append("g")
         .call(d3.axisLeft(yScale).ticks(10));
+
+    // Add x-axis label
+    svg.append("text")
+        .attr("x", width / 2)
+        .attr("y", height + 50) // Position below the x-axis
+        .attr("text-anchor", "middle")
+        .style("font-size", "14px")
+        .text("Months")
+        .attr("fill", "#800000");
+
+    // Add y-axis label
+    svg.append("text")
+        .attr("x", -height / 2)
+        .attr("y", -50) // Position to the left of the y-axis
+        .attr("transform", "rotate(-90)")
+        .attr("text-anchor", "middle")
+        .style("font-size", "14px")
+        .text("Hours listened")
+        .attr("fill", "#800000");
 
     // Add tooltip
     const tooltip = d3.select("#tooltip");
@@ -894,7 +947,7 @@ function plotPodcastMusicChart(allUsersData) {
         .attr("fill", "#800000") // Spotify green for music
         .on("mouseover", (event, d) => {
             tooltip.style("opacity", 1)
-                .html(`Month: ${d.month}<br>Type: Music<br>Hours: ${d.musicHours.toFixed(2)}`);
+                .html(`Month: ${d.month}<br>Type: Music<br>${d.musicHours.toFixed(2)} hours`);
         })
         .on("mousemove", (event) => {
             tooltip.style("left", `${event.pageX + 10}px`)
@@ -917,7 +970,7 @@ function plotPodcastMusicChart(allUsersData) {
         .attr("fill", "#FFD65A") // Yellow for podcasts
         .on("mouseover", (event, d) => {
             tooltip.style("opacity", 1)
-                .html(`Month: ${d.month}<br>Type: Podcast<br>Hours: ${d.podcastHours.toFixed(2)}`);
+                .html(`Month: ${d.month}<br>Type: Podcast<br>${d.podcastHours.toFixed(2)} hours`);
         })
         .on("mousemove", (event) => {
             tooltip.style("left", `${event.pageX + 10}px`)
@@ -1029,7 +1082,7 @@ const node = svg.append("g")
         tooltip.style("opacity", 1)
                .html(`
                     ${d.group === 'artistName' ? 'Artist' : 'Track'} : ${d.id}<br>
-                    <strong>Links:</strong> ${numLinks}
+                    <strong>Times listened:</strong> ${numLinks}
                 `);
     })
     .on("mousemove", (event) => {
