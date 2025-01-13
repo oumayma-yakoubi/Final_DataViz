@@ -46,7 +46,7 @@ https://www.tooplate.com/view/2117-infinite-loop
                 <a class="nav-link tm-nav-link" href="#testimonials">Source de données</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link tm-nav-link" href="#gallery">Description</a>
+                  <a class="nav-link tm-nav-link" href="#gallery">Technologies</a>
               </li>                    
             </ul>
           </div>        
@@ -65,10 +65,10 @@ https://www.tooplate.com/view/2117-infinite-loop
       <div class="text-center tm-hero-text-container">
         <div class="tm-hero-text-container-inner">
             <h2 class="tm-hero-title">Harmonie en Vue</h2>
-            <p class="tm-hero-subtitle">
+            <h3 class="tm-hero-subtitle">
               Visualisez, Vibrez, Redécouvrez 
               <br>votre musique.
-            </p>
+            </h3>
         </div>        
       </div>
 
@@ -82,7 +82,7 @@ https://www.tooplate.com/view/2117-infinite-loop
     <section id="whatwedo" class="tm-section-pad-top">    
         <div class="container">
           <center><h2>L'Écosystème de Vos Écoutes</h2></center>
-          <center><p>Les points d'écoute les plus intenses révèlent vos artistes phares.</p></center>
+          <center><h3>Les points d'écoute les plus intenses révèlent vos artistes phares.</h3></center>
           <div id="fdGraphContainer">
             <div id="fdGraph"></div>
           </div>
@@ -126,6 +126,13 @@ https://www.tooplate.com/view/2117-infinite-loop
               </div>
               <div class="chart" id="podcastMusicChart"></div>
           </div>
+          <div class="story-step">
+            <div class="story-text">
+                <h2>Ton équilibre entre podcasts et musique</h2>
+                <p>Plongé entre les rythmes de la <span class="spotify-highlight">musique</span> et les récits captivants des <span class="spotify-highlight">podcasts</span>, découvre comment tu partages ton temps entre ces deux univers sonores.</p>
+            </div>
+            <div class="chart" id="playlist-chart"></div>
+        </div>
       </div>
 
       
@@ -137,23 +144,30 @@ https://www.tooplate.com/view/2117-infinite-loop
       <div class="container tm-testimonials-content">
         <div class="row">
           <div class="col-lg-12 tm-content-box">
-            <h2 class="text-white text-center mb-4 tm-section-title">Traitements de données</h2>
+            <h2 class="text-white text-center mb-4 tm-section-title">Source des données</h2>
             <p class="mx-auto tm-section-desc text-center">
-              Source de donnéesSource de donnéesSource de donnéesSource de donnéesSource de donnéesSource de donnéesSource de données
-              Source de donnéesSource de donnéesSource de donnéesSource de données
+              Pour ce projet, les données utilisées proviennent des historiques Spotify de plusieurs utilisateurs. Afin de garantir une source légitime et fiable, nous avons contacté des amis et leur avons expliqué le but du projet. Ils ont généreusement accepté de partager leurs données personnelles Spotify avec nous. Ces données contiennent des informations telles que les chansons écoutées, les artistes favoris, les genres musicaux préférés, et les horaires d'écoute.
+              Les utilisateurs ont téléchargé leurs données personnelles directement depuis Spotify en utilisant la fonctionnalité de demande de données personnelles disponible dans les paramètres de confidentialité de la plateforme.
               </p>
             <div class="mx-auto tm-gallery-container tm-gallery-container-2">
               <div class="tm-testimonials-carousel">
                 <figure class="tm-testimonial-item">
-                  <blockquote>Source de donnéesSource de donnéesSource de donnéesSource de donnée</blockquote>
+                  <blockquote>Processus de collecte <br> 
+                  <p>Une fois les utilisateurs ayant accepté de participer : Chaque utilisateur a accédé à la section de confidentialité de leur compte Spotify pour demander une copie de leurs données personnelles pour l'année 2024. Ce processus a pris 5 jours avant que Spotify génère et envoie les fichiers.
+                    Les fichiers reçus, en format JSON , ont été transmis avec leur consentement explicite à l’équipe du projet.</blockquote>
+                  </p>
+                  </figure>
+
+                <figure class="tm-testimonial-item">
+                  <blockquote>Nettoyage des données</blockquote>
+                  <p>
+                  Le processus charge et organise les données utilisateur en récupérant, via un fichier d'index, les fichiers JSON associés à chaque utilisateur (historique, playlists, etc.) depuis un dépôt GitHub, puis les structure pour une utilisation efficace.    
+                  </p>
                 </figure>
 
                 <figure class="tm-testimonial-item">
-                  <blockquote>Source de donnéesSource de donnéesSource de donnéesSource de donnée.</blockquote>
-                </figure>
-
-                <figure class="tm-testimonial-item">
-                  <blockquote>Source de donnéesSource de donnéesSource de donnéesSource de donnée.</blockquote>
+                  <blockquote>Transformation en visualisation.</blockquote>
+                  <p>Les données nettoyées ont été transformées en graphiques pour mettre en évidence les tendances et comportements d’écoute. Ces visualisations permettent d'explorer les préférences musicales et les habitudes d’écoute de manière claire et esthétique.</p>
                 </figure>
 
               </div>
@@ -168,12 +182,13 @@ https://www.tooplate.com/view/2117-infinite-loop
       <div class="container tm-container-gallery">
         <div class="row">
           <div class="text-center col-12">
-              <h2 class="tm-text-primary tm-section-title mb-4">Description</h2>
+              <h2 class="tm-text-primary tm-section-title mb-4">Outils et Technologies</h2>
               <p class="mx-auto tm-section-desc">
-                Description DescriptionDescription DescriptionDescriptionDescription Description Description
-                Description DescriptionDescription DescriptionDescriptionDescription Description Description
-                Description DescriptionDescription DescriptionDescriptionDescription Description Description
-                
+                <b>HTML (HyperText Markup Language)</b> est le langage standard pour structurer le contenu des pages web. Il permet de définir la structure de base d'un site web en utilisant des balises pour les titres, paragraphes, liens, images, et autres éléments.
+                <br> <b>CSS (Cascading Style Sheets)</b> est une technologie utilisée pour définir le style et la présentation des documents HTML. Elle permet de contrôler les couleurs, polices, dispositions, animations, et bien plus, pour rendre les pages web esthétiques et adaptatives.
+                <br> <b>Bootstrap</b> : est une bibliothèque front-end open-source qui facilite le développement de sites web réactifs. Il offre des composants préconçus comme des grilles, boutons, formulaires, et bien plus, pour accélérer la création d'interfaces modernes.
+                <br> <b>D3 js (Data-Driven Documents)</b> est une bibliothèque JavaScript utilisée pour produire des visualisations de données interactives et dynamiques basées sur le web. Elle permet de manipuler directement les éléments SVG, HTML, ou CSS en fonction des données.
+                <br> Pour une gestion optimale de notre projet, nous avons utilisé <b>GitHub</b>. Cette plateforme a facilité la collaboration entre les membres de l'équipe en permettant une gestion efficace des versions.
               </p>
           </div>            
         </div>
@@ -184,7 +199,7 @@ https://www.tooplate.com/view/2117-infinite-loop
     <section id="contact" class="tm-section-pad-top tm-parallax-2">
 
       	<footer class="text-center small tm-footer">
-          <p class="mb-0"> Ce travail est réalisé par : LIROULET Inès, RIDOUAN Aafaf et YAKOUBI Oumayma</p>
+          <h3 class="mb-0"> Ce travail est réalisé par : LIROULET Inès, RIDOUAN Aafaf et YAKOUBI Oumayma</h3>
         </footer>
 
     </section>

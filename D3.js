@@ -102,12 +102,16 @@ async function visualizePlaylists(userData) {
     // Process playlists into data and take the top N
     const playlistData = userData.playlists
         .map(playlist => {
-            const name = playlist.name || "Untitled Playlist";
+            const fullName = playlist.name || "Untitled Playlist"; // Store full name
             const itemCount = Array.isArray(playlist.items) ? playlist.items.length : 0;
-            return { name: name, count: itemCount };
+            return { fullName: fullName, name: fullName, count: itemCount };
         })
         .sort((a, b) => b.count - a.count) // Sort by count descending
-        .slice(0, topN); // Take only the top N playlists
+        .slice(0, topN) // Take only the top N playlists
+        .map(d => ({
+            ...d,
+            name: d.name.length > 11 ? d.name.substring(0, 10) + "..." : d.name, // Truncate long names for display
+        }));
 
     const width = 500;
     const height = 300; 
@@ -120,6 +124,10 @@ async function visualizePlaylists(userData) {
                   .append("svg")
                   .attr("width", width)
                   .attr("height", height);
+
+    // Create a sequential YlOrRd color scale
+    const colorScale = d3.scaleSequential(d3.interpolateYlOrRd)
+                         .domain([0, playlistData.length - 1]); // Map index to YlOrRd gradient
 
     const xScale = d3.scaleBand()
                      .domain(playlistData.map(d => d.name))
@@ -137,10 +145,9 @@ async function visualizePlaylists(userData) {
 
     xAxis.selectAll("text")
          .style("text-anchor", "end")
-         .attr("transform", "rotate(-90)")
-         .attr("x", -10)
-         .attr("y", 0)
-         .attr("dy", "0.35em");
+         .attr("transform", "rotate(-30)")
+         .attr("x", -2)
+         .attr("y", +7);
 
     // Append y-axis
     svg.append("g")
@@ -159,10 +166,10 @@ async function visualizePlaylists(userData) {
        .attr("y", d => yScale(d.count))
        .attr("width", xScale.bandwidth())
        .attr("height", d => height - margin.bottom - yScale(d.count))
-       .attr("fill", "steelblue")
+       .attr("fill", (_, i) => colorScale(i)) // Assign YlOrRd color based on index
        .on("mouseover", (event, d) => {
            tooltip.style("opacity", 1)
-                  .html(`Playlist: ${d.name}<br>Items: ${d.count}`);
+                  .html(`Playlist: ${d.fullName}<br>Items: ${d.count}`); // Use full name in tooltip
        })
        .on("mousemove", (event) => {
            tooltip.style("left", (event.pageX + 10) + "px")
@@ -834,10 +841,10 @@ function plotPodcastMusicChart(allUsersData) {
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     comparisonData.forEach(record => {
         const [year, month] = record.month.split("-"); // Split "YYYY-MM" into year and month
-        record.month = `${monthNames[parseInt(month, 10) - 1]} ${year}`; // Convert numeric month to "ShortName YYYY"
+        record.month = `${monthNames[parseInt(month, 10) - 1]}`; // Convert numeric month to "ShortName YYYY"
     });
 
-    const margin = { top: 40, right: 40, bottom: 40, left: 55 };
+    const margin = { top: 25, right: 40, bottom: 40, left: 55 };
     const width = 400;
     const height = 200;
 
@@ -866,9 +873,7 @@ function plotPodcastMusicChart(allUsersData) {
     svg.append("g")
         .attr("transform", `translate(0,${height})`)
         .call(d3.axisBottom(xScale))
-        .selectAll("text")
-        .attr("transform", "rotate(-45)")
-        .style("text-anchor", "end");
+        .selectAll("text");
 
     svg.append("g")
         .call(d3.axisLeft(yScale).ticks(10));
