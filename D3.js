@@ -28,7 +28,7 @@ async function populateUserSelect() {
         console.log("Dropdown menu populated successfully!");
 
         // Set default user (e.g., "user-1") if it exists
-        const defaultUserIndex = allData.findIndex(user => user.user === "user-1");
+        const defaultUserIndex = allData.findIndex(user => user.user === "Zakaria");
         if (defaultUserIndex !== -1) {
             // Call onUserSelect directly with the default user
             const defaultEvent = {

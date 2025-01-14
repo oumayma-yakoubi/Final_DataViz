@@ -51,7 +51,7 @@ async function loadAllUsersData() {
 
 // Function to load the genre data from json files
 async function loadGenreData(userFolder) {
-    const genreFilePath = `https://raw.githubusercontent.com/oumayma-yakoubi/SpotifyDataViz/refs/heads/main/data/genre/artistGenres_${userFolder}.json`;
+    const genreFilePath = `https://raw.githubusercontent.com/oumayma-yakoubi/Final_DataViz/refs/heads/main/data/genre/artistGenres_${userFolder}.json`;
     try {
         const genreData = await loadJSON(genreFilePath);
         return genreData;
