@@ -583,7 +583,7 @@ async function visualizeMonthlyListening(userData, updateTimeDistribution) {
                 svg.selectAll("circle").attr("fill", "lightgray");
                 d3.select(event.currentTarget).attr("fill", "#800000");
             }
-        });
+});
 
     // Add X-axis title
     svg.append("text")
@@ -867,7 +867,7 @@ function formatToYearMonth(dateString) {
     return `${year}-${String(month).padStart(2, '0')}`;
 }
 
-// Function to aggregate streaming time per month
+// // Function to aggregate streaming time per month
 function aggregateStreamingData(streamingData) {
     const monthlyData = {};
 
@@ -911,10 +911,10 @@ function prepareComparisonData(userData) {
         });
     });
 
-
     // Sort by month
     return comparisonData.sort((a, b) => new Date(a.month) - new Date(b.month));
 }
+
 
 
 function plotPodcastMusicChart(allUsersData) {
@@ -1067,123 +1067,257 @@ function plotPodcastMusicChart(allUsersData) {
 // ********* Slot 8 *********
 // **************************
 
-async function artistDensityChart(userData){
+// async function artistDensityChart(userData){
 
+//     console.log("************je suis dans artistDensityChart");
+//     const musicData = userData.streamingHistory.music;
+//     const nodes = [];
+//     const nodeMap ={};
+//     const links = [];
+
+//     musicData.forEach(d => {
+//         if(!nodeMap[d.artistName]){
+//             nodes.push({ id: d.artistName, group: 'artistName'});
+//             nodeMap[d.artistName]= true;
+//         }
+//         if(!nodeMap[d.trackName]){
+//             nodes.push({ id: d.trackName, group: 'trackName'});
+//             nodeMap[d.trackName] = true;
+//         }
+//         links.push({ source: d.artistName, target: d.trackName, value: 1 });
+//     });
+
+//     const width = 2600;
+//     const height = 1000;
+//     const color = d3.scaleOrdinal()
+//     .domain(['artistName', 'trackName'])  // Définir les types de groupes
+//     .range(['#800000', '#FFD65A']);  // Noir pour les artistes, rouge pour les pistes
+
+//     // Créer un tableau de liens entre les artistes et les musiques
+//     const simulation = d3.forceSimulation(nodes)
+//     .force("link", d3.forceLink(links).id(d => d.id))
+//     .force("charge", d3.forceManyBody())
+//     .force("x", d3.forceX())
+//     .force("y", d3.forceY());
+
+//     d3.select("#fdGraph").selectAll("*").remove();
+
+//     const svg = d3.select("#fdGraph")
+//     .append("svg")
+//     .attr("width", width)
+//     .attr("height", height)
+//     .attr("viewBox", [-width / 2, -height / 2, width, height])
+//     .attr("style", "max-width: 100%; height: auto;");
+
+// const link = svg.append("g")
+//     .attr("stroke", "#999")
+//     .attr("stroke-opacity", 0.6)
+//     .selectAll("line")
+//     .data(links)
+//     .join("line")
+//     .attr("stroke-width", d => Math.sqrt(d.value));
+
+// const node = svg.append("g")
+//     .attr("stroke", "#fff")
+//     .attr("stroke-width", 1.5)
+//     .selectAll("circle")
+//     .data(nodes)
+//     .join("circle")
+//     .attr("r", 5)
+//     .attr("fill", d => color(d.group))
+//     .on("mouseover", (event, d) => {
+//         const numLinks = links.filter(link => link.source.id === d.id || link.target.id === d.id).length;
+//         tooltip.style("opacity", 1)
+//                .html(`
+//                     ${d.group === 'artistName' ? 'Artiste' : 'Morceau'} : ${d.id}<br>
+//                     <strong>Nombre d'écoutes :</strong> ${numLinks}
+//                 `);
+//     })
+//     .on("mousemove", (event) => {
+//         tooltip.style("left", (event.pageX + 10) + "px")
+//                .style("top", (event.pageY - 20) + "px");
+//     })
+//     .on("mouseout", () => {
+//         tooltip.style("opacity", 0);
+//     });
+
+// // node.append("title")
+// //     .text(d => d.id);
+
+// node.call(d3.drag()
+//       .on("start", dragstarted)
+//       .on("drag", dragged)
+//       .on("end", dragended));
+
+// const tooltip = d3.select("#tooltip");
+
+
+// simulation.on("tick", () => {
+//   link
+//       .attr("x1", d => d.source.x)
+//       .attr("y1", d => d.source.y)
+//       .attr("x2", d => d.target.x)
+//       .attr("y2", d => d.target.y);
+
+//   node
+//       .attr("cx", d => d.x)
+//       .attr("cy", d => d.y);
+
+// });
+
+
+// function dragstarted(event) {
+//   if (!event.active) simulation.alphaTarget(0.3).restart();
+//   event.subject.fx = event.subject.x;
+//   event.subject.fy = event.subject.y;
+// }
+
+// function dragged(event) {
+//   event.subject.fx = event.x;
+//   event.subject.fy = event.y;
+// }
+
+// function dragended(event) {
+//   if (!event.active) simulation.alphaTarget(0);
+//   event.subject.fx = null;
+//   event.subject.fy = null;
+// }
+
+// // invalidation.then(() => simulation.stop());
+
+// return svg.node();
+// }
+
+
+
+async function artistDensityChart(userData) {
     console.log("************je suis dans artistDensityChart");
     const musicData = userData.streamingHistory.music;
     const nodes = [];
-    const nodeMap ={};
+    const nodeMap = {};
     const links = [];
 
+    // Construire les nœuds et les liens
     musicData.forEach(d => {
-        if(!nodeMap[d.artistName]){
-            nodes.push({ id: d.artistName, group: 'artistName'});
-            nodeMap[d.artistName]= true;
+        if (!nodeMap[d.artistName]) {
+            nodes.push({ id: d.artistName, group: 'artistName', listens: 0 });
+            nodeMap[d.artistName] = true;
         }
-        if(!nodeMap[d.trackName]){
-            nodes.push({ id: d.trackName, group: 'trackName'});
+        if (!nodeMap[d.trackName]) {
+            nodes.push({ id: d.trackName, group: 'trackName', listens: 0 });
             nodeMap[d.trackName] = true;
         }
         links.push({ source: d.artistName, target: d.trackName, value: 1 });
     });
 
+    // Calculer le nombre d'écoutes pour chaque nœud
+    links.forEach(link => {
+        const sourceNode = nodes.find(n => n.id === link.source);
+        const targetNode = nodes.find(n => n.id === link.target);
+        if (sourceNode) sourceNode.listens += 1;
+        if (targetNode) targetNode.listens += 1;
+    });
+
     const width = 2600;
     const height = 1000;
-    const color = d3.scaleOrdinal()
-    .domain(['artistName', 'trackName'])  // Définir les types de groupes
-    .range(['#800000', '#FFD65A']);  // Noir pour les artistes, rouge pour les pistes
 
-    // Créer un tableau de liens entre les artistes et les musiques
+    // Échelles pour la taille des nœuds
+    const sizeScaleArtist = d3.scaleLinear()
+        .domain(d3.extent(nodes.filter(n => n.group === 'artistName'), d => d.listens)) // Filtrer les artistes
+        .range([5, 50]); // Taille des cercles des artistes
+
+    const sizeScaleTrack = d3.scaleLinear()
+        .domain(d3.extent(nodes.filter(n => n.group === 'trackName'), d => d.listens)) // Filtrer les morceaux
+        .range([5, 30]); // Taille des cercles des morceaux (plus grands)
+
+    const color = d3.scaleOrdinal()
+        .domain(['artistName', 'trackName'])
+        .range(['#800000', '#FFD65A']);
+
     const simulation = d3.forceSimulation(nodes)
-    .force("link", d3.forceLink(links).id(d => d.id))
-    .force("charge", d3.forceManyBody())
-    .force("x", d3.forceX())
-    .force("y", d3.forceY());
+        .force("link", d3.forceLink(links).id(d => d.id))
+        .force("charge", d3.forceManyBody())
+        .force("x", d3.forceX())
+        .force("y", d3.forceY());
 
     d3.select("#fdGraph").selectAll("*").remove();
 
     const svg = d3.select("#fdGraph")
-    .append("svg")
-    .attr("width", width)
-    .attr("height", height)
-    .attr("viewBox", [-width / 2, -height / 2, width, height])
-    .attr("style", "max-width: 100%; height: auto;");
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("viewBox", [-width / 2, -height / 2, width, height])
+        .attr("style", "max-width: 100%; height: auto;");
 
-const link = svg.append("g")
-    .attr("stroke", "#999")
-    .attr("stroke-opacity", 0.6)
-    .selectAll("line")
-    .data(links)
-    .join("line")
-    .attr("stroke-width", d => Math.sqrt(d.value));
+    const link = svg.append("g")
+        .attr("stroke", "#999")
+        .attr("stroke-opacity", 0.6)
+        .selectAll("line")
+        .data(links)
+        .join("line")
+        .attr("stroke-width", d => Math.sqrt(d.value));
 
-const node = svg.append("g")
-    .attr("stroke", "#fff")
-    .attr("stroke-width", 1.5)
-    .selectAll("circle")
-    .data(nodes)
-    .join("circle")
-    .attr("r", 5)
-    .attr("fill", d => color(d.group))
-    .on("mouseover", (event, d) => {
-        const numLinks = links.filter(link => link.source.id === d.id || link.target.id === d.id).length;
-        tooltip.style("opacity", 1)
-               .html(`
+    const node = svg.append("g")
+        .attr("stroke", "#fff")
+        .attr("stroke-width", 1.5)
+        .selectAll("circle")
+        .data(nodes)
+        .join("circle")
+        .attr("r", d => {
+            // Utiliser une échelle différente pour les artistes et les morceaux
+            return d.group === 'artistName' ? sizeScaleArtist(d.listens) : sizeScaleTrack(d.listens);
+        })
+        .attr("fill", d => color(d.group))
+        .on("mouseover", (event, d) => {
+            tooltip.style("opacity", 1)
+                .html(`
                     ${d.group === 'artistName' ? 'Artiste' : 'Morceau'} : ${d.id}<br>
-                    <strong>Nombre d'écoutes :</strong> ${numLinks}
+                    <strong>Nombre d'écoutes :</strong> ${d.listens}
                 `);
-    })
-    .on("mousemove", (event) => {
-        tooltip.style("left", (event.pageX + 10) + "px")
-               .style("top", (event.pageY - 20) + "px");
-    })
-    .on("mouseout", () => {
-        tooltip.style("opacity", 0);
+        })
+        .on("mousemove", (event) => {
+            tooltip.style("left", (event.pageX + 10) + "px")
+                .style("top", (event.pageY - 20) + "px");
+        })
+        .on("mouseout", () => {
+            tooltip.style("opacity", 0);
+        });
+
+    node.call(d3.drag()
+        .on("start", dragstarted)
+        .on("drag", dragged)
+        .on("end", dragended));
+
+    const tooltip = d3.select("#tooltip");
+
+    simulation.on("tick", () => {
+        link
+            .attr("x1", d => d.source.x)
+            .attr("y1", d => d.source.y)
+            .attr("x2", d => d.target.x)
+            .attr("y2", d => d.target.y);
+
+        node
+            .attr("cx", d => d.x)
+            .attr("cy", d => d.y);
     });
 
-// node.append("title")
-//     .text(d => d.id);
+    function dragstarted(event) {
+        if (!event.active) simulation.alphaTarget(0.3).restart();
+        event.subject.fx = event.subject.x;
+        event.subject.fy = event.subject.y;
+    }
 
-node.call(d3.drag()
-      .on("start", dragstarted)
-      .on("drag", dragged)
-      .on("end", dragended));
+    function dragged(event) {
+        event.subject.fx = event.x;
+        event.subject.fy = event.y;
+    }
 
-const tooltip = d3.select("#tooltip");
+    function dragended(event) {
+        if (!event.active) simulation.alphaTarget(0);
+        event.subject.fx = null;
+        event.subject.fy = null;
+    }
 
-
-simulation.on("tick", () => {
-  link
-      .attr("x1", d => d.source.x)
-      .attr("y1", d => d.source.y)
-      .attr("x2", d => d.target.x)
-      .attr("y2", d => d.target.y);
-
-  node
-      .attr("cx", d => d.x)
-      .attr("cy", d => d.y);
-
-});
-
-
-function dragstarted(event) {
-  if (!event.active) simulation.alphaTarget(0.3).restart();
-  event.subject.fx = event.subject.x;
-  event.subject.fy = event.subject.y;
-}
-
-function dragged(event) {
-  event.subject.fx = event.x;
-  event.subject.fy = event.y;
-}
-
-function dragended(event) {
-  if (!event.active) simulation.alphaTarget(0);
-  event.subject.fx = null;
-  event.subject.fy = null;
-}
-
-// invalidation.then(() => simulation.stop());
-
-return svg.node();
+    return svg.node();
 }

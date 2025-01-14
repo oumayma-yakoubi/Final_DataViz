@@ -1,5 +1,5 @@
 {
-    "user-1": [
+    "Lucie": [
       "Identity.json",
       "Playlist1.json",
       "SearchQueries.json",
@@ -9,7 +9,7 @@
       "YourLibrary.json"
 
     ],
-    "user-2": [
+    "Pierre": [
       "Identity.json",
       "Playlist1.json",
       "Playlist2.json",
@@ -20,7 +20,7 @@
       "Wrapped2023.json", 
       "YourLibrary.json"
     ],
-    "user-3": [
+    "Élise": [
       "Identity.json",
       "Playlist1.json",
       "SearchQueries.json",
