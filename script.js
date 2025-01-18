@@ -26,7 +26,7 @@ async function loadAllUsersData() {
 
 // Function to load the genre data from json files
 async function loadGenreData() {
-    return d3.json('data/genre/merged_genre_data.json') // Use D3's `json` method to fetch and parse the JSON file
+    return d3.json('merged_genre_data.json') // Use D3's `json` method to fetch and parse the JSON file
         .then(function(data) {
             return data; // Return the parsed JSON data
         })
