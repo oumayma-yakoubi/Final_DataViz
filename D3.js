@@ -133,8 +133,9 @@ async function visualizePlaylists(userData, selectedMonth = "2024-12") {
     // Step 2: Filter and update counts for the selected month
     const filteredCounts = playlistOrder.map(fullName => {
         const originalPlaylist = userData.playlists.find(p => p.name === fullName);
+        if (!originalPlaylist) return 0; // Handle missing playlists
         const filteredItems = filterTracksByMonthOrYear(originalPlaylist, selectedMonth); // Filter by selected month
-        return filteredItems.length; // Return the count of items for the selected month
+        return filteredItems ? filteredItems.length : 0; // Return the count of items for the selected month
     });
 
     const width = 500;
