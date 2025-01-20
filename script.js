@@ -25,15 +25,15 @@ async function loadAllUsersData() {
 
 
 // Function to load the genre data from json files
-async function loadGenreData() {
-    return d3.json('merged_genre_data.json') // Use D3's `json` method to fetch and parse the JSON file
-        .then(function(data) {
-            return data; // Return the parsed JSON data
-        })
-        .catch(function(error) {
-            console.error('Error loading the JSON file:', error);
-        });
-}
+// async function loadGenreData() {
+//     return d3.json('merged_genre_data.json') // Use D3's `json` method to fetch and parse the JSON file
+//         .then(function(data) {
+//             return data; // Return the parsed JSON data
+//         })
+//         .catch(function(error) {
+//             console.error('Error loading the JSON file:', error);
+//         });
+// }
 
 
 
@@ -131,8 +131,8 @@ async function fetchArtistsBatchWithGlobalRateLimit(artistNames, accessToken) {
 
 
 async function init() {
-    const clientId = "2b0cb231ed154e9eb7688620fc9aad55"; 
-    const clientSecret = "42e1045384db43a798a64e68608071a5"; 
+    const clientId = "f4f33c59da0a42d98cedcedbd7d86c96"; 
+    const clientSecret = "6ba45acf833d4f8ebc258145594d730f"; 
 
     // Load all users' data
     const allData = await loadAllUsersData();
