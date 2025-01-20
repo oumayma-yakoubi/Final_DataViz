@@ -128,15 +128,20 @@ async function visualizePlaylists(userData, selectedMonth = "2024-12") {
         .sort((a, b) => b.count - a.count) // Sort by count descending
         .slice(0, topN); // Take only the top N playlists
 
-    const playlistOrder = topPlaylists.map(d => d.fullName); // Fix the order of playlists for x-axis
-
     // Step 2: Filter and update counts for the selected month
-    const filteredCounts = playlistOrder.map(fullName => {
-        const originalPlaylist = userData.playlists.find(p => p.name === fullName);
-        if (!originalPlaylist) return 0; // Handle missing playlists
+    const filteredCounts = topPlaylists.map(playlist => {
+        const originalPlaylist = userData.playlists.find(p => p.name === playlist.fullName);
+        if (!originalPlaylist) {
+            console.warn(`Playlist "${playlist.fullName}" not found in user data.`);
+            return 0;
+        }
         const filteredItems = filterTracksByMonthOrYear(originalPlaylist, selectedMonth); // Filter by selected month
-        return filteredItems ? filteredItems.length : 0; // Return the count of items for the selected month
+        const itemCount = filteredItems ? filteredItems.length : 0;
+        return itemCount;
     });
+
+    // Debug: Log the filtered counts
+    console.log("Filtered Counts:", filteredCounts);
 
     const width = 500;
     const height = 300;
@@ -154,9 +159,9 @@ async function visualizePlaylists(userData, selectedMonth = "2024-12") {
     const colorScale = d3.scaleSequential(d3.interpolateYlOrRd)
         .domain([0, topN - 1]); // Map index to YlOrRd gradient
 
-    // Fix the x-axis scale using the base playlist order
+    // Fix the x-axis scale using topPlaylists for a fixed order
     const xScale = d3.scaleBand()
-        .domain(playlistOrder) // Use fixed playlist order for x-axis
+        .domain(topPlaylists.map(d => d.fullName)) // Use topPlaylists to determine order
         .range([margin.left, width - margin.right])
         .padding(0.2);
 
@@ -203,20 +208,21 @@ async function visualizePlaylists(userData, selectedMonth = "2024-12") {
 
     const tooltip = d3.select("#tooltip");
 
-    // Create bars (using topPlaylists for order and metadata)
+    // Create bars (using topPlaylists for fixed x positions)
     svg.selectAll(".bar")
-        .data(topPlaylists) // Use topPlaylists (fixed order from base month)
+        .data(topPlaylists) // Use topPlaylists for x positions
         .enter()
         .append("rect")
         .attr("class", "bar")
         .attr("x", d => xScale(d.fullName))
-        .attr("y", (_, i) => yScale(filteredCounts[i])) // Update height dynamically
+        .attr("y", (_, i) => yScale(filteredCounts[i])) // Use filtered counts for heights
         .attr("width", xScale.bandwidth())
-        .attr("height", (_, i) => height - margin.bottom - yScale(filteredCounts[i])) // Update bar height
+        .attr("height", (_, i) => height - margin.bottom - yScale(filteredCounts[i])) // Adjust bar heights
         .attr("fill", (_, i) => colorScale(i)) // Assign YlOrRd color based on index
         .on("mouseover", (event, d, i) => {
+            const index = topPlaylists.findIndex(p => p.fullName === d.fullName);
             tooltip.style("opacity", 1)
-                .html(`Playlist: ${d.fullName}<br>${filteredCounts[i]} morceaux`); // Use full name in tooltip
+                .html(`Playlist: ${d.fullName}<br>${filteredCounts[index]} morceaux`);
         })
         .on("mousemove", (event) => {
             tooltip.style("left", (event.pageX + 10) + "px")
