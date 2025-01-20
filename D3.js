@@ -116,25 +116,27 @@ function filterTracksByMonthOrYear(playlist, selectedValue) {
 async function visualizePlaylists(userData, selectedMonth = "2024-12") {
     const topN = 20; // Number of playlists to display
 
-    // Step 1: Compute the top 20 playlists based on the last month of 2024
+    // Step 1: Compute the top 20 playlists based on the base month (`2024-12`)
     const baseMonth = "2024-12"; // Base month to determine the top 20 playlists
     const topPlaylists = userData.playlists
         .map(playlist => {
             const fullName = playlist.name || "Untitled Playlist"; // Store full name
             const filteredItems = filterTracksByMonthOrYear(playlist, baseMonth); // Filter by base month
             const itemCount = filteredItems.length; // Count items
-            return { fullName, name: fullName, count: itemCount };
+            return { fullName, name: fullName, baseCount: itemCount }; // Store the base count for ordering
         })
-        .sort((a, b) => b.count - a.count) // Sort by count descending
+        .sort((a, b) => b.baseCount - a.baseCount) // Sort by base count descending
         .slice(0, topN); // Take only the top N playlists
 
-    // Step 2: Fix the x-axis order based on the top 20 playlists
+    // Step 2: Fix the x-axis order based on the top 20 playlists (from the base month)
     const playlistOrder = topPlaylists.map(d => d.fullName); // Fix the order of playlists
-    const filteredPlaylists = topPlaylists.map(playlist => {
-        const originalPlaylist = userData.playlists.find(p => p.name === playlist.fullName);
+
+    // Step 3: Update the counts for the selected month without changing the order
+    const filteredPlaylists = playlistOrder.map(fullName => {
+        const originalPlaylist = userData.playlists.find(p => p.name === fullName);
         const filteredItems = filterTracksByMonthOrYear(originalPlaylist, selectedMonth); // Filter by selected month
         const itemCount = filteredItems.length; // Count items for the selected month
-        return { ...playlist, count: itemCount }; // Keep original playlist info, update count
+        return { fullName, count: itemCount }; // Keep the fixed order, update count
     });
 
     const width = 500;
