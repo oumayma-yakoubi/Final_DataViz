@@ -2,63 +2,37 @@
 // ************* DATA LOADING *************
 // ****************************************
 
-async function loadJSON(filePath){
-    const response = await fetch(filePath);
-    if(!response.ok) throw new Error(`Could not fetch ${filePath} : ${response.statusText}`);
-    return await response.json();
-}
-
-async function getUserFileList() {
-    const response = await fetch('https://raw.githubusercontent.com/oumayma-yakoubi/Final_DataViz/refs/heads/main/index.json');
-    return await response.json();
-}
-
-async function loadUserData(userFolder, files) {
-    const basePath = `https://raw.githubusercontent.com/oumayma-yakoubi/Final_DataViz/refs/heads/main/data/${userFolder}`;
-    const userData = {user: userFolder, playlists: [], streamingHistory: {music: [], podcast: []} };
-
-    for (const file of files){
-        if (file.startsWith('StreamingHistory_music')){
-            const musicData = await loadJSON(`${basePath}/${file}`);
-            userData.streamingHistory.music.push(...musicData);
-        }
-        else if(file.startsWith('StreamingHistory_podcast')){
-            const podcastData = await loadJSON(`${basePath}/${file}`);  
-            userData.streamingHistory.podcast.push(...podcastData);
-        }
-        else if(file.startsWith('Playlist')){
-            const playlistData = await loadJSON(`${basePath}/${file}`);
-            userData.playlists.push(...playlistData.playlists);
-        } else{
-            const fileKey = file.replace('.json', '');
-            userData[fileKey] = await loadJSON(`${basePath}/${file}`);
-        }
-    }
-    return userData;
-}
-
 async function loadAllUsersData() {
-    const fileList = await getUserFileList();
-    const allData = [];
-
-    for (const [userFolder, files] of Object.entries(fileList)){
-        const userData = await loadUserData(userFolder, files);
-        allData.push(userData);
-    }
-
-    return allData;
+    return d3.json('data.json') // Use D3's `json` method to fetch and parse the JSON file
+        .then(function(data) {
+            return data; // Return the parsed JSON data
+        })
+        .catch(function(error) {
+            console.error('Error loading the JSON file:', error);
+        });
 }
+
+// async function loadJSON(filePath) {
+//     return d3.json(filePath) // Use D3's json method to fetch and parse the JSON file
+//         .then(function(data) {
+//             return data; // Return the parsed JSON data
+//         })
+//         .catch(function(error) {
+//             console.error(`Error loading ${filePath}:`, error);
+//         });
+// }
+
+
 
 // Function to load the genre data from json files
-async function loadGenreData(userFolder) {
-    const genreFilePath = `https://raw.githubusercontent.com/oumayma-yakoubi/Final_DataViz/refs/heads/main/data/genre/artistGenres_${userFolder}.json`;
-    try {
-        const genreData = await loadJSON(genreFilePath);
-        return genreData;
-    } catch (error) {
-        console.error(`Error loading genre data for ${userFolder}:`, error);
-        return {};  // Return empty object if there was an error
-    }
+async function loadGenreData() {
+    return d3.json('merged_genre_data.json') // Use D3's `json` method to fetch and parse the JSON file
+        .then(function(data) {
+            return data; // Return the parsed JSON data
+        })
+        .catch(function(error) {
+            console.error('Error loading the JSON file:', error);
+        });
 }
 
 
@@ -162,7 +136,7 @@ async function init() {
 
     // Load all users' data
     const allData = await loadAllUsersData();
-    console.log("Données consolidées: ", allData);
+    // console.log("Données consolidées: ", allData);
 
     for (const userData of allData) {
 

@@ -1,48 +1,46 @@
-async function populateUserSelect() {
+document.addEventListener("DOMContentLoaded", async () => {
     try {
-        const allData = await loadAllUsersData(); // Load user data
-        const userDropdownMenu = document.getElementById("userDropdownMenu"); // Dropdown menu element
+        const allData = await loadAllUsersData(); // Load data once
+        await populateUserSelect(allData); // Pass it to populateUserSelect
+        initializeDropdown(allData); // Pass it to other handlers if necessary
+    } catch (error) {
+        console.error("Error during initialization:", error);
+    }
+});
 
-        // Reset the dropdown menu
-        userDropdownMenu.innerHTML = '';
-
-        // Add each user to the menu
+async function populateUserSelect(allData) {
+    try {
+        const userDropdownMenu = document.getElementById("userDropdownMenu");
+        userDropdownMenu.innerHTML = ''; // Clear previous entries
         allData.forEach((user, index) => {
-            const listItem = document.createElement("li"); // Create <li>
-            const linkItem = document.createElement("a"); // Create <a>
-            linkItem.className = "dropdown-item"; // Bootstrap class for dropdown items
-            linkItem.href = "#"; // Empty link
-            linkItem.textContent = user.user; // Display user name
-            linkItem.setAttribute("data-index", index);  // Add index as an attribute
-
-            // Add click event handler
-            linkItem.addEventListener("click", (event) => {
-                console.log(`User selected: ${user.user} (Index: ${index})`);
-                onUserSelect(event, allData); // Pass the event and all data to the selection handler
-            });
-
-            listItem.appendChild(linkItem); // Add link to <li>
-            userDropdownMenu.appendChild(listItem); // Add <li> to dropdown menu
+            const listItem = document.createElement("li");
+            const linkItem = document.createElement("a");
+            linkItem.className = "dropdown-item";
+            linkItem.href = "#";
+            linkItem.textContent = user.user;
+            linkItem.setAttribute("data-index", index);
+            linkItem.addEventListener("click", (event) => onUserSelect(event, allData));
+            listItem.appendChild(linkItem);
+            userDropdownMenu.appendChild(listItem);
         });
 
-        console.log("Dropdown menu populated successfully!");
-
-        // Set default user (e.g., "user-1") if it exists
+        // Select default user
         const defaultUserIndex = allData.findIndex(user => user.user === "Zakaria");
         if (defaultUserIndex !== -1) {
-            // Call onUserSelect directly with the default user
-            const defaultEvent = {
-                target: {
-                    getAttribute: () => defaultUserIndex // Mock event target
-                }
-            };
-            onUserSelect(defaultEvent, allData); // Load visualizations for "user-1"
-        } else {
-            console.warn("Default user 'user-1' not found.");
+            const defaultEvent = { target: { getAttribute: () => defaultUserIndex } };
+            onUserSelect(defaultEvent, allData);
         }
-
     } catch (error) {
-        console.error("Error populating dropdown menu:", error);
+        console.error("Error populating user dropdown:", error);
+    }
+}
+
+function initializeDropdown(allData) {
+    const dropdownMenu = document.getElementById("userDropdownMenu");
+    if (dropdownMenu) {
+        dropdownMenu.addEventListener("click", (event) => onUserSelect(event, allData));
+    } else {
+        console.error("Dropdown menu with ID 'userDropdownMenu' not found.");
     }
 }
 
@@ -51,42 +49,32 @@ async function onUserSelect(event, allData) {
 
     if (selectedIndex !== "") {
         const user_data = allData[selectedIndex]; // Get user data
-        console.log("---------------------------", user_data.user);
-        console.log("---------------------------", user_data);
-
-        const genreData = await loadGenreData(user_data.user);
+        // console.log("---------------------------", user_data.user);
+        // console.log("---------------------------", user_data);
+        document.getElementById("month-filter").value = '2024-12'; 
+        // const genreData = await loadGenreData(user_data.user);
 
         // Call visualizations
-        await visualizePlaylists(user_data);
-        await ecoutesChart(user_data);
+        artistDensityChart(user_data);
+        plotTopArtistsTreemap(user_data);
 
         // Pass a callback to visualizeMonthlyListening to link both ecoutesChart and plotTopArtistsTreemap
-        await visualizeMonthlyListening(user_data, (selectedMonth) => {
+        visualizeMonthlyListening(user_data, (selectedMonth) => {
             ecoutesChart(user_data, selectedMonth);
             plotTopArtistsTreemap(user_data, selectedMonth);
         });
-
-        await plotTopArtistsTreemap(user_data);
-        await plotGenrePieChart(genreData);
-        await visualizeTopSearchQueries(user_data);
-        await plotPodcastMusicChart(user_data);
-        await artistDensityChart(user_data);
+        ecoutesChart(user_data);
+        plotPodcastMusicChart(user_data);
+        plotGenrePieChart(await loadGenreData(), user_data.user);
+        visualizePlaylists(user_data);
+        // visualizeTopSearchQueries(user_data);
+         
 
     } else {
         document.getElementById("playlist-chart").innerHTML = "";
     }
 }
 
-// Call populateUserSelect on page load
-document.addEventListener("DOMContentLoaded", async () => {
-    await populateUserSelect(); // Populate dropdown and select default user
-});
-
-// Attach event listener to the dropdown menu
-document.getElementById("userDropdownMenu").addEventListener("click", async (event) => {
-    const allData = await loadAllUsersData();
-    onUserSelect(event, allData);
-});
 
 
 // **************************
@@ -101,20 +89,6 @@ function formatToYearMonth(dateString) {
     return `${year}-${String(month).padStart(2, '0')}`;
 }
 
-// Function to filter tracks based on the selected month or year and count items in the playlist
-function filterTracksByMonthOrYear(playlist, selectedValue) {
-    if (selectedValue === "2024") {
-        // If "Whole Year" is selected, include all tracks from 2024
-        return playlist.items.filter(item => new Date(item.addedDate).getFullYear() === 2024);
-    } else {
-        // If a specific month is selected, filter tracks by that month
-        return playlist.items.filter(item => {
-            const trackAddedMonth = formatToYearMonth(item.addedDate); 
-            return trackAddedMonth <= selectedValue; // Include tracks added before or in the selected month
-        });
-    }
-}
-// Visualize the playlists
 
 // Function to filter tracks based on the selected month or year and count items in the playlist
 function filterTracksByMonthOrYear(playlist, selectedValue) {
@@ -147,7 +121,7 @@ async function visualizePlaylists(userData, selectedValue = null) {
             const itemCount = filteredItems.length; // Count filtered items
             return { fullName: fullName, name: fullName, count: itemCount };
         })
-        .sort((a, b) => b.count - a.count) // Sort by count descending
+        // .sort((a, b) => b.count - a.count) // Sort by count descending
         .slice(0, topN) // Take only the top N playlists
         .map(d => ({
             ...d,
@@ -229,7 +203,7 @@ async function visualizePlaylists(userData, selectedValue = null) {
        .attr("fill", (_, i) => colorScale(i)) // Assign YlOrRd color based on index
        .on("mouseover", (event, d) => {
            tooltip.style("opacity", 1)
-                  .html(`Playlist: ${d.fullName}<br>Items: ${d.count}`); // Use full name in tooltip
+                  .html(`Playlist : ${d.fullName}<br>Morceaux : ${d.count}`); // Use full name in tooltip
        })
        .on("mousemove", (event) => {
            tooltip.style("left", (event.pageX + 10) + "px")
@@ -261,8 +235,7 @@ async function visualizePlaylists(userData, selectedValue = null) {
 // ********* Slot 2 *********
 // **************************
 
-
-// Top serach queries history
+// Top search queries history
 
 async function visualizeTopSearchQueries(userData) {
     // Extract the search queries from the user data
@@ -476,12 +449,13 @@ async function ecoutesChart(userData, month = null) {
 }
 
 
+
 // **************************
 // ********* Slot 4 *********
 // **************************
 
-// Visualize the total listening time per month (Line chart)
 
+// Visualize the total listening time per month (Line chart)
 async function visualizeMonthlyListening(userData, updateTimeDistribution) {
     const musicData = userData.streamingHistory.music;
     if (!musicData || musicData.length === 0) {
@@ -491,7 +465,7 @@ async function visualizeMonthlyListening(userData, updateTimeDistribution) {
     const monthlyHours = {};
     musicData.forEach(record => {
         const date = new Date(record.endTime);
-        const month = date.toLocaleString('fr-FR', { month: 'short' });
+        const month = date.toLocaleString('default', { month: 'short' });
         const hours = record.msPlayed / (60000 * 60);
 
         if (monthlyHours[month]) {
@@ -558,7 +532,7 @@ async function visualizeMonthlyListening(userData, updateTimeDistribution) {
         .attr("fill", "#800000")
         .on("mouseover", (event, d) => {
             tooltip.style("opacity", 1)
-                .html(`Mois : ${months[hours.indexOf(d)]}<br>${d.toFixed(2)} heures`);
+                .html(`Mois: ${months[hours.indexOf(d)]}<br>${d.toFixed(2)} heures`);
         })
         .on("mousemove", (event) => {
             tooltip.style("left", (event.pageX + 10) + "px")
@@ -583,7 +557,7 @@ async function visualizeMonthlyListening(userData, updateTimeDistribution) {
                 svg.selectAll("circle").attr("fill", "lightgray");
                 d3.select(event.currentTarget).attr("fill", "#800000");
             }
-});
+        });
 
     // Add X-axis title
     svg.append("text")
@@ -727,13 +701,15 @@ async function plotTopArtistsTreemap(userData, selectedMonth = null) {
 // Plot the genre distribution
 
 // Function to aggregate and count genres
-function aggregateGenres(genreData) {
+function aggregateGenres(genreData, selectedUser) {
+    // console.log("**********selectedUser", selectedUser)
+    // console.log("genreData selectedUser************", genreData[selectedUser])
     const genreCount = {};
 
     // Iterate through each artist's genres
-    for (const artist in genreData) {
+    for (const artist in genreData[selectedUser]) {
 
-        const genres = genreData[artist];
+        const genres = genreData[selectedUser][artist];
         
         genres.forEach((genre) => {
             // Count occurrences of each genre
@@ -753,15 +729,15 @@ function aggregateGenres(genreData) {
 
     // Sort genres by count in descending order
     genreArray.sort((a, b) => b.count - a.count);
-    console.log(genreArray.length)
+    // console.log(genreArray.length)
 
     // Keep only the top 10 genres
     return genreArray.slice(0, 10);
 }
 
-function plotGenrePieChart(genreData) {
+function plotGenrePieChart(genreData, selectedUser) {
     // Step 1: Aggregate genres
-    const topGenres = aggregateGenres(genreData);
+    const topGenres = aggregateGenres(genreData, selectedUser);
 
     // Step 2: Set up the pie chart
     const width = 300, height = 300, radius = Math.min(width, height) / 2;
@@ -890,8 +866,8 @@ function prepareComparisonData(userData) {
     const musicData = aggregateStreamingData(userData.streamingHistory.music);
     const podcastData = aggregateStreamingData(userData.streamingHistory.podcast);
 
-    console.log("Music Monthly Data:", musicData);
-    console.log("Podcast Monthly Data:", podcastData);
+    // console.log("Music Monthly Data:", musicData);
+    // console.log("Podcast Monthly Data:", podcastData);
 
     // Create a unified dataset for visualization
     const allMonths = new Set([...musicData.map(d => d.month), ...podcastData.map(d => d.month)]);
@@ -901,8 +877,8 @@ function prepareComparisonData(userData) {
         const music = musicData.find(d => d.month === month);
         const podcast = podcastData.find(d => d.month === month);
 
-        console.log("Music mapping:", music);
-        console.log("Podcast mapping:", podcast);
+        // console.log("Music mapping:", music);
+        // console.log("Podcast mapping:", podcast);
 
         comparisonData.push({
             month,
@@ -1067,131 +1043,7 @@ function plotPodcastMusicChart(allUsersData) {
 // ********* Slot 8 *********
 // **************************
 
-// async function artistDensityChart(userData){
-
-//     console.log("************je suis dans artistDensityChart");
-//     const musicData = userData.streamingHistory.music;
-//     const nodes = [];
-//     const nodeMap ={};
-//     const links = [];
-
-//     musicData.forEach(d => {
-//         if(!nodeMap[d.artistName]){
-//             nodes.push({ id: d.artistName, group: 'artistName'});
-//             nodeMap[d.artistName]= true;
-//         }
-//         if(!nodeMap[d.trackName]){
-//             nodes.push({ id: d.trackName, group: 'trackName'});
-//             nodeMap[d.trackName] = true;
-//         }
-//         links.push({ source: d.artistName, target: d.trackName, value: 1 });
-//     });
-
-//     const width = 2600;
-//     const height = 1000;
-//     const color = d3.scaleOrdinal()
-//     .domain(['artistName', 'trackName'])  // Définir les types de groupes
-//     .range(['#800000', '#FFD65A']);  // Noir pour les artistes, rouge pour les pistes
-
-//     // Créer un tableau de liens entre les artistes et les musiques
-//     const simulation = d3.forceSimulation(nodes)
-//     .force("link", d3.forceLink(links).id(d => d.id))
-//     .force("charge", d3.forceManyBody())
-//     .force("x", d3.forceX())
-//     .force("y", d3.forceY());
-
-//     d3.select("#fdGraph").selectAll("*").remove();
-
-//     const svg = d3.select("#fdGraph")
-//     .append("svg")
-//     .attr("width", width)
-//     .attr("height", height)
-//     .attr("viewBox", [-width / 2, -height / 2, width, height])
-//     .attr("style", "max-width: 100%; height: auto;");
-
-// const link = svg.append("g")
-//     .attr("stroke", "#999")
-//     .attr("stroke-opacity", 0.6)
-//     .selectAll("line")
-//     .data(links)
-//     .join("line")
-//     .attr("stroke-width", d => Math.sqrt(d.value));
-
-// const node = svg.append("g")
-//     .attr("stroke", "#fff")
-//     .attr("stroke-width", 1.5)
-//     .selectAll("circle")
-//     .data(nodes)
-//     .join("circle")
-//     .attr("r", 5)
-//     .attr("fill", d => color(d.group))
-//     .on("mouseover", (event, d) => {
-//         const numLinks = links.filter(link => link.source.id === d.id || link.target.id === d.id).length;
-//         tooltip.style("opacity", 1)
-//                .html(`
-//                     ${d.group === 'artistName' ? 'Artiste' : 'Morceau'} : ${d.id}<br>
-//                     <strong>Nombre d'écoutes :</strong> ${numLinks}
-//                 `);
-//     })
-//     .on("mousemove", (event) => {
-//         tooltip.style("left", (event.pageX + 10) + "px")
-//                .style("top", (event.pageY - 20) + "px");
-//     })
-//     .on("mouseout", () => {
-//         tooltip.style("opacity", 0);
-//     });
-
-// // node.append("title")
-// //     .text(d => d.id);
-
-// node.call(d3.drag()
-//       .on("start", dragstarted)
-//       .on("drag", dragged)
-//       .on("end", dragended));
-
-// const tooltip = d3.select("#tooltip");
-
-
-// simulation.on("tick", () => {
-//   link
-//       .attr("x1", d => d.source.x)
-//       .attr("y1", d => d.source.y)
-//       .attr("x2", d => d.target.x)
-//       .attr("y2", d => d.target.y);
-
-//   node
-//       .attr("cx", d => d.x)
-//       .attr("cy", d => d.y);
-
-// });
-
-
-// function dragstarted(event) {
-//   if (!event.active) simulation.alphaTarget(0.3).restart();
-//   event.subject.fx = event.subject.x;
-//   event.subject.fy = event.subject.y;
-// }
-
-// function dragged(event) {
-//   event.subject.fx = event.x;
-//   event.subject.fy = event.y;
-// }
-
-// function dragended(event) {
-//   if (!event.active) simulation.alphaTarget(0);
-//   event.subject.fx = null;
-//   event.subject.fy = null;
-// }
-
-// // invalidation.then(() => simulation.stop());
-
-// return svg.node();
-// }
-
-
-
 async function artistDensityChart(userData) {
-    console.log("************je suis dans artistDensityChart");
     const musicData = userData.streamingHistory.music;
     const nodes = [];
     const nodeMap = {};
@@ -1235,7 +1087,10 @@ async function artistDensityChart(userData) {
         .range(['#800000', '#FFD65A']);
 
     const simulation = d3.forceSimulation(nodes)
-        .force("link", d3.forceLink(links).id(d => d.id))
+        .force("link", d3.forceLink(links)
+        .id(d => d.id)
+        .distance(50) // Adjust this value to change the link distance
+    )
         .force("charge", d3.forceManyBody())
         .force("x", d3.forceX())
         .force("y", d3.forceY());
