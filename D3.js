@@ -113,31 +113,28 @@ function filterTracksByMonthOrYear(playlist, selectedValue) {
     return playlist.items;
 }
 
-async function visualizePlaylists(userData, selectedValue = "2024-12") {
-    const topN = 20; // Define the number of top playlists to display
+async function visualizePlaylists(userData, selectedMonth = "2024-12") {
+    const topN = 20; // Number of playlists to display
 
     // Step 1: Compute the top 20 playlists based on the last month of 2024
-    const baseMonth = "2024-12"; // Define the base month for top 20 computation
-    const basePlaylistData = userData.playlists
+    const baseMonth = "2024-12"; // Base month to determine the top 20 playlists
+    const topPlaylists = userData.playlists
         .map(playlist => {
             const fullName = playlist.name || "Untitled Playlist"; // Store full name
-            const filteredItems = filterTracksByMonthOrYear(playlist, baseMonth); // Filter by the base month
-            const itemCount = filteredItems.length; // Count filtered items
+            const filteredItems = filterTracksByMonthOrYear(playlist, baseMonth); // Filter by base month
+            const itemCount = filteredItems.length; // Count items
             return { fullName, name: fullName, count: itemCount };
         })
         .sort((a, b) => b.count - a.count) // Sort by count descending
-        .slice(0, topN) // Take only the top N playlists
-        .map(d => ({
-            ...d,
-            name: d.name.length > 11 ? d.name.substring(0, 10) + "..." : d.name, // Truncate long names for display
-        }));
+        .slice(0, topN); // Take only the top N playlists
 
-    // Step 2: Keep the order of the base playlists and update counts for the selected month
-    const filteredPlaylistData = basePlaylistData.map(playlist => {
+    // Step 2: Fix the x-axis order based on the top 20 playlists
+    const playlistOrder = topPlaylists.map(d => d.fullName); // Fix the order of playlists
+    const filteredPlaylists = topPlaylists.map(playlist => {
         const originalPlaylist = userData.playlists.find(p => p.name === playlist.fullName);
-        const filteredItems = filterTracksByMonthOrYear(originalPlaylist, selectedValue); // Filter by the selected month
-        const itemCount = filteredItems.length; // Count filtered items
-        return { ...playlist, count: itemCount }; // Update the count while keeping the order
+        const filteredItems = filterTracksByMonthOrYear(originalPlaylist, selectedMonth); // Filter by selected month
+        const itemCount = filteredItems.length; // Count items for the selected month
+        return { ...playlist, count: itemCount }; // Keep original playlist info, update count
     });
 
     const width = 500;
@@ -154,15 +151,15 @@ async function visualizePlaylists(userData, selectedValue = "2024-12") {
 
     // Create a sequential YlOrRd color scale
     const colorScale = d3.scaleSequential(d3.interpolateYlOrRd)
-        .domain([0, filteredPlaylistData.length - 1]); // Map index to YlOrRd gradient
+        .domain([0, topN - 1]); // Map index to YlOrRd gradient
 
     const xScale = d3.scaleBand()
-        .domain(basePlaylistData.map(d => d.name)) // Keep the same playlists on the x-axis
+        .domain(playlistOrder) // Use fixed playlist order for x-axis
         .range([margin.left, width - margin.right])
         .padding(0.2);
 
     const yScale = d3.scaleLinear()
-        .domain([0, d3.max(filteredPlaylistData, d => d.count)]) // Scale based on the current counts
+        .domain([0, d3.max(filteredPlaylists, d => d.count)]) // Scale based on current counts
         .range([height - margin.bottom, margin.top]);
 
     // Append x-axis
@@ -204,11 +201,11 @@ async function visualizePlaylists(userData, selectedValue = "2024-12") {
 
     // Create bars
     svg.selectAll(".bar")
-        .data(filteredPlaylistData)
+        .data(filteredPlaylists)
         .enter()
         .append("rect")
         .attr("class", "bar")
-        .attr("x", d => xScale(d.name))
+        .attr("x", d => xScale(d.fullName))
         .attr("y", d => yScale(d.count))
         .attr("width", xScale.bandwidth())
         .attr("height", d => height - margin.bottom - yScale(d.count))
@@ -226,7 +223,7 @@ async function visualizePlaylists(userData, selectedValue = "2024-12") {
         });
 
     // Message for no data
-    if (filteredPlaylistData.every(d => d.count === 0)) {
+    if (filteredPlaylists.every(d => d.count === 0)) {
         svg.append("text")
             .attr("x", width / 2)
             .attr("y", height / 2)
