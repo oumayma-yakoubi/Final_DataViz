@@ -89,28 +89,24 @@ function formatToYearMonth(dateString) {
     return `${year}-${String(month).padStart(2, '0')}`;
 }
 
+// Updated filtering function
 function filterTracksByMonthOrYear(playlist, selectedValue) {
     if (!playlist || !Array.isArray(playlist.items)) {
-        console.warn("Invalid playlist or playlist.items.");
+        console.warn("Invalid playlist data.");
         return [];
     }
 
-    if (selectedValue === "2024") {
-        // Filter for the whole year 2024
-        return playlist.items.filter(item => {
-            const year = new Date(item.addedDate).getFullYear();
-            return year === 2024;
-        });
-    } else if (selectedValue) {
-        // Filter for a specific month in 2024 (e.g., "2024-12")
-        return playlist.items.filter(item => {
-            const trackAddedMonth = formatToYearMonth(item.addedDate);
-            return trackAddedMonth === selectedValue;
-        });
-    }
+    const selectedYear = parseInt(selectedValue.split("-")[0], 10);
+    const selectedMonth = parseInt(selectedValue.split("-")[1], 10);
 
-    // If no selectedValue is provided, return all items
-    return playlist.items;
+    return playlist.items.filter(item => {
+        const addedDate = new Date(item.addedDate);
+        const itemYear = addedDate.getFullYear();
+        const itemMonth = addedDate.getMonth() + 1; // Month is zero-based
+
+        // Include tracks added up to and including the selected month
+        return itemYear < selectedYear || (itemYear === selectedYear && itemMonth <= selectedMonth);
+    });
 }
 
 async function visualizePlaylists(userData, selectedMonth = null) {
