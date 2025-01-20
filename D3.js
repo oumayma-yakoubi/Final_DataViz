@@ -99,19 +99,24 @@ function filterTracksByMonthOrYear(playlist, selectedValue) {
     const selectedYear = parseInt(selectedValue.split("-")[0], 10);
     const selectedMonth = parseInt(selectedValue.split("-")[1], 10);
 
+    // Filter tracks up to the selected month
     return playlist.items.filter(item => {
         const addedDate = new Date(item.addedDate);
         const itemYear = addedDate.getFullYear();
-        const itemMonth = addedDate.getMonth() + 1; // Month is zero-based
+        const itemMonth = addedDate.getMonth() + 1;
 
         // Include tracks added up to and including the selected month
-        return itemYear < selectedYear || (itemYear === selectedYear && itemMonth <= selectedMonth);
+        return (
+            itemYear < selectedYear ||
+            (itemYear === selectedYear && itemMonth <= selectedMonth)
+        );
     });
 }
 
 async function visualizePlaylists(userData, selectedMonth = null) {
-    // Step 1: Define the top playlists (computed once for the base month, e.g., December 2024)
-    const baseMonth = "2024-12"; // Fixed base month
+    const baseMonth = "2024-12"; // Fixed base month for determining the top 20 playlists
+
+    // Step 1: Compute top playlists for the base month
     const topPlaylists = userData.playlists
         .map(playlist => {
             const fullName = playlist.name || "Untitled Playlist";
@@ -120,13 +125,12 @@ async function visualizePlaylists(userData, selectedMonth = null) {
         })
         .sort((a, b) => b.count - a.count) // Sort by count descending
         .slice(0, 20) // Take the top 20
-        .map((d, i) => ({
+        .map(d => ({
             ...d,
-            index: i, // Store index for fixed order
-            name: d.name.length > 11 ? d.name.substring(0, 10) + "..." : d.name // Truncate for display
+            name: d.name.length > 11 ? d.name.substring(0, 10) + "..." : d.name // Truncate names
         }));
 
-    // Step 2: Filter playlists for the selected month and compute counts
+    // Step 2: Filter playlists for the selected month
     const filteredCounts = topPlaylists.map(playlist => {
         const filteredItems = selectedMonth
             ? filterTracksByMonthOrYear(
@@ -140,31 +144,29 @@ async function visualizePlaylists(userData, selectedMonth = null) {
         return { ...playlist, count: filteredItems.length };
     });
 
-    // Step 3: Set up dimensions
+    // Step 3: Set up chart dimensions
     const width = 500;
     const height = 300;
     const margin = { top: 20, right: 20, bottom: 70, left: 70 };
 
-    // Clear previous content
     d3.select("#playlist-chart").selectAll("*").remove();
 
-    // Create SVG container
     const svg = d3.select("#playlist-chart")
         .append("svg")
         .attr("width", width)
         .attr("height", height);
 
-    // Step 4: Set up scales
+    // Step 4: Scales
     const xScale = d3.scaleBand()
         .domain(topPlaylists.map(d => d.name)) // Fixed domain based on the top playlists
         .range([margin.left, width - margin.right])
         .padding(0.2);
 
     const yScale = d3.scaleLinear()
-        .domain([0, d3.max(filteredCounts, d => d.count) || 1]) // Dynamic domain based on filtered counts
+        .domain([0, d3.max(filteredCounts, d => d.count) || 1]) // Dynamic based on filtered counts
         .range([height - margin.bottom, margin.top]);
 
-    // Step 5: Draw Axes
+    // Step 5: Axes
     svg.append("g")
         .attr("transform", `translate(0, ${height - margin.bottom})`)
         .call(d3.axisBottom(xScale));
@@ -173,7 +175,7 @@ async function visualizePlaylists(userData, selectedMonth = null) {
         .attr("transform", `translate(${margin.left}, 0)`)
         .call(d3.axisLeft(yScale));
 
-    // Add axis labels
+    // Step 6: Axis labels
     svg.append("text")
         .attr("x", width / 2)
         .attr("y", height - margin.bottom + 50)
@@ -191,19 +193,19 @@ async function visualizePlaylists(userData, selectedMonth = null) {
         .text("Nombre de morceaux")
         .attr("fill", "#800000");
 
-    // Step 6: Add Tooltip
+    // Step 7: Tooltip
     const tooltip = d3.select("#tooltip");
 
-    // Step 7: Draw Bars
+    // Step 8: Bars
     svg.selectAll(".bar")
-        .data(filteredCounts) // Use the filtered counts for the bars
+        .data(filteredCounts)
         .join("rect")
         .attr("class", "bar")
-        .attr("x", d => xScale(d.name)) // x position based on fixed playlist order
-        .attr("y", d => yScale(d.count)) // y position based on filtered counts
+        .attr("x", d => xScale(d.name)) // Fixed x position
+        .attr("y", d => yScale(d.count)) // Dynamic y position
         .attr("width", xScale.bandwidth())
-        .attr("height", d => height - margin.bottom - yScale(d.count)) // Height adjusted dynamically
-        .attr("fill", (_, i) => d3.interpolateYlOrRd(i / 20)) // Color from YlOrRd palette
+        .attr("height", d => height - margin.bottom - yScale(d.count)) // Dynamic height
+        .attr("fill", (_, i) => d3.interpolateYlOrRd(i / 20))
         .on("mouseover", (event, d) => {
             tooltip.style("opacity", 1)
                 .html(`Playlist: ${d.fullName}<br>${d.count} morceaux`);
@@ -215,7 +217,7 @@ async function visualizePlaylists(userData, selectedMonth = null) {
             tooltip.style("opacity", 0);
         });
 
-    // Step 8: Add no data message if applicable
+    // Step 9: No data message
     if (filteredCounts.every(d => d.count === 0)) {
         svg.append("text")
             .attr("x", width / 2)
@@ -226,10 +228,10 @@ async function visualizePlaylists(userData, selectedMonth = null) {
             .text("Aucune donnée disponible");
     }
 
-    // Event listener for the month filter dropdown
+    // Step 10: Add event listener for dropdown
     document.getElementById("month-filter").addEventListener("change", event => {
         const selectedMonth = event.target.value;
-        visualizePlaylists(userData, selectedMonth); // Re-render the visualization
+        visualizePlaylists(userData, selectedMonth); // Re-render
     });
 }
 
