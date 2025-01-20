@@ -132,12 +132,12 @@ async function visualizePlaylists(userData, selectedValue = "2024-12") {
             name: d.name.length > 11 ? d.name.substring(0, 10) + "..." : d.name, // Truncate long names for display
         }));
 
-    // Step 2: Filter the data for the selected month while maintaining the top 20 playlists
+    // Step 2: Keep the order of the base playlists and update counts for the selected month
     const filteredPlaylistData = basePlaylistData.map(playlist => {
         const originalPlaylist = userData.playlists.find(p => p.name === playlist.fullName);
         const filteredItems = filterTracksByMonthOrYear(originalPlaylist, selectedValue); // Filter by the selected month
         const itemCount = filteredItems.length; // Count filtered items
-        return { ...playlist, count: itemCount }; // Update the count while preserving the top 20 order
+        return { ...playlist, count: itemCount }; // Update the count while keeping the order
     });
 
     const width = 500;
@@ -157,7 +157,7 @@ async function visualizePlaylists(userData, selectedValue = "2024-12") {
         .domain([0, filteredPlaylistData.length - 1]); // Map index to YlOrRd gradient
 
     const xScale = d3.scaleBand()
-        .domain(filteredPlaylistData.map(d => d.name)) // Keep the same playlists on the x-axis
+        .domain(basePlaylistData.map(d => d.name)) // Keep the same playlists on the x-axis
         .range([margin.left, width - margin.right])
         .padding(0.2);
 
