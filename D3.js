@@ -153,11 +153,13 @@ async function visualizePlaylists(userData, selectedMonth = "2024-12") {
     const colorScale = d3.scaleSequential(d3.interpolateYlOrRd)
         .domain([0, topN - 1]); // Map index to YlOrRd gradient
 
+    // Fix the x-axis scale using the base playlist order
     const xScale = d3.scaleBand()
         .domain(playlistOrder) // Use fixed playlist order for x-axis
         .range([margin.left, width - margin.right])
         .padding(0.2);
 
+    // Adjust the y-axis scale dynamically based on the selected month
     const yScale = d3.scaleLinear()
         .domain([0, d3.max(filteredCounts)]) // Scale based on the filtered counts
         .nice()
@@ -202,14 +204,14 @@ async function visualizePlaylists(userData, selectedMonth = "2024-12") {
 
     // Create bars (using topPlaylists for order and metadata)
     svg.selectAll(".bar")
-        .data(topPlaylists)
+        .data(topPlaylists) // Use topPlaylists (fixed order from base month)
         .enter()
         .append("rect")
         .attr("class", "bar")
         .attr("x", d => xScale(d.fullName))
-        .attr("y", (_, i) => yScale(filteredCounts[i]))
+        .attr("y", (_, i) => yScale(filteredCounts[i])) // Update height dynamically
         .attr("width", xScale.bandwidth())
-        .attr("height", (_, i) => height - margin.bottom - yScale(filteredCounts[i]))
+        .attr("height", (_, i) => height - margin.bottom - yScale(filteredCounts[i])) // Update bar height
         .attr("fill", (_, i) => colorScale(i)) // Assign YlOrRd color based on index
         .on("mouseover", (event, d, i) => {
             tooltip.style("opacity", 1)
