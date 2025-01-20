@@ -121,7 +121,7 @@ async function visualizePlaylists(userData, selectedValue = null) {
             const itemCount = filteredItems.length; // Count filtered items
             return { fullName: fullName, name: fullName, count: itemCount };
         })
-        .sort((a, b) => b.count - a.count) // Sort by count descending
+        // .sort((a, b) => b.count - a.count) // Sort by count descending
         .slice(0, topN) // Take only the top N playlists
         .map(d => ({
             ...d,
