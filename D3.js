@@ -86,8 +86,9 @@ function formatToYearMonth(dateString) {
     const date = new Date(dateString);
     const year = date.getFullYear();
     const month = date.getMonth() + 1; // Month is zero-indexed
-    return ${year}-${String(month).padStart(2, '0')};
+    return `${year}-${String(month).padStart(2, '0')}`;
 }
+
 
 // Function to filter tracks based on the selected month or year and count items in the playlist
 function filterTracksByMonthOrYear(playlist, selectedValue) {
@@ -154,7 +155,7 @@ async function visualizePlaylists(userData, selectedValue = null) {
 
     // Append x-axis
     const xAxis = svg.append("g")
-                     .attr("transform", translate(0, ${height - margin.bottom}))
+                     .attr("transform", `translate(0, ${height - margin.bottom})`)
                      .call(d3.axisBottom(xScale));
 
     xAxis.selectAll("text")
@@ -165,7 +166,7 @@ async function visualizePlaylists(userData, selectedValue = null) {
 
     // Append y-axis
     svg.append("g")
-       .attr("transform", translate(${margin.left}, 0))
+       .attr("transform", `translate(${margin.left}, 0)`)
        .call(d3.axisLeft(yScale));
 
     // Append x-axis label
@@ -202,7 +203,7 @@ async function visualizePlaylists(userData, selectedValue = null) {
        .attr("fill", (_, i) => colorScale(i)) // Assign YlOrRd color based on index
        .on("mouseover", (event, d) => {
            tooltip.style("opacity", 1)
-                  .html(Playlist: ${d.fullName}<br>${d.count} morceaux); // Use full name in tooltip
+                  .html(`Playlist : ${d.fullName}<br>Morceaux : ${d.count}`); // Use full name in tooltip
        })
        .on("mousemove", (event) => {
            tooltip.style("left", (event.pageX + 10) + "px")
