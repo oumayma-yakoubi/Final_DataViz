@@ -35,7 +35,8 @@ select {
 select:hover {
   background-color: #1f0707;
   border-color: #ef2121;
-}
+} 
+
 /* Le conteneur parent va occuper toute la fenêtre et utiliser Flexbox pour centrer */
 #fdGraphContainer {
   display: flex;              /* Active Flexbox */

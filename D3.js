@@ -139,24 +139,28 @@ async function visualizePlaylists(userData, selectedValue = null) {
     // Define the number of top playlists to display
     const topN = 20; // Change this value to adjust the number of playlists displayed
 
-    // Process playlists into data and apply the filter (month or whole year)
-    const playlistData = userData.playlists
+    // Process playlists into data, determine the top 20 by default, and apply the filter
+    const topPlaylists = userData.playlists
         .map(playlist => {
             const fullName = playlist.name || "Untitled Playlist"; // Store full name
-            let filteredItems = playlist.items;
-            if (selectedValue) {
-                // Filter tracks based on the selected month or year
-                filteredItems = filterTracksByMonthOrYear(playlist, selectedValue);
-            }
-            const itemCount = filteredItems.length; // Count filtered items
-            return { fullName: fullName, name: fullName, count: itemCount };
+            const itemCount = playlist.items.length; // Use unfiltered count for top N selection
+            return { fullName: fullName, name: fullName, count: itemCount, items: playlist.items };
         })
-        // .sort((a, b) => b.count - a.count) // Sort by count descending
-        .slice(0, topN) // Take only the top N playlists
-        .map(d => ({
-            ...d,
-            name: d.name.length > 11 ? d.name.substring(0, 10) + "..." : d.name, // Truncate long names for display
-        }));
+        .sort((a, b) => b.count - a.count) // Sort by count descending
+        .slice(0, topN); // Select the top N playlists
+
+    const playlistData = topPlaylists.map(playlist => {
+        let filteredItems = playlist.items;
+        if (selectedValue) {
+            // Filter tracks based on the selected month or year
+            filteredItems = filterTracksByMonthOrYear({ items: filteredItems }, selectedValue);
+        }
+        return {
+            fullName: playlist.fullName,
+            name: playlist.name,
+            count: filteredItems.length, // Update count based on the filter
+        };
+    });
 
     const width = 500;
     const height = 300;
@@ -253,12 +257,14 @@ async function visualizePlaylists(userData, selectedValue = null) {
            .style("fill", "gray")
            .text("No playlists available");
     }
-    
+
     // Event listener for the month filter dropdown
     document.getElementById("month-filter").addEventListener("change", (event) => {
         const selectedMonth = event.target.value; // Get the selected month
         visualizePlaylists(userData, selectedMonth); // Re-render the visualization with the selected month
     });
+        
+    
 }
 
 
