@@ -1,34 +1,36 @@
+async function loadAllUsersData() {
+    return d3.json('data.json') // Use D3's `json` method to fetch and parse the JSON file
+        .then(function(data) {
+            return data; // Return the parsed JSON data
+        })
+        .catch(function(error) {
+            console.error('Error loading the JSON file:', error);
+        });
+}
+async function loadGenreData() {
+    return d3.json('data/genre/merged_genre_data.json') // Use D3's `json` method to fetch and parse the JSON file
+        .then(function(data) {
+            return data; // Return the parsed JSON data
+        })
+        .catch(function(error) {
+            console.error('Error loading the JSON file:', error);
+        });
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
     try {
         const allData = await loadAllUsersData(); // Load data once
-        populateUserSelect(allData); // Populate dropdown
-        initializeDropdown(allData); // Initialize other event handlers
+        await populateUserSelect(allData); // Pass it to populateUserSelect
+        initializeDropdown(allData); // Pass it to other handlers if necessary
     } catch (error) {
         console.error("Error during initialization:", error);
     }
 });
 
-// Load all user data with caching
-async function loadAllUsersData() {
-    if (sessionStorage.getItem("allData")) {
-        return JSON.parse(sessionStorage.getItem("allData"));
-    }
-
-    try{
-        const data = await d3.json("data.json"); 
-        sessionStorage.setItem("allData", JSON.stringify(data));
-        return data
-    } catch (error) {
-        console.error("Failed to load data.json", error);
-        throw error;
-    }
-}
-
 async function populateUserSelect(allData) {
     try {
         const userDropdownMenu = document.getElementById("userDropdownMenu");
         userDropdownMenu.innerHTML = ''; // Clear previous entries
-        const fragment = document.createDocumentFragment();
         allData.forEach((user, index) => {
             const listItem = document.createElement("li");
             const linkItem = document.createElement("a");
@@ -36,13 +38,10 @@ async function populateUserSelect(allData) {
             linkItem.href = "#";
             linkItem.textContent = user.user;
             linkItem.setAttribute("data-index", index);
-            linkItem.addEventListener("click", debounce((event) => onUserSelect(event, allData), 300));
-            // linkItem.addEventListener("click", (event) => onUserSelect(event, allData));
+            linkItem.addEventListener("click", (event) => onUserSelect(event, allData));
             listItem.appendChild(linkItem);
             userDropdownMenu.appendChild(listItem);
         });
-        
-        userDropdownMenu.appendChild(fragment);
 
         // Select default user
         const defaultUserIndex = allData.findIndex(user => user.user === "Zakaria");
@@ -58,7 +57,7 @@ async function populateUserSelect(allData) {
 function initializeDropdown(allData) {
     const dropdownMenu = document.getElementById("userDropdownMenu");
     if (dropdownMenu) {
-        dropdownMenu.addEventListener("click", debounce((event) => onUserSelect(event, allData), 300));
+        dropdownMenu.addEventListener("click", (event) => onUserSelect(event, allData));
     } else {
         console.error("Dropdown menu with ID 'userDropdownMenu' not found.");
     }
@@ -67,44 +66,34 @@ function initializeDropdown(allData) {
 async function onUserSelect(event, allData) {
     const selectedIndex = event.target.getAttribute("data-index");
 
-    if (selectedIndex !== null) {
-        const userData = allData[selectedIndex]; // Get user data
+    if (selectedIndex !== "") {
+        const user_data = allData[selectedIndex]; // Get user data
         // console.log("---------------------------", user_data.user);
         // console.log("---------------------------", user_data);
         document.getElementById("month-filter").value = '2024-12'; 
-        await renderVisualizations(userData);
+        // const genreData = await loadGenreData(user_data.user);
+
+        // Call visualizations
+        artistDensityChart(user_data);
+        plotTopArtistsTreemap(user_data);
+
+        // Pass a callback to visualizeMonthlyListening to link both ecoutesChart and plotTopArtistsTreemap
+        visualizeMonthlyListening(user_data, (selectedMonth) => {
+            ecoutesChart(user_data, selectedMonth);
+            plotTopArtistsTreemap(user_data, selectedMonth);
+        });
+        ecoutesChart(user_data);
+        plotPodcastMusicChart(user_data);
+        plotGenrePieChart(await loadGenreData(), user_data.user);
+        visualizePlaylists(user_data);
+        // visualizeTopSearchQueries(user_data);
+         
+
     } else {
         document.getElementById("playlist-chart").innerHTML = "";
     }
 }
 
-async function renderVisualizations(userData) {
-    try{
-        const genreData = await loadGenreData(userData.user);
-        artistDensityChart(userData);
-        plotTopArtistsTreemap(userData);
-        visualizeMonthlyListening(userData, debounce((selectedMonth) => {
-            ecoutesChart(userData, selectedMonth);
-            plotTopArtistsTreemap(userData, selectedMonth);
-        }, 300));
-        ecoutesChart(userData);
-        plotPodcastMusicChart(userData);
-        plotGenrePieChart(genreData, userData.user);
-        visualizePlaylists(userData);
-    } catch (error){
-        console.error("Error rendering visualization ", error)
-    }
-    
-}
-
-function debounce(func, wait){
-    let timeout;
-    return function(...args){
-        clearTimeout(timeout);
-        timeout = setTimeout(()=> func.apply(this, args), wait);
-
-    }
-}
 
 
 // **************************

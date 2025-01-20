@@ -1,0 +1,48 @@
+{
+  "playlists": [
+    {
+      "name": "Arabiiiii",
+      "lastModifiedDate": "2023-02-13",
+      "items": [
+        {
+          "track": {
+            "trackName": "Tzazae",
+            "artistName": "Cheb Mami",
+            "albumName": "dellali",
+            "trackUri": "spotify:track:5BE0MgtsHnLvoIsduBYe8e"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2023-02-13"
+        },
+        {
+          "track": {
+            "trackName": "إيناس إيناس",
+            "artistName": "Hamza Namira",
+            "albumName": "Remix Season 1",
+            "trackUri": "spotify:track:0S0dN5eossNMwsPGWzwv7I"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2023-02-13"
+        },
+        {
+          "track": {
+            "trackName": "Lamma Bada Yatathana",
+            "artistName": "Lena Chamamyan",
+            "albumName": "The Collection",
+            "trackUri": "spotify:track:3BhgD8Kun1fXSW1KYTfnEO"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2023-02-13"
+        }
+      ],
+      "description": null,
+      "numberOfFollowers": 0
+    }
+  ]
+}

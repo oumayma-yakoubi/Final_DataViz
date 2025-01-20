@@ -1,17 +1,33 @@
 {
-    "Zakaria": [
-      "Identity.json",
-      "Playlist1.json",
-      "StreamingHistory_music_0.json",
-      "StreamingHistory_podcast_0.json"
-
-    ],
-    "Pierre": [
+    "Aurelie" : [
       "Identity.json",
       "Playlist1.json",
       "StreamingHistory_music_0.json",
       "StreamingHistory_music_1.json",
-      "StreamingHistory_podcast_0.json"
+      "StreamingHistory_podcast_0.json",
+      "YourLibrary.json"
+    ],
+    "Zakaria": [
+      "Identity.json",
+      "Playlist1.json",
+      "StreamingHistory_music_0.json",
+      "StreamingHistory_podcast_0.json",
+      "YourLibrary.json"
+    ],
+    "Marouane" : [
+      "Identity.json",
+      "Playlist1.json",
+      "StreamingHistory_music_0.json",
+      "StreamingHistory_podcast_0.json",
+      "YourLibrary.json"
+    ],
+    "Houssine" : [
+      "Identity.json",
+      "Playlist1.json",
+      "StreamingHistory_music_0.json",
+      "StreamingHistory_music_1.json",
+      "StreamingHistory_podcast_0.json",
+      "YourLibrary.json"
     ]
   }
   
