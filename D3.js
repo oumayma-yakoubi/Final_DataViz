@@ -68,6 +68,12 @@ async function onUserSelect(event, allData) {
 
     if (selectedIndex !== "") {
         const user_data = allData[selectedIndex]; // Get user data
+
+        // Mettre à jour le texte du bouton avec le nom de l'utilisateur sélectionné
+        const selectedUserNameElement = document.getElementById("selectedUserName");
+        if (selectedUserNameElement) {
+            selectedUserNameElement.textContent = user_data.user;
+        }
         // console.log("---------------------------", user_data.user);
         // console.log("---------------------------", user_data);
         document.getElementById("month-filter").value = '2024-12'; 
