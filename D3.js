@@ -114,31 +114,24 @@ function filterTracksByMonthOrYear(playlist, selectedValue) {
 }
 
 async function visualizePlaylists(userData, selectedValue = null) {
-    const topN = 20; // Adjust the number of playlists displayed
+    const topN = 20; // Number of top playlists to display
 
-    const playlistData = userData.playlists
+    // Compute the top N playlists only once
+    const allPlaylists = userData.playlists
         .map(playlist => {
             const fullName = playlist.name || "Untitled Playlist";
-            const filteredItems = filterTracksByMonthOrYear(playlist, selectedValue);
-            const itemCount = filteredItems.length;
-            return { fullName, name: fullName, count: itemCount };
+            const itemCount = Array.isArray(playlist.items) ? playlist.items.length : 0;
+            return { fullName, name: fullName, totalCount: itemCount, items: playlist.items };
         })
-        .sort((a, b) => b.count - a.count) // Sort by count descending
-        .slice(0, topN)
-        .map(d => ({
-            ...d,
-            name: d.name.length > 11 ? d.name.substring(0, 10) + "..." : d.name,
-        }));
-
-    console.log("Filtered Playlist Data:", playlistData); // Debugging output
+        .sort((a, b) => b.totalCount - a.totalCount) // Sort by total item count descending
+        .slice(0, topN); // Take only the top N playlists
 
     const width = 500;
     const height = 300;
     const margin = { top: 20, right: 20, bottom: 70, left: 70 };
 
-    // Clear old content
+    // Create SVG container or clear it if it already exists
     d3.select("#playlist-chart").selectAll("*").remove();
-
     const svg = d3.select("#playlist-chart")
         .append("svg")
         .attr("width", width)
@@ -146,15 +139,14 @@ async function visualizePlaylists(userData, selectedValue = null) {
 
     // Create a sequential YlOrRd color scale
     const colorScale = d3.scaleSequential(d3.interpolateYlOrRd)
-        .domain([0, playlistData.length - 1]); // Map index to YlOrRd gradient
+        .domain([0, allPlaylists.length - 1]);
 
     const xScale = d3.scaleBand()
-        .domain(playlistData.map(d => d.name))
+        .domain(allPlaylists.map(d => d.name.length > 11 ? d.name.substring(0, 10) + "..." : d.name))
         .range([margin.left, width - margin.right])
         .padding(0.2);
 
     const yScale = d3.scaleLinear()
-        .domain([0, d3.max(playlistData, d => d.count)])
         .range([height - margin.bottom, margin.top]);
 
     // Append x-axis
@@ -169,9 +161,8 @@ async function visualizePlaylists(userData, selectedValue = null) {
         .attr("y", +7);
 
     // Append y-axis
-    svg.append("g")
-        .attr("transform", `translate(${margin.left}, 0)`)
-        .call(d3.axisLeft(yScale));
+    const yAxis = svg.append("g")
+        .attr("transform", `translate(${margin.left}, 0)`);
 
     // Append x-axis label
     svg.append("text")
@@ -194,44 +185,67 @@ async function visualizePlaylists(userData, selectedValue = null) {
 
     const tooltip = d3.select("#tooltip");
 
-    // Create bars
-    svg.selectAll(".bar")
-        .data(playlistData)
-        .enter()
-        .append("rect")
-        .attr("class", "bar")
-        .attr("x", d => xScale(d.name))
-        .attr("y", d => yScale(d.count))
-        .attr("width", xScale.bandwidth())
-        .attr("height", d => height - margin.bottom - yScale(d.count))
-        .attr("fill", (_, i) => colorScale(i)) // Assign YlOrRd color based on index
-        .on("mouseover", (event, d) => {
-            tooltip.style("opacity", 1)
-                .html(`Playlist: ${d.fullName}<br>${d.count} morceaux`); // Use full name in tooltip
-        })
-        .on("mousemove", (event) => {
-            tooltip.style("left", (event.pageX + 10) + "px")
-                .style("top", (event.pageY - 20) + "px");
-        })
-        .on("mouseout", () => {
-            tooltip.style("opacity", 0);
+    // Function to update the chart based on the selected month or year
+    function updateChart(selectedValue) {
+        // Filter playlist items based on the selectedValue (month or year)
+        const filteredData = allPlaylists.map(playlist => {
+            const filteredItems = selectedValue
+                ? filterTracksByMonthOrYear({ items: playlist.items }, selectedValue)
+                : playlist.items;
+
+            return {
+                ...playlist,
+                count: filteredItems.length, // Count filtered items
+            };
         });
 
-    // Message for no data
-    if (playlistData.length === 0) {
-        svg.append("text")
-            .attr("x", width / 2)
-            .attr("y", height / 2)
-            .attr("text-anchor", "middle")
-            .style("font-size", "14px")
-            .style("fill", "gray")
-            .text("No playlists available");
+        // Update yScale domain
+        yScale.domain([0, d3.max(filteredData, d => d.count)]);
+
+        // Update y-axis
+        yAxis.transition().duration(500).call(d3.axisLeft(yScale));
+
+        // Bind data to bars
+        const bars = svg.selectAll(".bar")
+            .data(filteredData, d => d.name);
+
+        // Update existing bars
+        bars.transition().duration(500)
+            .attr("y", d => yScale(d.count))
+            .attr("height", d => height - margin.bottom - yScale(d.count));
+
+        // Enter new bars
+        bars.enter()
+            .append("rect")
+            .attr("class", "bar")
+            .attr("x", d => xScale(d.name.length > 11 ? d.name.substring(0, 10) + "..." : d.name))
+            .attr("y", d => yScale(d.count))
+            .attr("width", xScale.bandwidth())
+            .attr("height", d => height - margin.bottom - yScale(d.count))
+            .attr("fill", (_, i) => colorScale(i)) // Assign YlOrRd color based on index
+            .on("mouseover", (event, d) => {
+                tooltip.style("opacity", 1)
+                    .html(`Playlist: ${d.fullName}<br>${d.count} morceaux`); // Use full name in tooltip
+            })
+            .on("mousemove", (event) => {
+                tooltip.style("left", (event.pageX + 10) + "px")
+                    .style("top", (event.pageY - 20) + "px");
+            })
+            .on("mouseout", () => {
+                tooltip.style("opacity", 0);
+            });
+
+        // Exit and remove old bars
+        bars.exit().remove();
     }
+
+    // Initial render
+    updateChart(selectedValue);
 
     // Event listener for the month filter dropdown
     document.getElementById("month-filter").addEventListener("change", (event) => {
         const selectedMonth = event.target.value; // Get the selected month
-        visualizePlaylists(userData, selectedMonth); // Re-render the visualization with the selected month
+        updateChart(selectedMonth); // Update the visualization with the selected month
     });
 }
 
@@ -239,8 +253,7 @@ async function visualizePlaylists(userData, selectedValue = null) {
 // ********* Slot 2 *********
 // **************************
 
-
-// Top serach queries history
+// Top search queries history
 
 async function visualizeTopSearchQueries(userData) {
     // Extract the search queries from the user data
