@@ -5,35 +5,12 @@
 async function loadAllUsersData() {
     return d3.json('data.json') // Use D3's `json` method to fetch and parse the JSON file
         .then(function(data) {
-            return data; // Return the parsed JSON data
+            return data;
         })
         .catch(function(error) {
             console.error('Error loading the JSON file:', error);
         });
 }
-
-// async function loadJSON(filePath) {
-//     return d3.json(filePath) // Use D3's json method to fetch and parse the JSON file
-//         .then(function(data) {
-//             return data; // Return the parsed JSON data
-//         })
-//         .catch(function(error) {
-//             console.error(`Error loading ${filePath}:`, error);
-//         });
-// }
-
-
-
-// Function to load the genre data from json files
-// async function loadGenreData() {
-//     return d3.json('merged_genre_data.json') // Use D3's `json` method to fetch and parse the JSON file
-//         .then(function(data) {
-//             return data; // Return the parsed JSON data
-//         })
-//         .catch(function(error) {
-//             console.error('Error loading the JSON file:', error);
-//         });
-// }
 
 
 
@@ -71,7 +48,7 @@ function extractUniqueArtists(streamingHistory) {
         artistSet.add(track.artistName); // Adjust based on JSON structure
     });
 
-    return Array.from(artistSet); // Convert to array
+    return Array.from(artistSet); 
 }
 
 
@@ -84,7 +61,6 @@ function chunkArray(array, chunkSize) {
     return chunks;
 }
 
-// Update to fetchArtistsBatchWithGlobalRateLimit
 async function fetchArtistsBatchWithGlobalRateLimit(artistNames, accessToken) {
     const batches = chunkArray(artistNames, 10); // Split into batches of 10
     let allArtistData = [];
@@ -116,11 +92,11 @@ async function fetchArtistsBatchWithGlobalRateLimit(artistNames, accessToken) {
                     name: artist.name,
                     genres: artist.genres,
                 })));
-                break; // Successfully fetched, exit the retry loop
+                break; 
             } catch (error) {
                 console.error(`Attempt ${attempt + 1} failed: ${error.message}`);
                 attempt++;
-                const backoffDelay = Math.pow(2, attempt) * 1000; // Exponential backoff
+                const backoffDelay = Math.pow(2, attempt) * 1000; 
                 await new Promise(resolve => setTimeout(resolve, backoffDelay));
             }
         }
@@ -136,8 +112,7 @@ async function init() {
 
     // Load all users' data
     const allData = await loadAllUsersData();
-    // console.log("Données consolidées: ", allData);
-
+   
     for (const userData of allData) {
 
         try {

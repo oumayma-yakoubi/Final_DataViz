@@ -10,6 +10,7 @@ def load_json(file_path):
         print(f"Error loading {file_path}: {e}")
         return None
 
+
 # Function to get the list of user files from index.json
 def get_user_file_list():
     try:
@@ -17,6 +18,7 @@ def get_user_file_list():
     except Exception as e:
         print(f"Error loading the JSON file: {e}")
         return None
+
 
 # Function to load user data based on folder and file structure
 def load_user_data(user_folder, files):
@@ -53,6 +55,7 @@ def load_user_data(user_folder, files):
 
     return user_data
 
+
 # Function to load all users' data and combine into a single list
 def load_all_users_data():
     file_list = get_user_file_list()
@@ -76,9 +79,6 @@ def main():
         print("No data to save.")
 
 
-import json
-import os
-
 def merge_user_data_to_single_file(genre_dir="data/genre", output_file="data/genre/merged_genre_data.json"):
     """
     Fusionne les données de genre de plusieurs utilisateurs dans un seul fichier JSON.
@@ -86,23 +86,23 @@ def merge_user_data_to_single_file(genre_dir="data/genre", output_file="data/gen
     :param genre_dir: Dossier où les fichiers de genre des utilisateurs sont stockés (par défaut 'data/genre').
     :param output_file: Chemin du fichier de sortie où les données combinées seront sauvegardées (par défaut 'data/genre/merged_genre_data.json').
     """
-    # Créer un dictionnaire vide pour stocker les données combinées
+    # Create a dictionary where the data will be stored
     merged_data = {}
 
-    # Parcourir tous les fichiers dans le répertoire genre
+    # Browse all files in the genre directory
     for filename in os.listdir(genre_dir):
-        if filename.endswith(".json"):  # Assurer que ce sont des fichiers JSON
+        if filename.endswith(".json"):  
             file_path = os.path.join(genre_dir, filename)
             try:
                 with open(file_path, 'r', encoding='utf-8') as json_file:
                     user_data = json.load(json_file)
-                    user_folder = filename.split("_")[1].replace(".json", "")  # Extraire l'identifiant de l'utilisateur
+                    user_folder = filename.split("_")[1].replace(".json", "")  # Get the user id
                     merged_data[user_folder] = user_data
                 print(f"Les données de {user_folder} ont été chargées avec succès.")
             except Exception as e:
                 print(f"Erreur lors de la lecture du fichier {filename}: {e}")
 
-    # Sauvegarder les données combinées dans le fichier de sortie
+    # Save combined data to output file
     try:
         with open(output_file, 'w', encoding='utf-8') as json_output_file:
             json.dump(merged_data, json_output_file, ensure_ascii=False, indent=4)
@@ -111,8 +111,7 @@ def merge_user_data_to_single_file(genre_dir="data/genre", output_file="data/gen
         print(f"Erreur lors de l'enregistrement du fichier combiné: {e}")
 
 
-# Run the main function
 if __name__ == "__main__":
     main()
-    # Appel de la fonction pour fusionner les données
+    # Merge the data
     merge_user_data_to_single_file()

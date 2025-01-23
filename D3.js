@@ -1,16 +1,22 @@
+
+// ******************************************************
+// ********* Data Loading & Initialisation *********
+// ******************************************************
+
 async function loadAllUsersData() {
-    return d3.json('data.json') // Use D3's `json` method to fetch and parse the JSON file
+    return d3.json('data.json') 
         .then(function(data) {
-            return data; // Return the parsed JSON data
+            return data;
         })
         .catch(function(error) {
             console.error('Error loading the JSON file:', error);
         });
 }
+
 async function loadGenreData() {
-    return d3.json('data/genre/merged_genre_data.json') // Use D3's `json` method to fetch and parse the JSON file
+    return d3.json('data/genre/merged_genre_data.json') 
         .then(function(data) {
-            return data; // Return the parsed JSON data
+            return data; 
         })
         .catch(function(error) {
             console.error('Error loading the JSON file:', error);
@@ -20,8 +26,8 @@ async function loadGenreData() {
 document.addEventListener("DOMContentLoaded", async () => {
     try {
         const allData = await loadAllUsersData(); // Load data once
-        await populateUserSelect(allData); // Pass it to populateUserSelect
-        initializeDropdown(allData); // Pass it to other handlers if necessary
+        await populateUserSelect(allData); 
+        initializeDropdown(allData); 
     } catch (error) {
         console.error("Error during initialization:", error);
     }
@@ -30,7 +36,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 async function populateUserSelect(allData) {
     try {
         const userDropdownMenu = document.getElementById("userDropdownMenu");
-        userDropdownMenu.innerHTML = ''; // Clear previous entries
+        userDropdownMenu.innerHTML = ''; 
         allData.forEach((user, index) => {
             const listItem = document.createElement("li");
             const linkItem = document.createElement("a");
@@ -69,15 +75,13 @@ async function onUserSelect(event, allData) {
     if (selectedIndex !== "") {
         const user_data = allData[selectedIndex]; // Get user data
 
-        // Mettre à jour le texte du bouton avec le nom de l'utilisateur sélectionné
+        // Update button text with selected user name
         const selectedUserNameElement = document.getElementById("selectedUserName");
         if (selectedUserNameElement) {
             selectedUserNameElement.textContent = user_data.user;
         }
-        // console.log("---------------------------", user_data.user);
-        // console.log("---------------------------", user_data);
+
         document.getElementById("month-filter").value = '2024-12'; 
-        // const genreData = await loadGenreData(user_data.user);
 
         // Call visualizations
         artistDensityChart(user_data);
@@ -91,15 +95,12 @@ async function onUserSelect(event, allData) {
         ecoutesChart(user_data);
         plotPodcastMusicChart(user_data);
         plotGenrePieChart(await loadGenreData(), user_data.user);
-        visualizePlaylists(user_data);
-        // visualizeTopSearchQueries(user_data);
-         
+        visualizePlaylists(user_data);         
 
     } else {
         document.getElementById("playlist-chart").innerHTML = "";
     }
 }
-
 
 
 // **************************
@@ -113,7 +114,6 @@ function formatToYearMonth(dateString) {
     const month = date.getMonth() + 1; // Month is zero-indexed
     return `${year}-${String(month).padStart(2, '0')}`;
 }
-
 
 // Function to filter tracks based on the selected month or year and count items in the playlist
 function filterTracksByMonthOrYear(playlist, selectedValue) {
@@ -131,18 +131,17 @@ function filterTracksByMonthOrYear(playlist, selectedValue) {
 
 // Function to visualize playlists, with the added date filter
 async function visualizePlaylists(userData, selectedValue = null) {
-    // Define the number of top playlists to display
-    const topN = 20; // Change this value to adjust the number of playlists displayed
+    
+    const topN = 20; // number of playlists displayed
 
-    // Process playlists into data, determine the top 20 by default, and apply the filter
     const topPlaylists = userData.playlists
         .map(playlist => {
-            const fullName = playlist.name || "Untitled Playlist"; // Store full name
-            const itemCount = playlist.items.length; // Use unfiltered count for top N selection
+            const fullName = playlist.name || "Untitled Playlist"; 
+            const itemCount = playlist.items.length; 
             return { fullName: fullName, name: fullName, count: itemCount, items: playlist.items };
         })
         .sort((a, b) => b.count - a.count) // Sort by count descending
-        .slice(0, topN); // Select the top N playlists
+        .slice(0, topN); // Select the top N playlists (20)
 
     const playlistData = topPlaylists.map(playlist => {
         let filteredItems = playlist.items;
@@ -171,7 +170,7 @@ async function visualizePlaylists(userData, selectedValue = null) {
 
     // Create a sequential YlOrRd color scale
     const colorScale = d3.scaleSequential(d3.interpolateYlOrRd)
-                         .domain([0, playlistData.length - 1]); // Map index to YlOrRd gradient
+                         .domain([0, playlistData.length - 1]); 
 
     const xScale = d3.scaleBand()
                      .domain(playlistData.map(d => d.name))
@@ -263,13 +262,11 @@ async function visualizePlaylists(userData, selectedValue = null) {
 }
 
 
-
 // **************************
 // ********* Slot 2 *********
 // **************************
 
 // Top search queries history
-
 async function visualizeTopSearchQueries(userData) {
     // Extract the search queries from the user data
     const searchQueries = userData.SearchQueries;
@@ -278,8 +275,8 @@ async function visualizeTopSearchQueries(userData) {
     const searchCount = {};
 
     searchQueries.forEach(entry => {
-        const term = entry.searchQuery.trim().toLowerCase(); // Normalize the search term
-        if (term && term.length >= 3) { // Only consider terms with 3+ characters
+        const term = enùtry.searchQuery.trim().toLowerCase(); 
+        if (term && term.length >= 3) { // Only consider terms with 3+ characters to avoid one letter 
             searchCount[term] = (searchCount[term] || 0) + 1;
         }
     });
@@ -297,7 +294,7 @@ async function visualizeTopSearchQueries(userData) {
     const height = 300;
     const margin = { top: 20, right: 20, bottom: 50, left: 50 };
 
-    // Effacer l'ancien contenu de la div
+    // Clear old content
     d3.select("#top15Searches").selectAll("*").remove();
 
     // Create the SVG element for the bar chart
@@ -314,7 +311,7 @@ async function visualizeTopSearchQueries(userData) {
 
     const yScale = d3.scaleLinear()
                      .domain([0, d3.max(topSearchData, d => d.count)])
-                     .nice()  // Adjust the range for better fit
+                     .nice()  
                      .range([height - margin.bottom, margin.top]);
 
     // Append the x and y axes
@@ -323,7 +320,7 @@ async function visualizeTopSearchQueries(userData) {
        .call(d3.axisBottom(xScale))
        .selectAll("text")
        .attr("transform", "rotate(-45)")
-       .attr("x", -10) // Adjust horizontal position
+       .attr("x", -10)
        .style("text-anchor", "end");  // Rotate x-axis labels for readability
 
     svg.append("g")
@@ -362,7 +359,6 @@ async function visualizeTopSearchQueries(userData) {
 // **************************
 
 // Listening time distribution
-
 async function ecoutesChart(userData, month = null) {
     if (!userData.streamingHistory || !Array.isArray(userData.streamingHistory.music)) {
         console.error("streamingHistory or music is missing for this user.");
@@ -403,7 +399,7 @@ async function ecoutesChart(userData, month = null) {
 
     const width = 500;
     const height = 300;
-    const margin = { top: 20, right: 20, bottom: 70, left: 70 }; // Adjusted margins for axis labels
+    const margin = { top: 20, right: 20, bottom: 70, left: 70 };
 
     d3.select("#ecoutesChart").selectAll("*").remove();
 
@@ -482,11 +478,9 @@ async function ecoutesChart(userData, month = null) {
 }
 
 
-
 // **************************
 // ********* Slot 4 *********
 // **************************
-
 
 // Visualize the total listening time per month (Line chart)
 async function visualizeMonthlyListening(userData, updateTimeDistribution) {
@@ -644,7 +638,6 @@ async function getTopArtists(userData, selectedMonth = null) {
         .slice(0, 8);
 }
 
-
 // Draw the top 8 artist treemap 
 function drawTreemap(artistData) {
     const width = 500;
@@ -689,7 +682,7 @@ function drawTreemap(artistData) {
         .attr("y", 15)
         .attr("dy", ".35em")
         .style("font-size", "12px")
-        .style("fill", "white") // Ensure text is visible on dark colors
+        .style("fill", "white") 
         .text(d => d.data.name)
         .each(function (d) {
             // Trim long names to fit within the rectangle
@@ -735,8 +728,7 @@ async function plotTopArtistsTreemap(userData, selectedMonth = null) {
 
 // Function to aggregate and count genres
 function aggregateGenres(genreData, selectedUser) {
-    // console.log("**********selectedUser", selectedUser)
-    // console.log("genreData selectedUser************", genreData[selectedUser])
+
     const genreCount = {};
 
     // Iterate through each artist's genres
@@ -762,17 +754,16 @@ function aggregateGenres(genreData, selectedUser) {
 
     // Sort genres by count in descending order
     genreArray.sort((a, b) => b.count - a.count);
-    // console.log(genreArray.length)
 
     // Keep only the top 10 genres
     return genreArray.slice(0, 10);
 }
 
 function plotGenrePieChart(genreData, selectedUser) {
-    // Step 1: Aggregate genres
+    // Aggregate genres
     const topGenres = aggregateGenres(genreData, selectedUser);
 
-    // Step 2: Set up the pie chart
+    // Set up the pie chart
     const width = 300, height = 300, radius = Math.min(width, height) / 2;
     d3.select("#pieChart").selectAll("*").remove();
 
@@ -783,16 +774,16 @@ function plotGenrePieChart(genreData, selectedUser) {
     // Create SVG element and append a group for the pie chart
     const svg = d3.select("#pieChart")
         .append("svg")
-        .attr("width", width + 150) // Add extra width for the legend
+        .attr("width", width + 150)
         .attr("height", height)
         .append("g")
-        .attr("transform", `translate(${width / 2}, ${height / 2})`); // Center the pie chart inside the SVG
+        .attr("transform", `translate(${width / 2}, ${height / 2})`);
 
     // Create pie function for calculating the angle of each slice
     const pie = d3.pie().value((d) => d.count);
-    const arc = d3.arc().outerRadius(radius).innerRadius(0); // Pie slices
+    const arc = d3.arc().outerRadius(radius).innerRadius(0);
 
-    // Step 3: Bind data to pie chart and create the slices
+    // Bind data to pie chart and create the slices
     const arcs = svg.selectAll(".arc")
         .data(pie(topGenres))
         .enter()
@@ -802,7 +793,7 @@ function plotGenrePieChart(genreData, selectedUser) {
     // Append pie slices
     arcs.append("path")
         .attr("d", arc)
-        .style("fill", (d, i) => colorScale(i)); // Use the YlOrRd scale
+        .style("fill", (d, i) => colorScale(i));
 
     // Add percentage labels inside each slice
     arcs.append("text")
@@ -813,7 +804,7 @@ function plotGenrePieChart(genreData, selectedUser) {
         .style("font-weight", "bold")
         .text((d) => `${Math.round((d.data.count / d3.sum(topGenres, (d) => d.count)) * 100)}%`);
 
-    // Step 4: Create the legend on the right side of the chart
+    // Create the legend on the right side of the chart
     const legend = d3.select("#pieChart svg")
         .append("g")
         .attr("transform", `translate(${width+10}, 70)`); // Position legend to the right of the pie chart
@@ -876,12 +867,12 @@ function formatToYearMonth(dateString) {
     return `${year}-${String(month).padStart(2, '0')}`;
 }
 
-// // Function to aggregate streaming time per month
+// Function to aggregate streaming time per month
 function aggregateStreamingData(streamingData) {
     const monthlyData = {};
 
     streamingData.forEach(entry => {
-        if (entry.msPlayed > 0) { // Only consider entries with valid playtime
+        if (entry.msPlayed > 0) {
             const yearMonth = formatToYearMonth(entry.endTime);
             monthlyData[yearMonth] = (monthlyData[yearMonth] || 0) + entry.msPlayed;
         }
@@ -899,9 +890,6 @@ function prepareComparisonData(userData) {
     const musicData = aggregateStreamingData(userData.streamingHistory.music);
     const podcastData = aggregateStreamingData(userData.streamingHistory.podcast);
 
-    // console.log("Music Monthly Data:", musicData);
-    // console.log("Podcast Monthly Data:", podcastData);
-
     // Create a unified dataset for visualization
     const allMonths = new Set([...musicData.map(d => d.month), ...podcastData.map(d => d.month)]);
     const comparisonData = [];
@@ -909,9 +897,6 @@ function prepareComparisonData(userData) {
     allMonths.forEach(month => {
         const music = musicData.find(d => d.month === month);
         const podcast = podcastData.find(d => d.month === month);
-
-        // console.log("Music mapping:", music);
-        // console.log("Podcast mapping:", podcast);
 
         comparisonData.push({
             month,
@@ -924,8 +909,6 @@ function prepareComparisonData(userData) {
     return comparisonData.sort((a, b) => new Date(a.month) - new Date(b.month));
 }
 
-
-
 function plotPodcastMusicChart(allUsersData) {
     const comparisonData = prepareComparisonData(allUsersData);
 
@@ -936,11 +919,11 @@ function plotPodcastMusicChart(allUsersData) {
         record.month = `${monthNames[parseInt(month, 10) - 1]}`; // Convert numeric month to "ShortName YYYY"
     });
 
-    const margin = { top: 25, right: 40, bottom: 70, left: 70 }; // Adjusted margins for axis labels
+    const margin = { top: 25, right: 40, bottom: 70, left: 70 };
     const width = 400;
     const height = 200;
 
-    // Remove any existing chart
+    // Clear old content
     d3.select("#podcastMusicChart").selectAll("*").remove();
 
     // Create the SVG container
@@ -953,7 +936,7 @@ function plotPodcastMusicChart(allUsersData) {
 
     // Set up scales
     const xScale = d3.scaleBand()
-        .domain(comparisonData.map(d => d.month)) // Use formatted month names as the domain
+        .domain(comparisonData.map(d => d.month))
         .range([0, width])
         .padding(0.2);
 
@@ -1001,7 +984,7 @@ function plotPodcastMusicChart(allUsersData) {
         .attr("y", d => yScale(d.musicHours))
         .attr("width", xScale.bandwidth() / 2)
         .attr("height", d => height - yScale(d.musicHours))
-        .attr("fill", "#800000") // Spotify green for music
+        .attr("fill", "#800000") 
         .on("mouseover", (event, d) => {
             tooltip.style("opacity", 1)
                 .html(`Mois : ${d.month}<br>Type : Musique<br>${d.musicHours.toFixed(2)} heures`);
@@ -1024,7 +1007,7 @@ function plotPodcastMusicChart(allUsersData) {
         .attr("y", d => yScale(d.podcastHours))
         .attr("width", xScale.bandwidth() / 2)
         .attr("height", d => height - yScale(d.podcastHours))
-        .attr("fill", "#FFD65A") // Yellow for podcasts
+        .attr("fill", "#FFD65A")
         .on("mouseover", (event, d) => {
             tooltip.style("opacity", 1)
                 .html(`Mois : ${d.month}<br>Type : Podcast<br>${d.podcastHours.toFixed(2)} heures`);
@@ -1045,36 +1028,39 @@ function plotPodcastMusicChart(allUsersData) {
     legend.append("rect")
         .attr("x", -6)
         .attr("y", 0)
-        .attr("width", 13) // Smaller square size
-        .attr("height", 13) // Smaller square size
+        .attr("width", 13)
+        .attr("height", 13)
         .attr("fill", "#800000");
 
     legend.append("text")
         .attr("x", 11)
         .attr("y", 11)
         .text("Musique")
-        .style("font-size", "12px") // Smaller font size
+        .style("font-size", "12px")
         .attr("alignment-baseline", "middle");
 
     // Podcast legend
     legend.append("rect")
         .attr("x", 66) // Position to the right of "Music" legend
         .attr("y", 0)
-        .attr("width", 13) // Smaller square size
-        .attr("height", 13) // Smaller square size
+        .attr("width", 13)
+        .attr("height", 13)
         .attr("fill", "#FFD65A");
 
     legend.append("text")
         .attr("x", 83) // Position to the right of the yellow rectangle
         .attr("y", 11)
         .text("Podcast")
-        .style("font-size", "12px") // Smaller font size
+        .style("font-size", "12px")
         .attr("alignment-baseline", "middle");
 }
+
 
 // **************************
 // ********* Slot 8 *********
 // **************************
+
+// Plot the Artist Density Chart
 
 async function artistDensityChart(userData) {
     const musicData = userData.streamingHistory.music;
@@ -1082,7 +1068,7 @@ async function artistDensityChart(userData) {
     const nodeMap = {};
     const links = [];
 
-    // Construire les nœuds et les liens
+    // Building nodes and links
     musicData.forEach(d => {
         if (!nodeMap[d.artistName]) {
             nodes.push({ id: d.artistName, group: 'artistName', listens: 0 });
@@ -1095,7 +1081,7 @@ async function artistDensityChart(userData) {
         links.push({ source: d.artistName, target: d.trackName, value: 1 });
     });
 
-    // Calculer le nombre d'écoutes pour chaque nœud
+    // Count the number of listens for each node
     links.forEach(link => {
         const sourceNode = nodes.find(n => n.id === link.source);
         const targetNode = nodes.find(n => n.id === link.target);
@@ -1108,12 +1094,12 @@ async function artistDensityChart(userData) {
 
     // Échelles pour la taille des nœuds
     const sizeScaleArtist = d3.scaleLinear()
-        .domain(d3.extent(nodes.filter(n => n.group === 'artistName'), d => d.listens)) // Filtrer les artistes
-        .range([5, 50]); // Taille des cercles des artistes
+        .domain(d3.extent(nodes.filter(n => n.group === 'artistName'), d => d.listens)) //Filter the artists
+        .range([5, 50]); // Size of artist circles
 
     const sizeScaleTrack = d3.scaleLinear()
-        .domain(d3.extent(nodes.filter(n => n.group === 'trackName'), d => d.listens)) // Filtrer les morceaux
-        .range([5, 30]); // Taille des cercles des morceaux (plus grands)
+        .domain(d3.extent(nodes.filter(n => n.group === 'trackName'), d => d.listens)) // Filter the songs
+        .range([5, 30]); // Size of the circles of the pieces (larger)
 
     const color = d3.scaleOrdinal()
         .domain(['artistName', 'trackName'])
@@ -1122,7 +1108,7 @@ async function artistDensityChart(userData) {
     const simulation = d3.forceSimulation(nodes)
         .force("link", d3.forceLink(links)
         .id(d => d.id)
-        .distance(50) // Adjust this value to change the link distance
+        .distance(50)
     )
         .force("charge", d3.forceManyBody())
         .force("x", d3.forceX())
@@ -1152,7 +1138,7 @@ async function artistDensityChart(userData) {
         .data(nodes)
         .join("circle")
         .attr("r", d => {
-            // Utiliser une échelle différente pour les artistes et les morceaux
+            // Use a different scale for artists and songs
             return d.group === 'artistName' ? sizeScaleArtist(d.listens) : sizeScaleTrack(d.listens);
         })
         .attr("fill", d => color(d.group))
