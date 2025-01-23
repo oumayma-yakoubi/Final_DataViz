@@ -30,11 +30,14 @@ This project highlights an innovative approach to delivering personalized musica
 
 ## Questions
 
-- Comment pourrait-on permettre aux utilisateurs de visualiser leurs artistes préférés ?
-- Comment pourrait-on permettre aux utilisateurs de visualiser leurs préférences musicales (genres de musique) ?
-- Comment pourrait-on permettre aux utilisateurs d’analyser leur train de vie à partir de leurs horaires de consommation de musique ?
-- Comment  pourrait-on permettre d’analyser les humeurs d’un utilisateur selon le type de musique qu’il écoute ?
-- Comment pourrait-on permettre aux utilisateurs de visualiser leur capacité à explorer de la nouvelle musique ?
+- Quels artistes dominent mon univers musical ?
+- Quels artistes ont eu le plus d’impact sur mes playlists ?
+- Comment mes habitudes d’écoute varient-elles d’un mois à l’autre ?
+- Comment mes habitudes d’écoute diffèrent-elles entre le matin, l’après-midi et le soir ?
+- Quels genres musicaux représentent mes préférences ?
+- Suis-je plus orienté vers la musique ou les récits (podcasts) dans mon quotidien ?
+- Quelles sont mes playlists les plus riches en contenu ?
+
 
 ## Visualisations Principales
 
