@@ -70,6 +70,10 @@ This project highlights an innovative approach to delivering personalized musica
 * **CSS** : (Cascading Style Sheets) permet de créer des pages web à l'apparence soignée.
 * **GitHub** : pour la gestion des versions
 
+#### Note:
+Lors de la réalisation de ce projet, nous nous sommes principalement appuyés sur la documentation de D3. La première visualisation est directement inspirée d’un exemple issu de cette documentation. Nous avons également utilisé ChatGPT pour nous assister dans l’exploitation du langage D3, tout en restant attentifs aux éventuelles erreurs générées par cet outil.
+
+
 #### Liens Important
 
 Pour accéder à au site web, [cliquez ici...](https://oumayma-yakoubi.github.io/MySpotifyDataViz/)
