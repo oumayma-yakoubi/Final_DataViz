@@ -8,7 +8,7 @@
 - Ridouan Aafaf aafaf.ridouan@etu.univ-lyon1.fr
 - Yakoubi Oumayma oumayma.yakoubi@etu.univ-lyon1.fr
 
-## Résumée
+## Résumé
 
 Ce projet vise à répondre aux besoins d’analyse et de visualisation des comportements musicaux des utilisateurs de Spotify. Nous cherchons à fournir des outils interactifs permettant aux utilisateurs d’explorer leurs données personnelles, de mieux comprendre leurs habitudes d’écoute, et de découvrir des insights sur leurs préférences musicales, leurs humeurs, et leur comportement de consommation.
 
