@@ -60,7 +60,15 @@ This project highlights an innovative approach to delivering personalized musica
    Une visualisation comparative qui illustre la part de votre temps d'écoute consacrée à la musique et aux podcasts, montrant vos préférences entre ces deux univers.
 
 7. **Top 20 des Playlists les Plus Remplies : Un Océan de Musique**  
-   Un classement interactif des playlists contenant le plus de chansons, avec des filtres pour explorer l’évolution de leur contenu au fil des mois. 
+   Un classement interactif des playlists contenant le plus de chansons, avec des filtres pour explorer l’évolution de leur contenu au fil des mois.
+
+
+   ## Technologies 
+
+* **D3.js** : (ou D3 pour Data-Driven Documents) est une bibliothèque graphique JavaScript qui permet l'affichage de données numériques sous une forme graphique et dynamique. Il s'agit d'un outil important pour la conformation aux normes W3C qui utilise les technologies courantes SVG, JavaScript et CSS pour la visualisation de données.
+* **HTML** : Le HyperText Markup Language, généralement abrégé HTML ou, dans sa dernière version, HTML5, est le langage de balisage conçu pour écrire les pages web.
+* **CSS** : (Cascading Style Sheets) permet de créer des pages web à l'apparence soignée.
+* **GitHub** : pour la gestion des versions
 
 #### Liens Important
 
