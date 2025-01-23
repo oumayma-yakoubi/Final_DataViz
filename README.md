@@ -41,6 +41,27 @@ This project highlights an innovative approach to delivering personalized musica
 
 ## Visualisations Principales
 
+1. **L'Écosystème de Vos Écoutes**  
+   Une carte visuelle qui met en évidence vos artistes les plus écoutés, montrant les points les plus intenses et les piliers de votre année musicale.
+
+2. **Vos Icônes Musicales de l’Année !**  
+   Une visualisation où la taille des rectangles reflète l'impact de chaque artiste sur vos playlists. Elle met en lumière vos artistes phares avec des détails interactifs.
+
+3. **Les Minutes Qui Ont Rythmé Vos Mois !**  
+   Un graphique chronologique coloré montrant vos habitudes d'écoute minute par minute pour chaque mois, révélant vos pics et creux d'activité musicale.
+
+4. **Ton Cycle Quotidien d'Écoute**  
+   Une analyse temporelle illustrant vos habitudes d'écoute au cours de la journée, avec une répartition entre le matin, l’après-midi et le soir.
+
+5. **Le Genre Musical Qui Te Définit**  
+   Un diagramme circulaire qui montre la répartition de vos genres musicaux préférés, offrant un aperçu de votre univers sonore.
+
+6. **Ton Équilibre Entre Podcasts et Musique**  
+   Une visualisation comparative qui illustre la part de votre temps d'écoute consacrée à la musique et aux podcasts, montrant vos préférences entre ces deux univers.
+
+7. **Top 20 des Playlists les Plus Remplies : Un Océan de Musique**  
+   Un classement interactif des playlists contenant le plus de chansons, avec des filtres pour explorer l’évolution de leur contenu au fil des mois. 
+
 #### Liens Important
 
 Pour accéder à au site web, [cliquez ici...](https://oumayma-yakoubi.github.io/MySpotifyDataViz/)
