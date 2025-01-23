@@ -1,6 +1,6 @@
 # MySpotify DataViz
 
-![Image](https://github.com/user-attachments/assets/1db18f42-c78b-4903-8373-16a8e4d68d1a)
+![Image](img/site_overview.gif)
 
 #### Membre du groupe
 
