@@ -28,6 +28,16 @@ After the five-day period required by Spotify to generate the files, users share
 
 This project highlights an innovative approach to delivering personalized musical insights while maintaining transparency and respecting users’ data privacy.
 
+## Questions
+
+- Comment pourrait-on permettre aux utilisateurs de visualiser leurs artistes préférés ?
+- Comment pourrait-on permettre aux utilisateurs de visualiser leurs préférences musicales (genres de musique) ?
+- Comment pourrait-on permettre aux utilisateurs d’analyser leur train de vie à partir de leurs horaires de consommation de musique ?
+- Comment  pourrait-on permettre d’analyser les humeurs d’un utilisateur selon le type de musique qu’il écoute ?
+- Comment pourrait-on permettre aux utilisateurs de visualiser leur capacité à explorer de la nouvelle musique ?
+
+## Visualisations Principales
+
 #### Liens Important
 
 Pour accéder à au site web, [cliquez ici...](https://oumayma-yakoubi.github.io/MySpotifyDataViz/)
