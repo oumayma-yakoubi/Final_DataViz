@@ -2,7 +2,7 @@
 
 ![Image](img/site_overview.gif)
 
-#### Membre du groupe
+#### Membres du groupe
 
 - Liroulet Inès ines.liroulet@etu.univ-lyon1.fr
 - Ridouan Aafaf aafaf.ridouan@etu.univ-lyon1.fr
