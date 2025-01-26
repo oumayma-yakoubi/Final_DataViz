@@ -4,9 +4,9 @@
 
 #### Membres du groupe
 
-- Liroulet Inès ines.liroulet@etu.univ-lyon1.fr
-- Ridouan Aafaf aafaf.ridouan@etu.univ-lyon1.fr
-- Yakoubi Oumayma oumayma.yakoubi@etu.univ-lyon1.fr
+- Liroulet Inès : ines.liroulet@etu.univ-lyon1.fr
+- Ridouan Aafaf : aafaf.ridouan@etu.univ-lyon1.fr
+- Yakoubi Oumayma : oumayma.yakoubi@etu.univ-lyon1.fr
 
 ## Résumé
 
